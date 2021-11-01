@@ -1,0 +1,179 @@
+#-------------------------------ПРАКТИКА------PostgreSQL------------------------------
+
+"""
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres 
+[sudo] password for hello: 
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \l
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | hello    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(5 rows)
+
+postgres=# 
+postgres=# CREATE TYPE condition AS ENUM ('new', 'used', 'fixed');
+CREATE TYPE
+postgres=# CREATE TABLE Car(
+postgres(# id SERIAL PRIMARY KEY,
+postgres(# brand VARCHAR(50) NOT NULL,
+postgres(# model VARCHAR(50) NOT NULL,
+postgres(# state condition DEFAULT 'new',
+postgres(# price MONEY,
+postgres(# is_registered BOOL DEFAULT True,
+postgres(# date_of_release DATE);
+CREATE TABLE
+postgres=# \dt
+        List of relations
+ Schema | Name | Type  |  Owner   
+--------+------+-------+----------
+ public | car  | table | postgres
+(1 row)
+
+postgres=# \d car
+                                        Table "public.car"
+     Column      |         Type          | Collation | Nullable |             Default             
+-----------------+-----------------------+-----------+----------+---------------------------------
+ id              | integer               |           | not null | nextval('car_id_seq'::regclass)
+ brand           | character varying(50) |           | not null | 
+ model           | character varying(50) |           | not null | 
+ state           | condition             |           |          | 'new'::condition
+ price           | money                 |           |          | 
+ is_registered   | boolean               |           |          | true
+ date_of_release | date                  |           |          | 
+Indexes:
+    "car_pkey" PRIMARY KEY, btree (id)
+
+postgres=# SELECT * FROM car;
+ id | brand | model | state | price | is_registered | date_of_release 
+----+-------+-------+-------+-------+---------------+-----------------
+(0 rows)
+
+postgres=# 
+postgres=# INSERT INTO Car (brand, model, price, date_of_release) VALUES ('Toyota', 'Camry 55', 31000, '2021/01/31'); 
+INSERT 0 1
+postgres=# SELECT * FROM car;
+ id | brand  |  model   | state |     price     | is_registered | date_of_release 
+----+--------+----------+-------+---------------+---------------+-----------------
+  1 | Toyota | Camry 55 | new   | 31 000.00 сом | t             | 2021-01-31
+(1 row)
+
+postgres=# 
+postgres=# 
+postgres=# INSERT INTO Car (brand, model, price, date_of_release, state, is_registered) VALUES ('BMW', 'X5', 25000, '2019/03/23', 'used', 'False'); 
+INSERT 0 1
+postgres=# SELECT * FROM car;
+ id | brand  |  model   | state |     price     | is_registered | date_of_release 
+----+--------+----------+-------+---------------+---------------+-----------------
+  1 | Toyota | Camry 55 | new   | 31 000.00 сом | t             | 2021-01-31
+  2 | BMW    | X5       | used  | 25 000.00 сом | f             | 2019-03-23
+(2 rows)
+
+postgres=# INSERT INTO Car (brand, model, price, date_of_release, state, is_registered) VALUES ('MERCEDES', '212', 34000, '2018/10/29', 'used', True); 
+INSERT 0 1
+postgres=# SELECT * FROM car;
+ id |  brand   |  model   | state |     price     | is_registered | date_of_release 
+----+----------+----------+-------+---------------+---------------+-----------------
+  1 | Toyota   | Camry 55 | new   | 31 000.00 сом | t             | 2021-01-31
+  2 | BMW      | X5       | used  | 25 000.00 сом | f             | 2019-03-23
+  3 | MERCEDES | 212      | used  | 34 000.00 сом | t             | 2018-10-29
+(3 rows)
+
+postgres=# SELECT * FROM car WHERE is_registered = True;
+ id |  brand   |  model   | state |     price     | is_registered | date_of_release 
+----+----------+----------+-------+---------------+---------------+-----------------
+  1 | Toyota   | Camry 55 | new   | 31 000.00 сом | t             | 2021-01-31
+  3 | MERCEDES | 212      | used  | 34 000.00 сом | t             | 2018-10-29
+(2 rows)
+
+postgres=# SELECT * FROM car WHERE state = 'new';
+ id | brand  |  model   | state |     price     | is_registered | date_of_release 
+----+--------+----------+-------+---------------+---------------+-----------------
+  1 | Toyota | Camry 55 | new   | 31 000.00 сом | t             | 2021-01-31
+(1 row)
+
+postgres=# 
+postgres=# 
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | hello    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(5 rows)
+
+postgres=# \c postgres 
+You are now connected to database "postgres" as user "postgres".
+postgres=# \s
+
+postgres=# \?
+postgres=# \h SELECT
+Command:     SELECT
+Description: retrieve rows from a table or view
+Syntax:
+[ WITH [ RECURSIVE ] with_query [, ...] ]
+SELECT [ ALL | DISTINCT [ ON ( expression [, ...] ) ] ]
+    [ * | expression [ [ AS ] output_name ] [, ...] ]
+    [ FROM from_item [, ...] ]
+    [ WHERE condition ]
+    [ GROUP BY [ ALL | DISTINCT ] grouping_element [, ...] ]
+    [ HAVING condition ]
+    [ WINDOW window_name AS ( window_definition ) [, ...] ]
+    [ { UNION | INTERSECT | EXCEPT } [ ALL | DISTINCT ] select ]
+    [ ORDER BY expression [ ASC | DESC | USING operator ] [ NULLS { FIRST | LAST } ] [, ...] ]
+    [ LIMIT { count | ALL } ]
+    [ OFFSET start [ ROW | ROWS ] ]
+    [ FETCH { FIRST | NEXT } [ count ] { ROW | ROWS } { ONLY | WITH TIES } ]
+    [ FOR { UPDATE | NO KEY UPDATE | SHARE | KEY SHARE } [ OF table_name [, ...] ] [ NOWAIT | SKIP LOCKED ] [...] ]
+
+where from_item can be one of:
+
+    [ ONLY ] table_name [ * ] [ [ AS ] alias [ ( column_alias [, ...] ) ] ]
+                [ TABLESAMPLE sampling_method ( argument [, ...] ) [ REPEATABLE ( seed ) ] ]
+    [ LATERAL ] ( select ) [ AS ] alias [ ( column_alias [, ...] ) ]
+    with_query_name [ [ AS ] alias [ ( column_alias [, ...] ) ] ]
+    [ LATERAL ] function_name ( [ argument [, ...] ] )
+                [ WITH ORDINALITY ] [ [ AS ] alias [ ( column_alias [, ...] ) ] ]
+    [ LATERAL ] function_name ( [ argument [, ...] ] ) [ AS ] alias ( column_definition [, ...] )
+    [ LATERAL ] function_name ( [ argument [, ...] ] ) AS ( column_definition [, ...] )
+    [ LATERAL ] ROWS FROM( function_name ( [ argument [, ...] ] ) [ AS ( column_definition [, ...] ) ] [, ...] )
+                [ WITH ORDINALITY ] [ [ AS ] alias [ ( column_alias [, ...] ) ] ]
+    from_item [ NATURAL ] join_type from_item [ ON join_condition | USING ( join_column [, ...] ) [ AS join_using_alias ] ]
+
+and grouping_element can be one of:
+
+    ( )
+    expression
+    ( expression [, ...] )
+    ROLLUP ( { expression | ( expression [, ...] ) } [, ...] )
+    CUBE ( { expression | ( expression [, ...] ) } [, ...] )
+    GROUPING SETS ( grouping_element [, ...] )
+
+and with_query is:
+
+    with_query_name [ ( column_name [, ...] ) ] AS [ [ NOT ] MATERIALIZED ] ( select | values | insert | update | delete )
+        [ SEARCH { BREADTH | DEPTH } FIRST BY column_name [, ...] SET search_seq_col_name ]
+        [ CYCLE column_name [, ...] SET cycle_mark_col_name [ TO cycle_mark_value DEFAULT cycle_mark_default ] USING cycle_path_col_name ]
+
+TABLE [ ONLY ] table_name [ * ]
+
+URL: https://www.postgresql.org/docs/14/sql-select.html
+
+postgres=# 
+
+"""

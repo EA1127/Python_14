@@ -1,0 +1,139 @@
+sudo snap install pycharm-community --classic
+ 1819  pip install --upgrade pip
+ 1820  touch requirements.txt
+ 1821  pip install -r requirements.txt 
+ 1822  pip freeze
+ 1823  django-admin startproject myproject
+ 1824  python manage.py startapp main
+ 1825  ls
+ 1826  cd myproject/
+ 1827  ls
+ 1828  python manage.py startapp main
+ 1829  python manage.py startapp order
+ 1830  python manage.py startapp payment
+ 1831  python manage.py runserver
+ 1832  fuser -k -n tcp 8000
+ 1833  python manage.py runserver
+ 1834  clear
+ 1835  python manage.py migrate
+ 1836  python manage.py runserver
+ 1837  source /home/hello/Desktop/bootcamp/week7/day31/reddit_news/venv/bin/activate
+ 1838  deactivate
+ 1839  clear
+ 1840  source /home/hello/Desktop/bootcamp/week8/day40/pyshop14/venv/bin/activate
+ 1841  pip install -r requirements.txt 
+ 1842  pip freeze
+ 1843  django-admin startproject shop .
+ 1844  python manage.py runserver
+ 1845  python manage.py runserver 5000
+ 1846  python manage.py startapp product
+ 1847  source /home/hello/Desktop/bootcamp/week8/day40/pyshop14/venv/bin/activate
+ 1848  /home/hello/Desktop/bootcamp/week8/day40/pyshop14/venv/bin/python
+ 1849  psql
+ 1850  python manage.py makemigrations
+ 1851  python manage.py migrate
+ 1852  python manage.py runserver
+ 1853  python manage.py runserver 5000
+ 1854  python manage.py create superuser
+ 1855  python manage.py createsuperuser
+ 1856  python manage.py runserver 5000
+ 1857  deactivate
+ 1858  cd
+ 
+ 1859  cd Desktop/
+ 1860  git clone https://github.com/Janat-PI/PyShop14.git
+ 1861  ls
+ 1862  git remote remote origin
+ 1863  ls
+ 1864  cd PyShop14/
+ 1865  ls
+ 1866  clear
+ 1867  ls
+ 1868  ls -a
+ 1869  clear
+ 1870  git remote remove origin
+ 1871  clear
+ 1872  ls
+ 1873  clear
+ 1874  ls
+ 1875  rm -rf .git
+ 1876  clear
+ 1877  git init
+ 1878  clear
+ 1879  ls
+ 1880  ls -a
+ 1881  code .
+ 1882  cd Desktop/week8/day40
+ 1883  cd Desktop/week8/
+ 1884  cd Desktop/
+ 1885  cd week8
+ 1886  cd bootcamp/
+ 1887  cd week8
+ 1888  cd day40
+ 1889  mkdir pyshop14
+ 1890  cd pyshop14/
+ 1891  python3 -m venv venv
+ 1892  ls
+ 1893  . venv/bin/activate
+ 1894  touch requirements.txt
+ 1895  code
+ 1896  cd ..
+ 1897  psql
+ 1898  ls
+ 1899  python3 -m venv venv
+ 1900  . venv/bin/activate
+ 1901  pip install -r requirements.txt 
+ 1902  clear
+ 1903  python manage.py makemigrations
+ 1904  python manage.py migratr
+ 1905  python manage.py migrate
+ 1906  python manage.py makemigrations
+ 1907  ls
+ 1908  python manage.py createsuperuser
+ 1909  clear
+ 1910  python manage.py runserver
+ 1911  clear
+ 1912  psql
+ 1913  ls
+ 1914  . venv/bin/activate
+ 1915  pip freeze
+ 1916  clear
+ 1917  ls
+ 1918  python manage.py makemigrations
+ 1919  python manage.py migratr
+ 1920  python manage.py migrate
+ 1921  clear
+ 1922  python manage.py createsuperuser
+ 1923  clear
+ 1924  python manage.py runserver
+ 1925  ls -a
+ 1926  git remote remove origin
+ 1927  git remote add origin git@github.com:EA1127/PyShop14.git
+ 1928  git status
+ 1929  git pull origin master
+ 1930  git add .
+ 1931  git commit -m 'Fix project'
+ 1932  rm -rf .git
+ 1933  ls -a
+ 1934  git init
+ 1935  git remote add origin git@github.com:EA1127/PyShop14.git
+ 1936  git status
+ 1937  git add .
+ 1938  git commit -m 'Create project, models.'
+ 1939  git push origin master
+ 1940  pip freeze
+ 1941  python3 -m venv venv
+ 1942  ls
+ 1943  . venv/bin/activate
+ 1944  pip freeze
+ 1945  python manage.py runserver
+ 1946  source /home/hello/Desktop/PyShop14/venv/bin/activate
+ 1947  python manage.py runserver
+ 1948  source /home/hello/Desktop/PyShop14/venv/bin/activate
+ 1949  git add .
+ 1950  git status 
+ 1951  git commit -m 'change pic'
+ 1952  psql
+ 1953  source /home/hello/Desktop/PyShop14/venv/bin/activate
+ 1954  history
+(venv) hello@hello-Extensa-215-51:~/Desktop/PyShop14$ 

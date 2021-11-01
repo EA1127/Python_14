@@ -1,0 +1,112 @@
+hello@hello-Extensa-215-51:~$ sudu -i -u psql
+
+Command 'sudu' not found, did you mean:
+
+  command 'sudo' from deb sudo (1.8.31-1ubuntu1.2)
+  command 'sudo' from deb sudo-ldap (1.8.31-1ubuntu1.2)
+  command 'tudu' from deb tudu (0.10.3-1build1)
+
+Try: sudo apt install <deb name>
+
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+[sudo] password for hello: 
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \l
+postgres=# create database MyDB;
+CREATE DATABASE
+postgres=# \l
+postgres=# \l
+postgres=# \c mydb
+You are now connected to database "mydb" as user "postgres".
+mydb=# 
+mydb=# 
+mydb=# CREATE TYPE language AS ENUM ('Python', 'Javascript');
+CREATE TYPE
+mydb=# CREATE TABLE Info(
+mydb(# id serial PRIMARY KEY,
+mydb(# name VARCHAR(50) NOT NULL,
+mydb(# last_name VARCHAR(150),
+mydb(# country VARCHAR(60),
+mydb(# email VARCHAR(50) unique,
+mydb(# age INT,
+mydb(# programming_language language NOT NULL,
+mydb(# experiance INT);
+CREATE TABLE
+mydb=# \dt
+        List of relations
+ Schema | Name | Type  |  Owner   
+--------+------+-------+----------
+ public | info | table | postgres
+(1 row)
+
+mydb=# \d info
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('John', 'Snow', 'Island', 'jsnow@gmail.com', '43', 'Python', 3);  
+INSERT 0 1
+mydb=# SELECT * FROM info
+mydb-# ;
+ id | name | last_name | country |      email      | age | programming_language | experiance 
+----+------+-----------+---------+-----------------+-----+----------------------+------------
+  1 | John | Snow      | Island  | jsnow@gmail.com |  43 | Python               |          3
+(1 row)
+
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Alice', 'Snow', 'Island', 'asnow@hotmail.com', '23', 'Javacsript', 2);  
+ERROR:  invalid input value for enum language: "Javacsript"
+LINE 1: ...ce', 'Snow', 'Island', 'asnow@hotmail.com', '23', 'Javacsrip...
+                                                             ^
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Alice', 'Snow', 'Island', 'asnow@hotmail.com', '23', 'Javascript', 2);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Sandy', 'Smith', 'USA', 'ssandy@yahoo.com', '18', 'Javascript', 4);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Andy', 'Smith', 'USA', 'ssandy@yahoo.com', '18', 'Javascript', 4);  
+ERROR:  duplicate key value violates unique constraint "info_email_key"
+DETAIL:  Key (email)=(ssandy@yahoo.com) already exists.
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Andy', 'Sacks', 'USA', 'sandrea@yahoo.com', '22', 'Python', 3);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Emely', 'Chart', 'Great Britain', 'cemely@gmail.com', '23', 'Python', 5);  
+INSERT 0 1
+mydb=# SELECT * FROM info;                                                                          mydb=# 
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Emil', 'Avazov', 'Kyrgyzstan', 'eayvazov@yahoo.com', '28', 'Python', 1);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Talant', 'Talantbekov', 'Kyrgyzstan', 'talasuper@gmail.com', '34', 'Javascript', 1);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Alima', 'Dzhanybayeva', 'Kyrgyzstan', 'dalima@hotmail.com', '23', 'Python', 1);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Jannet', 'Jannetova', 'Kyrgyzstan', 'jjannet@yahoo.com', '34', 'Python', 1);  
+INSERT 0 1
+mydb=# select * from info
+mydb-# ;
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Atai', 'Ataibekov', 'Kyrgyzstan', 'atai_atai@gmail.com', '25', 'Javascript', 3);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Kani', 'Mentor', 'Kyrgyzstan', 'kani@yahoo.com', '26', 'Javascript', 4);  
+INSERT 0 1
+mydb=# 
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Biatrix', 'Kiddo', 'Australia', 'bikiddo@hotmail.com', '30', 'Python', 6);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Kianu', 'Reeves', 'Japan', 'kianu@gmail.com', '50', 'Javascript', 7);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Alex', 'Smartungschaft', 'Germany', 'alexsmart@gmail.com', '29', 'Javascript', 9);  
+INSERT 0 1
+mydb=# select * from info                                                                                ;
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Maria', 'Sharapova', 'Russia', 'sugarpova@gmail.com', '34', 'Python', 2);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Loky', 'Asgardson', 'Norway', 'lokyloky@gmail.com', '300', 'Python', 5);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Jean', 'Gray', 'USA', 'white_pheonix@gmail.com', '17', 'Javascript', 3);  
+INSERT 0 1
+mydb=# select * from info
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Ryan', 'Deadpool', 'Canada', 'dead_pool@gmail.com', '38', 'Python', 2);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Zain', 'Malik', 'India', 'zain@hotmail.com', '26', 'Javascript', 6);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Shan', 'Chi', 'China', '10rings@yahoo.com', '25', 'Python', 5);  
+INSERT 0 1
+mydb=# select * from info;                                                                    mydb=# 
+mydb=# 
+mydb=# 
+mydb=# 

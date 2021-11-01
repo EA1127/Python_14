@@ -1,0 +1,216 @@
+venv) hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day37/orm_project$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+hello=# CREATE DATABASE deputy_db;
+CREATE DATABASE
+hello=# \l
+                                    List of databases
+      Name      |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+----------------+----------+----------+-------------+-------------+-----------------------
+ db_practice    | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ deputy_db      | hello    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ hello          | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ kfc_menu       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ my_db_postgres | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ mydb           | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ shakespeare    | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ shop_db        | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ template1      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ test_user      | hello    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(12 rows)
+
+hello=# exit
+(venv) hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day37/orm_project$ python3 orm.py 
+Connected!!!
+(venv) hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day37/orm_project$ python3 orm.py 
+Connected!!!
+TABLE CREATED!!!
+(venv) hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day37/orm_project$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+hello=# \dt
+Did not find any relations.
+hello=# \c deputy_db 
+You are now connected to database "deputy_db" as user "hello".
+deputy_db=# \dt
+        List of relations
+ Schema |  Name  | Type  | Owner 
+--------+--------+-------+-------
+ public | deputy | table | hello
+(1 row)
+
+deputy_db=# exit
+(venv) hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day37/orm_project$ python3 orm.py 
+Connected!!!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+Successfully added record!
+(venv) hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day37/orm_project$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+hello=# \c deputy_db 
+You are now connected to database "deputy_db" as user "hello".
+deputy_db=# \dt
+        List of relations
+ Schema |  Name  | Type  | Owner 
+--------+--------+-------+-------
+ public | deputy | table | hello
+(1 row)
+
+deputy_db=# \d deputy
+                                   Table "public.deputy"
+  Column   |       Type        | Collation | Nullable |              Default               
+-----------+-------------------+-----------+----------+------------------------------------
+ id        | integer           |           | not null | nextval('deputy_id_seq'::regclass)
+ fullname  | character varying |           |          | 
+ fraction  | character varying |           |          | 
+ telephone | character varying |           |          | 
+Indexes:
+    "deputy_pkey" PRIMARY KEY, btree (id)
+
+deputy_db=# SELECT * FROM deputy;
+deputy_db=# exit
+(venv) hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day37/orm_project$ python3 orm.py 
+Connected!!!
+Абдалиев Мейкинбек Акимович, Парламентская фракция «Онугуу-Прогресс», 0312 66 13 28
+(venv) hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day37/orm_project$ python3 orm.py 
+Connected!!!
+Абдалиев Мейкинбек Акимович, Парламентская фракция «Онугуу-Прогресс», 0312 66 13 28
+Kani, Парламентская фракция «Онугуу-Прогресс», 0312 66 13 28
+(venv) hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day37/orm_project$ python3 orm.py 
+Connected!!!
+Абдылдаев Мыктыбек Юсупович, Парламентская фракция «Бир Бол», 0312 63-86-39
+Акбаров Арысланбек Акбарович, Парламентская фракция «Бир Бол», 0312 63 86 03
+Бакиров Мамасадык Сабирович, Парламентская фракция «Бир Бол», 0312 63-86-03
+Мурашев Нурбек Мурпазылжанович, Парламентская фракция «Бир Бол», 0312638540
+Ормонов Улугбек Зулпукарович, Парламентская фракция «Бир Бол», 0312 63-85-88
+Осмонов Айбек Жапарович, Парламентская фракция «Бир Бол», 0312 63 88 21
+Субанбеков Бакирдин Жамалович, Парламентская фракция «Бир Бол», 0312 63-91-65
+Сулайманов Алтынбек Турдубаевич, Парламентская фракция «Бир Бол», 0312 63-91-94
+Тагаев Эрмамат Султанович, Парламентская фракция «Бир Бол», 63-86-25
+Токтомамбетов Аманкул Жапарбекович, Парламентская фракция «Бир Бол», 0312 63 86 20
+Торокулов Дүйшөн Гуламкадырович, Парламентская фракция «Бир Бол», 0312-63-89-07
+Турусбеков Бактыбек Сагындыкович, Парламентская фракция «Бир Бол», 63-91-32
+(venv) hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day37/orm_project$ 

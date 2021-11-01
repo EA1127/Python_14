@@ -1,0 +1,238 @@
+hello@hello-Extensa-215-51:~$ cd PycharmProjects/
+hello@hello-Extensa-215-51:~/PycharmProjects$ cd BookShop/
+hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ ls
+venv
+hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ touch requirements.txt
+hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ . venv/bin/activate
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ pip install -r requirements.txt
+Collecting Django
+  Using cached Django-3.2.8-py3-none-any.whl (7.9 MB)
+Collecting psycopg2-binary
+  Using cached psycopg2_binary-2.9.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.4 MB)
+Collecting Pillow
+  Using cached Pillow-8.4.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.1 MB)
+Collecting asgiref<4,>=3.3.2
+  Using cached asgiref-3.4.1-py3-none-any.whl (25 kB)
+Collecting pytz
+  Using cached pytz-2021.3-py2.py3-none-any.whl (503 kB)
+Collecting sqlparse>=0.2.2
+  Using cached sqlparse-0.4.2-py3-none-any.whl (42 kB)
+Installing collected packages: sqlparse, pytz, asgiref, psycopg2-binary, Pillow, Django
+Successfully installed Django-3.2.8 Pillow-8.4.0 asgiref-3.4.1 psycopg2-binary-2.9.1 pytz-2021.3 sqlparse-0.4.2
+WARNING: You are using pip version 21.1.2; however, version 21.3.1 is available.
+You should consider upgrading via the '/home/hello/PycharmProjects/BookShop/venv/bin/python -m pip install --upgrade pip' command.
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ pip freeze
+asgiref==3.4.1
+Django==3.2.8
+Pillow==8.4.0
+psycopg2-binary==2.9.1
+pytz==2021.3
+sqlparse==0.4.2
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ django-admin startproject bookshop .
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ python manage.py startapp main
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ python manage.py startapp order
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+November 01, 2021 - 05:10:41
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+^[[D^[[D[01/Nov/2021 05:11:36] "GET / HTTP/1.1" 200 10697
+[01/Nov/2021 05:11:36] "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+[01/Nov/2021 05:11:37] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+[01/Nov/2021 05:11:37] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+[01/Nov/2021 05:11:37] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+Not Found: /favicon.ico
+[01/Nov/2021 05:11:37] "GET /favicon.ico HTTP/1.1" 404 2112
+/home/hello/PycharmProjects/BookShop/bookshop/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/core/management/commands/runserver.py", line 121, in inner_run
+    self.check_migrations()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/core/management/base.py", line 486, in check_migrations
+    executor = MigrationExecutor(connections[DEFAULT_DB_ALIAS])
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/migrations/executor.py", line 18, in __init__
+    self.loader = MigrationLoader(self.connection)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/migrations/loader.py", line 53, in __init__
+    self.build_graph()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/migrations/loader.py", line 220, in build_graph
+    self.applied_migrations = recorder.applied_migrations()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/migrations/recorder.py", line 77, in applied_migrations
+    if self.has_table():
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/migrations/recorder.py", line 55, in has_table
+    with self.connection.cursor() as cursor:
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/backends/base/base.py", line 259, in cursor
+    return self._cursor()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/backends/base/base.py", line 235, in _cursor
+    self.ensure_connection()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/backends/base/base.py", line 219, in ensure_connection
+    self.connect()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/backends/base/base.py", line 199, in connect
+    conn_params = self.get_connection_params()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 160, in get_connection_params
+    if len(settings_dict['NAME'] or '') > self.ops.max_name_length():
+TypeError: object of type 'PosixPath' has no len()
+
+clear
+^C(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ 
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+hello=# CREATE DATABASE bookshop_db;
+CREATE DATABASE
+hello=# \c bookshop_db 
+You are now connected to database "bookshop_db" as user "hello".
+bookshop_db=# \dt
+                  List of relations
+ Schema |            Name            | Type  | Owner 
+--------+----------------------------+-------+-------
+ public | auth_group                 | table | hello
+ public | auth_group_permissions     | table | hello
+ public | auth_permission            | table | hello
+ public | auth_user                  | table | hello
+ public | auth_user_groups           | table | hello
+ public | auth_user_user_permissions | table | hello
+ public | django_admin_log           | table | hello
+ public | django_content_type        | table | hello
+ public | django_migrations          | table | hello
+ public | django_session             | table | hello
+(10 rows)
+
+bookshop_db=# 
+bookshop_db=# 
+bookshop_db=# \dt
+                  List of relations
+ Schema |            Name            | Type  | Owner 
+--------+----------------------------+-------+-------
+ public | auth_group                 | table | hello
+ public | auth_group_permissions     | table | hello
+ public | auth_permission            | table | hello
+ public | auth_user                  | table | hello
+ public | auth_user_groups           | table | hello
+ public | auth_user_user_permissions | table | hello
+ public | django_admin_log           | table | hello
+ public | django_content_type        | table | hello
+ public | django_migrations          | table | hello
+ public | django_session             | table | hello
+ public | main_author                | table | hello
+ public | main_book                  | table | hello
+ public | main_book_genre            | table | hello
+ public | main_genre                 | table | hello
+ public | order_order                | table | hello
+(15 rows)
+
+bookshop_db=# \dt
+                  List of relations
+ Schema |            Name            | Type  | Owner 
+--------+----------------------------+-------+-------
+ public | auth_group                 | table | hello
+ public | auth_group_permissions     | table | hello
+ public | auth_permission            | table | hello
+ public | auth_user                  | table | hello
+ public | auth_user_groups           | table | hello
+ public | auth_user_user_permissions | table | hello
+ public | django_admin_log           | table | hello
+ public | django_content_type        | table | hello
+ public | django_migrations          | table | hello
+ public | django_session             | table | hello
+ public | main_author                | table | hello
+ public | main_book                  | table | hello
+ public | main_book_genre            | table | hello
+ public | main_genre                 | table | hello
+ public | order_order                | table | hello
+(15 rows)
+
+bookshop_db=# SELECT * FROM main_author;
+ id |  name   | last_name | date_of_birth |            image             
+----+---------+-----------+---------------+------------------------------
+  1 | Chingiz | Aitmatov  | 1928-12-12    | authors/chingiz-aytmatov.jpg
+(1 row)
+
+bookshop_db=# SELECT * FROM main_author;
+ id |  name   | last_name | date_of_birth |            image             
+----+---------+-----------+---------------+------------------------------
+  1 | Chingiz | Aitmatov  | 1928-12-12    | authors/chingiz-aytmatov.jpg
+  2 | Joanne  | Rowling   | 1965-07-31    | authors/J_Rowling.jpeg
+  3 | Jack    | London    | 1876-01-12    | authors/J_London.jpeg
+(3 rows)
+
+bookshop_db=# SELECT * FROM main_book;
+ id |                  title                   |           image           |    status    | author_id 
+----+------------------------------------------+---------------------------+--------------+-----------
+  1 | Harry Potter and the Philosopher's stone | books/Harry_Potter_1.jpeg | in stock     |         2
+  2 | White Ship                               | books/white_ship.jpeg     | in stock     |         1
+  3 | The call of Wild                         | books/zov_prirody.jpg     | out of stock |         3
+(3 rows)
+
+bookshop_db=# \d main_book;
+                                     Table "public.main_book"
+  Column   |          Type          | Collation | Nullable |                Default                
+-----------+------------------------+-----------+----------+---------------------------------------
+ id        | bigint                 |           | not null | nextval('main_book_id_seq'::regclass)
+ title     | character varying(100) |           | not null | 
+ image     | character varying(100) |           |          | 
+ status    | character varying(20)  |           | not null | 
+ author_id | bigint                 |           | not null | 
+Indexes:
+    "main_book_pkey" PRIMARY KEY, btree (id)
+    "main_book_author_id_1299d038" btree (author_id)
+Foreign-key constraints:
+    "main_book_author_id_1299d038_fk_main_author_id" FOREIGN KEY (author_id) REFERENCES main_author(id) DEFERRABLE INITIALLY DEFERRED
+Referenced by:
+    TABLE "main_book_genre" CONSTRAINT "main_book_genre_book_id_89220ffd_fk_main_book_id" FOREIGN KEY (book_id) REFERENCES main_book(id) DEFERRABLE INITIALLY DEFERRED
+    TABLE "order_order" CONSTRAINT "order_order_book_id_fff7fa76_fk_main_book_id" FOREIGN KEY (book_id) REFERENCES main_book(id) DEFERRABLE INITIALLY DEFERRED
+
+bookshop_db=# 
+bookshop_db=# SELECT * FROM main_book;
+ id |                  title                   |           image           |    status    | author_id 
+----+------------------------------------------+---------------------------+--------------+-----------
+  1 | Harry Potter and the Philosopher's stone | books/Harry_Potter_1.jpeg | in stock     |         2
+  2 | White Ship                               | books/white_ship.jpeg     | in stock     |         1
+  3 | The call of Wild                         | books/zov_prirody.jpg     | out of stock |         3
+  4 | Jamilya                                  |                           | out of stock |         1
+(4 rows)
+
+bookshop_db=# SELECT * FROM main_book;
+ id |                  title                   |           image           |    status    | author_id 
+----+------------------------------------------+---------------------------+--------------+-----------
+  1 | Harry Potter and the Philosopher's stone | books/Harry_Potter_1.jpeg | in stock     |         2
+  2 | White Ship                               | books/white_ship.jpeg     | in stock     |         1
+  3 | The call of Wild                         | books/zov_prirody.jpg     | out of stock |         3
+  4 | Jamilya                                  |                           | out of stock |         1
+(4 rows)
+
+bookshop_db=# SELECT * FROM main_book;
+ id |                  title                   |           image           |    status    | author_id 
+----+------------------------------------------+---------------------------+--------------+-----------
+  1 | Harry Potter and the Philosopher's stone | books/Harry_Potter_1.jpeg | in stock     |         2
+  2 | White Ship                               | books/white_ship.jpeg     | in stock     |         1
+  3 | The call of Wild                         | books/zov_prirody.jpg     | out of stock |         3
+  4 | Jamilya                                  |                           | out of stock |         1
+  5 | Harry Potter and Chamber of Secrets      |                           | in stock     |         2
+(5 rows)
+
+bookshop_db=# 
+

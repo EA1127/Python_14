@@ -1,0 +1,857 @@
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+[sudo] password for hello: 
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# CREATE DATABASE kfc_menu;
+CREATE DATABASE
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ kfc_menu  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ mydb      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | hello    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(7 rows)
+
+postgres=# \c
+You are now connected to database "postgres" as user "postgres".
+postgres=# \c kfc_menu 
+You are now connected to database "kfc_menu" as user "postgres".
+kfc_menu=# \dt
+Did not find any relations.
+kfc_menu=# CREATE TYPE detail AS ENUM ('food', 'beverage', 'dessert');
+CREATE TYPE
+kfc_menu=# CREATE TYPE topping AS ENUM ('ketchup', 'mayo', 'BBQ', 'mustard', 'ranch');
+CREATE TYPE
+kfc_menu=# 
+kfc_menu=# CREATE TABLE Dish(
+kfc_menu(# id SERIAL PRIMARY KEY,
+kfc_menu(# title VARCHAR(155) NOT NULL,
+kfc_menu(# price MONEY,
+kfc_menu(# type detail NOT NULL,
+kfc_menu(# souce topping,
+kfc_menu(# is_vegetarian BOOL DEFAULT False,
+kfc_menu(# comment VARCHAR(255));
+CREATE TABLE
+kfc_menu=# \dt
+        List of relations
+ Schema | Name | Type  |  Owner   
+--------+------+-------+----------
+ public | dish | table | postgres
+(1 row)
+
+kfc_menu=# \d Dish
+                                       Table "public.dish"
+    Column     |          Type          | Collation | Nullable |             Default              
+---------------+------------------------+-----------+----------+----------------------------------
+ id            | integer                |           | not null | nextval('dish_id_seq'::regclass)
+ title         | character varying(155) |           | not null | 
+ price         | money                  |           |          | 
+ type          | detail                 |           | not null | 
+ souce         | topping                |           |          | 
+ is_vegetarian | boolean                |           |          | false
+ comment       | character varying(255) |           |          | 
+Indexes:
+    "dish_pkey" PRIMARY KEY, btree (id)
+
+kfc_menu=# ALTER TABLE Dish ALTER comment TYPE text;
+ALTER TABLE
+kfc_menu=# \d Dish
+                                       Table "public.dish"
+    Column     |          Type          | Collation | Nullable |             Default              
+---------------+------------------------+-----------+----------+----------------------------------
+ id            | integer                |           | not null | nextval('dish_id_seq'::regclass)
+ title         | character varying(155) |           | not null | 
+ price         | money                  |           |          | 
+ type          | detail                 |           | not null | 
+ souce         | topping                |           |          | 
+ is_vegetarian | boolean                |           |          | false
+ comment       | text                   |           |          | 
+Indexes:
+    "dish_pkey" PRIMARY KEY, btree (id)
+
+kfc_menu=# 
+kfc_menu=# INSERT INTO Dish (title, price, type, souce, comment) VALUES ('Chefburger', 6.35, 'food', 'BBQ', 'Extra cheese');
+INSERT 0 1
+kfc_menu=# SELECT * FROM Dish;
+ id |   title    |  price   | type | souce | is_vegetarian |   comment    
+----+------------+----------+------+-------+---------------+--------------
+  1 | Chefburger | 6.35 сом | food | BBQ   | f             | Extra cheese
+(1 row)
+
+kfc_menu=# set lc_monetary="en_US.UTF-8";
+SET
+kfc_menu=# SELECT * FROM Dish;
+ id |   title    | price | type | souce | is_vegetarian |   comment    
+----+------------+-------+------+-------+---------------+--------------
+  1 | Chefburger | $6.35 | food | BBQ   | f             | Extra cheese
+(1 row)
+
+kfc_menu=# 
+kfc_menu=# 
+kfc_menu=# INSERT INTO Dish (title, price, type, souce, is_vegetarian, comment) VALUES ('Nuggets', 12.40, 'food', 'BBQ', False, 'spicy'),
+kfc_menu-# ('Fries', 5.20, 'food', 'ketchup', True, 'extra salt'), ('Longer', 4.89, 'food', 'ranch', False, 'extra pickles'), ('Cheeseburger', 10.79, 'food', 'BBQ', False, 'extra cheese'), ('Cheeseburger De Lux', 12.99, 'food', 'mustard', False, 'add cheese souce'), ('Chefburger De Lux', 10.99, 'food', 'ketchup', False, 'add mustard'), ('Chefburger Junior', 5.99, 'food', 'mustard', False, 'add ketchup'), ('Basket s12', 12.99, 'food', 'ketchup', False, 'extra spicy'), ('Basket M20', 24.59, 'food', 'ketchup', False, 'not spicy');
+INSERT 0 9
+kfc_menu=# INSERT INTO Dish (title, price, type) VALUES ('Donut Apple-Cinnamon', 3.49, 'dessert'), ('Donut Strawberry', 3.49, 'dessert'), ('Cake Raspberry Blueberry', 5.00, 'dessert');
+INSERT 0 3
+kfc_menu=# INSERT INTO Dish (title, price, type, souce) VALUES ('Hashbrown', 3.50, 'food', 'mayo'), ('Fries po-derevensky', 4.69, 'food', 'ketchup'), ('Twister', 6.79, 'food', 'mustard');
+INSERT 0 3
+kfc_menu=# INSERT INTO Dish (title, price, type, is_vegetarian) VALUES ('Pepsi 0,3', 3.99, 'beverage', True), ('Pepsi 0,4', 4.99, 'beverage', True), ('Pepsi 0,5', 5.99, 'beverage', True), ('Pepsi in bottle 0,5', 5.00, 'beverage', True), ('Juice Apple', 3.59, 'beverage', True), ('Strawberry Milkshake', 12.89, 'beverage', True), ('Chocolate Milkshake', 12.89, 'beverage', True), ('Vanilla Milkshake', 12.99, 'beverage', True);
+INSERT 0 8
+kfc_menu=# INSERT INTO Dish (title, price, type, souce) VALUES ('Boxmaster', 23.99, 'food', 'ranch');
+INSERT 0 1
+kfc_menu=# SELECT * FROM Dish;
+ id |          title           | price  |   type   |  souce  | is_vegetarian |     comment      
+----+--------------------------+--------+----------+---------+---------------+------------------
+  1 | Chefburger               |  $6.35 | food     | BBQ     | f             | Extra cheese
+  2 | Nuggets                  | $12.40 | food     | BBQ     | f             | spicy
+  3 | Fries                    |  $5.20 | food     | ketchup | t             | extra salt
+  4 | Longer                   |  $4.89 | food     | ranch   | f             | extra pickles
+  5 | Cheeseburger             | $10.79 | food     | BBQ     | f             | extra cheese
+  6 | Cheeseburger De Lux      | $12.99 | food     | mustard | f             | add cheese souce
+  7 | Chefburger De Lux        | $10.99 | food     | ketchup | f             | add mustard
+  8 | Chefburger Junior        |  $5.99 | food     | mustard | f             | add ketchup
+  9 | Basket s12               | $12.99 | food     | ketchup | f             | extra spicy
+ 10 | Basket M20               | $24.59 | food     | ketchup | f             | not spicy
+ 11 | Donut Apple-Cinnamon     |  $3.49 | dessert  |         | f             | 
+ 12 | Donut Strawberry         |  $3.49 | dessert  |         | f             | 
+ 13 | Cake Raspberry Blueberry |  $5.00 | dessert  |         | f             | 
+ 14 | Hashbrown                |  $3.50 | food     | mayo    | f             | 
+ 15 | Fries po-derevensky      |  $4.69 | food     | ketchup | f             | 
+ 16 | Twister                  |  $6.79 | food     | mustard | f             | 
+ 17 | Pepsi 0,3                |  $3.99 | beverage |         | t             | 
+ 18 | Pepsi 0,4                |  $4.99 | beverage |         | t             | 
+ 19 | Pepsi 0,5                |  $5.99 | beverage |         | t             | 
+ 20 | Pepsi in bottle 0,5      |  $5.00 | beverage |         | t             | 
+ 21 | Juice Apple              |  $3.59 | beverage |         | t             | 
+ 22 | Strawberry Milkshake     | $12.89 | beverage |         | t             | 
+ 23 | Chocolate Milkshake      | $12.89 | beverage |         | t             | 
+ 24 | Vanilla Milkshake        | $12.99 | beverage |         | t             | 
+ 25 | Boxmaster                | $23.99 | food     | ranch   | f             | 
+(25 rows)
+
+kfc_menu=# 
+kfc_menu=# SELECT type || ' ' || title AS Meal FROM Dish; 
+               meal               
+----------------------------------
+ food Chefburger
+ food Nuggets
+ food Fries
+ food Longer
+ food Cheeseburger
+ food Cheeseburger De Lux
+ food Chefburger De Lux
+ food Chefburger Junior
+ food Basket s12
+ food Basket M20
+ dessert Donut Apple-Cinnamon
+ dessert Donut Strawberry
+ dessert Cake Raspberry Blueberry
+ food Hashbrown
+ food Fries po-derevensky
+ food Twister
+ beverage Pepsi 0,3
+ beverage Pepsi 0,4
+ beverage Pepsi 0,5
+ beverage Pepsi in bottle 0,5
+ beverage Juice Apple
+ beverage Strawberry Milkshake
+ beverage Chocolate Milkshake
+ beverage Vanilla Milkshake
+ food Boxmaster
+(25 rows)
+
+kfc_menu=# SELECT type || ' ' || title AS "Meal and Type" FROM Dish; 
+          Meal and Type           
+----------------------------------
+ food Chefburger
+ food Nuggets
+ food Fries
+ food Longer
+ food Cheeseburger
+ food Cheeseburger De Lux
+ food Chefburger De Lux
+ food Chefburger Junior
+ food Basket s12
+ food Basket M20
+ dessert Donut Apple-Cinnamon
+ dessert Donut Strawberry
+ dessert Cake Raspberry Blueberry
+ food Hashbrown
+ food Fries po-derevensky
+ food Twister
+ beverage Pepsi 0,3
+ beverage Pepsi 0,4
+ beverage Pepsi 0,5
+ beverage Pepsi in bottle 0,5
+ beverage Juice Apple
+ beverage Strawberry Milkshake
+ beverage Chocolate Milkshake
+ beverage Vanilla Milkshake
+ food Boxmaster
+(25 rows)
+
+kfc_menu=# 
+kfc_menu=# 
+kfc_menu=# 
+kfc_menu=# SELECT title, souce FROM Dish
+kfc_menu-# ORDER BY souce;
+          title           |  souce  
+--------------------------+---------
+ Fries po-derevensky      | ketchup
+ Fries                    | ketchup
+ Chefburger De Lux        | ketchup
+ Basket s12               | ketchup
+ Basket M20               | ketchup
+ Hashbrown                | mayo
+ Chefburger               | BBQ
+ Nuggets                  | BBQ
+ Cheeseburger             | BBQ
+ Twister                  | mustard
+ Chefburger Junior        | mustard
+ Cheeseburger De Lux      | mustard
+ Boxmaster                | ranch
+ Longer                   | ranch
+ Cake Raspberry Blueberry | 
+ Donut Strawberry         | 
+ Pepsi 0,3                | 
+ Pepsi 0,4                | 
+ Pepsi 0,5                | 
+ Pepsi in bottle 0,5      | 
+ Juice Apple              | 
+ Strawberry Milkshake     | 
+ Chocolate Milkshake      | 
+ Vanilla Milkshake        | 
+ Donut Apple-Cinnamon     | 
+(25 rows)
+
+kfc_menu=# 
+kfc_menu=# 
+kfc_menu=# SELECT title, souce FROM Dish
+ORDER BY title;
+          title           |  souce  
+--------------------------+---------
+ Basket M20               | ketchup
+ Basket s12               | ketchup
+ Boxmaster                | ranch
+ Cake Raspberry Blueberry | 
+ Cheeseburger             | BBQ
+ Cheeseburger De Lux      | mustard
+ Chefburger               | BBQ
+ Chefburger De Lux        | ketchup
+ Chefburger Junior        | mustard
+ Chocolate Milkshake      | 
+ Donut Apple-Cinnamon     | 
+ Donut Strawberry         | 
+ Fries                    | ketchup
+ Fries po-derevensky      | ketchup
+ Hashbrown                | mayo
+ Juice Apple              | 
+ Longer                   | ranch
+ Nuggets                  | BBQ
+ Pepsi 0,3                | 
+ Pepsi 0,4                | 
+ Pepsi 0,5                | 
+ Pepsi in bottle 0,5      | 
+ Strawberry Milkshake     | 
+ Twister                  | mustard
+ Vanilla Milkshake        | 
+(25 rows)
+
+kfc_menu=# SELECT title, souce FROM Dish
+ORDER BY title DESC;
+          title           |  souce  
+--------------------------+---------
+ Vanilla Milkshake        | 
+ Twister                  | mustard
+ Strawberry Milkshake     | 
+ Pepsi in bottle 0,5      | 
+ Pepsi 0,5                | 
+ Pepsi 0,4                | 
+ Pepsi 0,3                | 
+ Nuggets                  | BBQ
+ Longer                   | ranch
+ Juice Apple              | 
+ Hashbrown                | mayo
+ Fries po-derevensky      | ketchup
+ Fries                    | ketchup
+ Donut Strawberry         | 
+ Donut Apple-Cinnamon     | 
+ Chocolate Milkshake      | 
+ Chefburger Junior        | mustard
+ Chefburger De Lux        | ketchup
+ Chefburger               | BBQ
+ Cheeseburger De Lux      | mustard
+ Cheeseburger             | BBQ
+ Cake Raspberry Blueberry | 
+ Boxmaster                | ranch
+ Basket s12               | ketchup
+ Basket M20               | ketchup
+(25 rows)
+
+kfc_menu=# 
+kfc_menu=# SELECT title, price FROM Dish
+ORDER BY price;
+          title           | price  
+--------------------------+--------
+ Donut Strawberry         |  $3.49
+ Donut Apple-Cinnamon     |  $3.49
+ Hashbrown                |  $3.50
+ Juice Apple              |  $3.59
+ Pepsi 0,3                |  $3.99
+ Fries po-derevensky      |  $4.69
+ Longer                   |  $4.89
+ Pepsi 0,4                |  $4.99
+ Pepsi in bottle 0,5      |  $5.00
+ Cake Raspberry Blueberry |  $5.00
+ Fries                    |  $5.20
+ Chefburger Junior        |  $5.99
+ Pepsi 0,5                |  $5.99
+ Chefburger               |  $6.35
+ Twister                  |  $6.79
+ Cheeseburger             | $10.79
+ Chefburger De Lux        | $10.99
+ Nuggets                  | $12.40
+ Strawberry Milkshake     | $12.89
+ Chocolate Milkshake      | $12.89
+ Cheeseburger De Lux      | $12.99
+ Basket s12               | $12.99
+ Vanilla Milkshake        | $12.99
+ Boxmaster                | $23.99
+ Basket M20               | $24.59
+(25 rows)
+
+kfc_menu=# SELECT title, price FROM Dish
+ORDER BY price DESC;
+          title           | price  
+--------------------------+--------
+ Basket M20               | $24.59
+ Boxmaster                | $23.99
+ Cheeseburger De Lux      | $12.99
+ Vanilla Milkshake        | $12.99
+ Basket s12               | $12.99
+ Strawberry Milkshake     | $12.89
+ Chocolate Milkshake      | $12.89
+ Nuggets                  | $12.40
+ Chefburger De Lux        | $10.99
+ Cheeseburger             | $10.79
+ Twister                  |  $6.79
+ Chefburger               |  $6.35
+ Pepsi 0,5                |  $5.99
+ Chefburger Junior        |  $5.99
+ Fries                    |  $5.20
+ Pepsi in bottle 0,5      |  $5.00
+ Cake Raspberry Blueberry |  $5.00
+ Pepsi 0,4                |  $4.99
+ Longer                   |  $4.89
+ Fries po-derevensky      |  $4.69
+ Pepsi 0,3                |  $3.99
+ Juice Apple              |  $3.59
+ Hashbrown                |  $3.50
+ Donut Apple-Cinnamon     |  $3.49
+ Donut Strawberry         |  $3.49
+(25 rows)
+
+kfc_menu=# SELECT title, price FROM Dish
+ORDER BY price DESC LIMIT 1;
+   title    | price  
+------------+--------
+ Basket M20 | $24.59
+(1 row)
+
+kfc_menu=# SELECT title, price FROM Dish
+ORDER BY price LIMIT 1;
+        title         | price 
+----------------------+-------
+ Donut Apple-Cinnamon | $3.49
+(1 row)
+
+kfc_menu=# SELECT title, price FROM Dish
+ORDER BY price FETCH FIRST 1 ROW ONLY;
+        title         | price 
+----------------------+-------
+ Donut Apple-Cinnamon | $3.49
+(1 row)
+
+kfc_menu=# SELECT title, price FROM Dish
+ORDER BY price FETCH FIRST 3 ROW ONLY;
+        title         | price 
+----------------------+-------
+ Donut Strawberry     | $3.49
+ Donut Apple-Cinnamon | $3.49
+ Hashbrown            | $3.50
+(3 rows)
+
+kfc_menu=# SELECT title, price FROM Dish
+ORDER BY price FETCH FIRST 3 ROW ONLY;
+kfc_menu=# SELECT title, price FROM Dish
+ORDER BY price FETCH FIRST 3 ROW ONLY OFFSET 5;
+        title        | price 
+---------------------+-------
+ Fries po-derevensky | $4.69
+ Longer              | $4.89
+ Pepsi 0,4           | $4.99
+(3 rows)
+
+kfc_menu=# SELECT DISTINCT type, title FROM Dish;
+   type   |          title           
+----------+--------------------------
+ food     | Chefburger
+ food     | Cheeseburger De Lux
+ beverage | Pepsi 0,3
+ beverage | Pepsi 0,4
+ food     | Basket M20
+ food     | Basket s12
+ beverage | Vanilla Milkshake
+ food     | Chefburger Junior
+ food     | Cheeseburger
+ dessert  | Donut Strawberry
+ food     | Boxmaster
+ food     | Chefburger De Lux
+ dessert  | Cake Raspberry Blueberry
+ beverage | Pepsi 0,5
+ food     | Fries po-derevensky
+ food     | Hashbrown
+ food     | Nuggets
+ food     | Fries
+ beverage | Chocolate Milkshake
+ food     | Twister
+ beverage | Juice Apple
+ beverage | Strawberry Milkshake
+ beverage | Pepsi in bottle 0,5
+ dessert  | Donut Apple-Cinnamon
+ food     | Longer
+(25 rows)
+
+kfc_menu=# INSERT INTO Dish (title,, type) VALUES ('Hashbrown', 'food');
+ERROR:  syntax error at or near ","
+LINE 1: INSERT INTO Dish (title,, type) VALUES ('Hashbrown', 'food')...
+                                ^
+kfc_menu=# INSERT INTO Dish (title, type) VALUES ('Hashbrown', 'food');
+INSERT 0 1
+kfc_menu=# SELECT * FROM Dish;
+ id |          title           | price  |   type   |  souce  | is_vegetarian |     comment      
+----+--------------------------+--------+----------+---------+---------------+------------------
+  1 | Chefburger               |  $6.35 | food     | BBQ     | f             | Extra cheese
+  2 | Nuggets                  | $12.40 | food     | BBQ     | f             | spicy
+  3 | Fries                    |  $5.20 | food     | ketchup | t             | extra salt
+  4 | Longer                   |  $4.89 | food     | ranch   | f             | extra pickles
+  5 | Cheeseburger             | $10.79 | food     | BBQ     | f             | extra cheese
+  6 | Cheeseburger De Lux      | $12.99 | food     | mustard | f             | add cheese souce
+  7 | Chefburger De Lux        | $10.99 | food     | ketchup | f             | add mustard
+  8 | Chefburger Junior        |  $5.99 | food     | mustard | f             | add ketchup
+  9 | Basket s12               | $12.99 | food     | ketchup | f             | extra spicy
+ 10 | Basket M20               | $24.59 | food     | ketchup | f             | not spicy
+ 11 | Donut Apple-Cinnamon     |  $3.49 | dessert  |         | f             | 
+ 12 | Donut Strawberry         |  $3.49 | dessert  |         | f             | 
+ 13 | Cake Raspberry Blueberry |  $5.00 | dessert  |         | f             | 
+ 14 | Hashbrown                |  $3.50 | food     | mayo    | f             | 
+ 15 | Fries po-derevensky      |  $4.69 | food     | ketchup | f             | 
+ 16 | Twister                  |  $6.79 | food     | mustard | f             | 
+ 17 | Pepsi 0,3                |  $3.99 | beverage |         | t             | 
+ 18 | Pepsi 0,4                |  $4.99 | beverage |         | t             | 
+ 19 | Pepsi 0,5                |  $5.99 | beverage |         | t             | 
+ 20 | Pepsi in bottle 0,5      |  $5.00 | beverage |         | t             | 
+ 21 | Juice Apple              |  $3.59 | beverage |         | t             | 
+ 22 | Strawberry Milkshake     | $12.89 | beverage |         | t             | 
+ 23 | Chocolate Milkshake      | $12.89 | beverage |         | t             | 
+ 24 | Vanilla Milkshake        | $12.99 | beverage |         | t             | 
+ 25 | Boxmaster                | $23.99 | food     | ranch   | f             | 
+ 26 | Hashbrown                |        | food     |         | f             | 
+(26 rows)
+
+kfc_menu=# SELECT DISTINCT type, title FROM Dish;
+   type   |          title           
+----------+--------------------------
+ food     | Chefburger
+ food     | Cheeseburger De Lux
+ beverage | Pepsi 0,3
+ beverage | Pepsi 0,4
+ food     | Basket M20
+ food     | Basket s12
+ beverage | Vanilla Milkshake
+ food     | Chefburger Junior
+ food     | Cheeseburger
+ dessert  | Donut Strawberry
+ food     | Boxmaster
+ food     | Chefburger De Lux
+ dessert  | Cake Raspberry Blueberry
+ beverage | Pepsi 0,5
+ food     | Fries po-derevensky
+ food     | Hashbrown
+ food     | Nuggets
+ food     | Fries
+ beverage | Chocolate Milkshake
+ food     | Twister
+ beverage | Juice Apple
+ beverage | Strawberry Milkshake
+ beverage | Pepsi in bottle 0,5
+ dessert  | Donut Apple-Cinnamon
+ food     | Longer
+(25 rows)
+
+kfc_menu=# SELECT DISTINCT type, title, price FROM Dish;
+   type   |          title           | price  
+----------+--------------------------+--------
+ food     | Basket M20               | $24.59
+ food     | Basket s12               | $12.99
+ food     | Boxmaster                | $23.99
+ food     | Cheeseburger             | $10.79
+ food     | Cheeseburger De Lux      | $12.99
+ food     | Chefburger               |  $6.35
+ food     | Chefburger De Lux        | $10.99
+ food     | Chefburger Junior        |  $5.99
+ food     | Fries                    |  $5.20
+ food     | Fries po-derevensky      |  $4.69
+ food     | Hashbrown                |  $3.50
+ food     | Hashbrown                |       
+ food     | Longer                   |  $4.89
+ food     | Nuggets                  | $12.40
+ food     | Twister                  |  $6.79
+ beverage | Chocolate Milkshake      | $12.89
+ beverage | Juice Apple              |  $3.59
+ beverage | Pepsi 0,3                |  $3.99
+ beverage | Pepsi 0,4                |  $4.99
+ beverage | Pepsi 0,5                |  $5.99
+ beverage | Pepsi in bottle 0,5      |  $5.00
+ beverage | Strawberry Milkshake     | $12.89
+ beverage | Vanilla Milkshake        | $12.99
+ dessert  | Cake Raspberry Blueberry |  $5.00
+ dessert  | Donut Apple-Cinnamon     |  $3.49
+ dessert  | Donut Strawberry         |  $3.49
+(26 rows)
+
+kfc_menu=# 
+kfc_menu=# 
+kfc_menu=# SELECT DISTINCT ON(type) type, title FROM Dish;
+   type   |          title           
+----------+--------------------------
+ food     | Hashbrown
+ beverage | Chocolate Milkshake
+ dessert  | Cake Raspberry Blueberry
+(3 rows)
+
+kfc_menu=# 
+kfc_menu=# SELECT * FROM Dish WHERE price BETWEEN '10' and '20';
+ id |        title         | price  |   type   |  souce  | is_vegetarian |     comment      
+----+----------------------+--------+----------+---------+---------------+------------------
+  2 | Nuggets              | $12.40 | food     | BBQ     | f             | spicy
+  5 | Cheeseburger         | $10.79 | food     | BBQ     | f             | extra cheese
+  6 | Cheeseburger De Lux  | $12.99 | food     | mustard | f             | add cheese souce
+  7 | Chefburger De Lux    | $10.99 | food     | ketchup | f             | add mustard
+  9 | Basket s12           | $12.99 | food     | ketchup | f             | extra spicy
+ 22 | Strawberry Milkshake | $12.89 | beverage |         | t             | 
+ 23 | Chocolate Milkshake  | $12.89 | beverage |         | t             | 
+ 24 | Vanilla Milkshake    | $12.99 | beverage |         | t             | 
+(8 rows)
+
+kfc_menu=# 
+kfc_menu=# SELECT * FROM Dish WHERE price <= '15' AND type = 'food';
+ id |        title        | price  | type |  souce  | is_vegetarian |     comment      
+----+---------------------+--------+------+---------+---------------+------------------
+  1 | Chefburger          |  $6.35 | food | BBQ     | f             | Extra cheese
+  2 | Nuggets             | $12.40 | food | BBQ     | f             | spicy
+  3 | Fries               |  $5.20 | food | ketchup | t             | extra salt
+  4 | Longer              |  $4.89 | food | ranch   | f             | extra pickles
+  5 | Cheeseburger        | $10.79 | food | BBQ     | f             | extra cheese
+  6 | Cheeseburger De Lux | $12.99 | food | mustard | f             | add cheese souce
+  7 | Chefburger De Lux   | $10.99 | food | ketchup | f             | add mustard
+  8 | Chefburger Junior   |  $5.99 | food | mustard | f             | add ketchup
+  9 | Basket s12          | $12.99 | food | ketchup | f             | extra spicy
+ 14 | Hashbrown           |  $3.50 | food | mayo    | f             | 
+ 15 | Fries po-derevensky |  $4.69 | food | ketchup | f             | 
+ 16 | Twister             |  $6.79 | food | mustard | f             | 
+(12 rows)
+
+kfc_menu=# 
+kfc_menu=# 
+kfc_menu=# SELECT * FROM Dish WHERE (price <= '15' AND type = 'food') OR (type = 'beverage' AND price <= '4');
+ id |        title        | price  |   type   |  souce  | is_vegetarian |     comment      
+----+---------------------+--------+----------+---------+---------------+------------------
+  1 | Chefburger          |  $6.35 | food     | BBQ     | f             | Extra cheese
+  2 | Nuggets             | $12.40 | food     | BBQ     | f             | spicy
+  3 | Fries               |  $5.20 | food     | ketchup | t             | extra salt
+  4 | Longer              |  $4.89 | food     | ranch   | f             | extra pickles
+  5 | Cheeseburger        | $10.79 | food     | BBQ     | f             | extra cheese
+  6 | Cheeseburger De Lux | $12.99 | food     | mustard | f             | add cheese souce
+  7 | Chefburger De Lux   | $10.99 | food     | ketchup | f             | add mustard
+  8 | Chefburger Junior   |  $5.99 | food     | mustard | f             | add ketchup
+  9 | Basket s12          | $12.99 | food     | ketchup | f             | extra spicy
+ 14 | Hashbrown           |  $3.50 | food     | mayo    | f             | 
+ 15 | Fries po-derevensky |  $4.69 | food     | ketchup | f             | 
+ 16 | Twister             |  $6.79 | food     | mustard | f             | 
+ 17 | Pepsi 0,3           |  $3.99 | beverage |         | t             | 
+ 21 | Juice Apple         |  $3.59 | beverage |         | t             | 
+(14 rows)
+
+kfc_menu=# 
+kfc_menu=# 
+kfc_menu=# SELECT * FROM Dish WHERE (price <= '15' AND type = 'food' AND is_vegetarian = True) OR (type = 'beverage' AND price <= '4');
+ id |    title    | price |   type   |  souce  | is_vegetarian |  comment   
+----+-------------+-------+----------+---------+---------------+------------
+  3 | Fries       | $5.20 | food     | ketchup | t             | extra salt
+ 17 | Pepsi 0,3   | $3.99 | beverage |         | t             | 
+ 21 | Juice Apple | $3.59 | beverage |         | t             | 
+(3 rows)
+
+kfc_menu=# 
+kfc_menu=# 
+kfc_menu=# SELECT * FROM Dish WHERE (price <= '15' AND type = 'food' AND is_vegetarian = True) OR (type = 'beverage' AND price <= '4' AND is_vegetarian = True);
+ id |    title    | price |   type   |  souce  | is_vegetarian |  comment   
+----+-------------+-------+----------+---------+---------------+------------
+  3 | Fries       | $5.20 | food     | ketchup | t             | extra salt
+ 17 | Pepsi 0,3   | $3.99 | beverage |         | t             | 
+ 21 | Juice Apple | $3.59 | beverage |         | t             | 
+(3 rows)
+
+kfc_menu=# 
+kfc_menu=# SELECT * FROM Dish WHERE ((price <= '15' AND type = 'food') OR (type ='beverage' AND price <= '5')) ORDER BY price DESC;
+ id |        title        | price  |   type   |  souce  | is_vegetarian |     comment      
+----+---------------------+--------+----------+---------+---------------+------------------
+  9 | Basket s12          | $12.99 | food     | ketchup | f             | extra spicy
+  6 | Cheeseburger De Lux | $12.99 | food     | mustard | f             | add cheese souce
+  2 | Nuggets             | $12.40 | food     | BBQ     | f             | spicy
+  7 | Chefburger De Lux   | $10.99 | food     | ketchup | f             | add mustard
+  5 | Cheeseburger        | $10.79 | food     | BBQ     | f             | extra cheese
+ 16 | Twister             |  $6.79 | food     | mustard | f             | 
+  1 | Chefburger          |  $6.35 | food     | BBQ     | f             | Extra cheese
+  8 | Chefburger Junior   |  $5.99 | food     | mustard | f             | add ketchup
+  3 | Fries               |  $5.20 | food     | ketchup | t             | extra salt
+ 20 | Pepsi in bottle 0,5 |  $5.00 | beverage |         | t             | 
+ 18 | Pepsi 0,4           |  $4.99 | beverage |         | t             | 
+  4 | Longer              |  $4.89 | food     | ranch   | f             | extra pickles
+ 15 | Fries po-derevensky |  $4.69 | food     | ketchup | f             | 
+ 17 | Pepsi 0,3           |  $3.99 | beverage |         | t             | 
+ 21 | Juice Apple         |  $3.59 | beverage |         | t             | 
+ 14 | Hashbrown           |  $3.50 | food     | mayo    | f             | 
+(16 rows)
+
+kfc_menu=# SELECT * FROM Dish WHERE (price <= '15' AND type = 'food') OR (type ='beverage' AND price <= '5') ORDER BY price DESC;
+ id |        title        | price  |   type   |  souce  | is_vegetarian |     comment      
+----+---------------------+--------+----------+---------+---------------+------------------
+  9 | Basket s12          | $12.99 | food     | ketchup | f             | extra spicy
+  6 | Cheeseburger De Lux | $12.99 | food     | mustard | f             | add cheese souce
+  2 | Nuggets             | $12.40 | food     | BBQ     | f             | spicy
+  7 | Chefburger De Lux   | $10.99 | food     | ketchup | f             | add mustard
+  5 | Cheeseburger        | $10.79 | food     | BBQ     | f             | extra cheese
+ 16 | Twister             |  $6.79 | food     | mustard | f             | 
+  1 | Chefburger          |  $6.35 | food     | BBQ     | f             | Extra cheese
+  8 | Chefburger Junior   |  $5.99 | food     | mustard | f             | add ketchup
+  3 | Fries               |  $5.20 | food     | ketchup | t             | extra salt
+ 20 | Pepsi in bottle 0,5 |  $5.00 | beverage |         | t             | 
+ 18 | Pepsi 0,4           |  $4.99 | beverage |         | t             | 
+  4 | Longer              |  $4.89 | food     | ranch   | f             | extra pickles
+ 15 | Fries po-derevensky |  $4.69 | food     | ketchup | f             | 
+ 17 | Pepsi 0,3           |  $3.99 | beverage |         | t             | 
+ 21 | Juice Apple         |  $3.59 | beverage |         | t             | 
+ 14 | Hashbrown           |  $3.50 | food     | mayo    | f             | 
+(16 rows)
+
+kfc_menu=# 
+kfc_menu=# SELECT * FROM Dish WHERE (title ILIKE '%burger%' AND souce <> 'mustard') OR (title ILIKE '%donut%');
+ id |        title         | price  |  type   |  souce  | is_vegetarian |   comment    
+----+----------------------+--------+---------+---------+---------------+--------------
+  1 | Chefburger           |  $6.35 | food    | BBQ     | f             | Extra cheese
+  5 | Cheeseburger         | $10.79 | food    | BBQ     | f             | extra cheese
+  7 | Chefburger De Lux    | $10.99 | food    | ketchup | f             | add mustard
+ 11 | Donut Apple-Cinnamon |  $3.49 | dessert |         | f             | 
+ 12 | Donut Strawberry     |  $3.49 | dessert |         | f             | 
+(5 rows)
+
+kfc_menu=# SELECT * FROM Dish WHERE (title ILIKE '%burger%' AND NOT souce = 'mustard') OR (title ILIKE '%donut%');
+ id |        title         | price  |  type   |  souce  | is_vegetarian |   comment    
+----+----------------------+--------+---------+---------+---------------+--------------
+  1 | Chefburger           |  $6.35 | food    | BBQ     | f             | Extra cheese
+  5 | Cheeseburger         | $10.79 | food    | BBQ     | f             | extra cheese
+  7 | Chefburger De Lux    | $10.99 | food    | ketchup | f             | add mustard
+ 11 | Donut Apple-Cinnamon |  $3.49 | dessert |         | f             | 
+ 12 | Donut Strawberry     |  $3.49 | dessert |         | f             | 
+(5 rows)
+
+kfc_menu=# SELECT * FROM Dish WHERE is_vegetarian ORDER BY price DESC FETCH FIRST 3 ROW ONLY;
+ id |        title         | price  |   type   | souce | is_vegetarian | comment 
+----+----------------------+--------+----------+-------+---------------+---------
+ 24 | Vanilla Milkshake    | $12.99 | beverage |       | t             | 
+ 23 | Chocolate Milkshake  | $12.89 | beverage |       | t             | 
+ 22 | Strawberry Milkshake | $12.89 | beverage |       | t             | 
+(3 rows)
+
+kfc_menu=# SELECT * FROM Dish WHERE NOT is_vegetarian ORDER BY price DESC NULLS LAST FETCH FIRST 3 ROW ONLY;
+ id |        title        | price  | type |  souce  | is_vegetarian |     comment      
+----+---------------------+--------+------+---------+---------------+------------------
+ 10 | Basket M20          | $24.59 | food | ketchup | f             | not spicy
+ 25 | Boxmaster           | $23.99 | food | ranch   | f             | 
+  6 | Cheeseburger De Lux | $12.99 | food | mustard | f             | add cheese souce
+(3 rows)
+
+kfc_menu=# 
+kfc_menu=# 
+kfc_menu=# SELECT * FROM Dish WHERE type = 'food' AND souce IN ('ketchup', 'BBQ', 'mustard');
+ id |        title        | price  | type |  souce  | is_vegetarian |     comment      
+----+---------------------+--------+------+---------+---------------+------------------
+  1 | Chefburger          |  $6.35 | food | BBQ     | f             | Extra cheese
+  2 | Nuggets             | $12.40 | food | BBQ     | f             | spicy
+  3 | Fries               |  $5.20 | food | ketchup | t             | extra salt
+  5 | Cheeseburger        | $10.79 | food | BBQ     | f             | extra cheese
+  6 | Cheeseburger De Lux | $12.99 | food | mustard | f             | add cheese souce
+  7 | Chefburger De Lux   | $10.99 | food | ketchup | f             | add mustard
+  8 | Chefburger Junior   |  $5.99 | food | mustard | f             | add ketchup
+  9 | Basket s12          | $12.99 | food | ketchup | f             | extra spicy
+ 10 | Basket M20          | $24.59 | food | ketchup | f             | not spicy
+ 15 | Fries po-derevensky |  $4.69 | food | ketchup | f             | 
+ 16 | Twister             |  $6.79 | food | mustard | f             | 
+(11 rows)
+
+kfc_menu=# 
+kfc_menu=# 
+kfc_menu=# SELECT SUM(price) AS total FROM Dish;
+  total  
+---------
+ $220.46
+(1 row)
+
+kfc_menu=# 
+kfc_menu=# ALTER TABLE Dish ALTER price TYPE decimal;
+ALTER TABLE
+kfc_menu=# SELECT AVG(price) AS avg_burger_price FROM Dish WHERE title ILIKE '%burger%';
+  avg_burger_price  
+--------------------
+ 9.4220000000000000
+(1 row)
+
+kfc_menu=# SELECT ROUND(AVG(price)) AS avg_burger_price FROM Dish WHERE title ILIKE '%burger%';
+ avg_burger_price 
+------------------
+                9
+(1 row)
+
+kfc_menu=# SELECT ROUND(AVG(price), 2) AS avg_burger_price FROM Dish WHERE title ILIKE '%burger%';
+ avg_burger_price 
+------------------
+             9.42
+(1 row)
+
+kfc_menu=# SELECT MONEY(AVG(price), 2) AS avg_burger_price FROM Dish WHERE title ILIKE '%burger%';
+ERROR:  function money(numeric, integer) does not exist
+LINE 1: SELECT MONEY(AVG(price), 2) AS avg_burger_price FROM Dish WH...
+               ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+kfc_menu=# SELECT MONEY(AVG(price)) AS avg_burger_price FROM Dish WHERE title ILIKE '%burger%';
+ avg_burger_price 
+------------------
+            $9.42
+(1 row)
+
+kfc_menu=# 
+kfc_menu=# 
+kfc_menu=# SELECT COUNT(*) FROM Dish WHERE type = 'dessert';
+ count 
+-------
+     3
+(1 row)
+
+kfc_menu=# SELECT * FROM Dish WHERE type = 'dessert';
+ id |          title           | price |  type   | souce | is_vegetarian | comment 
+----+--------------------------+-------+---------+-------+---------------+---------
+ 11 | Donut Apple-Cinnamon     |  3.49 | dessert |       | f             | 
+ 12 | Donut Strawberry         |  3.49 | dessert |       | f             | 
+ 13 | Cake Raspberry Blueberry |  5.00 | dessert |       | f             | 
+(3 rows)
+
+kfc_menu=# SELECT type, SUM(price) FROM Dish GROUP BY type;
+   type   |  sum   
+----------+--------
+ beverage |  62.33
+ food     | 146.15
+ dessert  |  11.98
+(3 rows)
+
+kfc_menu=# SELECT type, MONEY(price) FROM Dish GROUP BY type;
+ERROR:  column "dish.price" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT type, MONEY(price) FROM Dish GROUP BY type;
+                           ^
+kfc_menu=# SELECT type, MONEY(SUM(price)) FROM Dish GROUP BY type;
+   type   |  money  
+----------+---------
+ beverage |  $62.33
+ food     | $146.15
+ dessert  |  $11.98
+(3 rows)
+
+kfc_menu=# SELECT type, COUNT(*) FROM Dish GROUP BY type;
+   type   | count 
+----------+-------
+ beverage |     8
+ food     |    15
+ dessert  |     3
+(3 rows)
+
+kfc_menu=# SELECT souce, COUNT(*) FROM Dish WHERE type = 'food' GROUP BY souce;
+  souce  | count 
+---------+-------
+ BBQ     |     3
+         |     1
+ ketchup |     5
+ mayo    |     1
+ mustard |     3
+ ranch   |     2
+(6 rows)
+
+kfc_menu=# SELECT title, price FROM DISH WHERE title ILIKE '%donut%';
+        title         | price 
+----------------------+-------
+ Donut Apple-Cinnamon |  3.49
+ Donut Strawberry     |  3.49
+(2 rows)
+
+kfc_menu=# UPDATE Dish SET price = 4.49 WHERE title ILIKE '%donut%';
+UPDATE 2
+kfc_menu=# SELECT title, price FROM DISH WHERE title ILIKE '%donut%';
+        title         | price 
+----------------------+-------
+ Donut Apple-Cinnamon |  4.49
+ Donut Strawberry     |  4.49
+(2 rows)
+
+kfc_menu=# DELETE FROM Dish WHERE price IS NULL;
+DELETE 1
+kfc_menu=# SELECT * FROM Dish
+kfc_menu-# ;
+ id |          title           | price |   type   |  souce  | is_vegetarian |     comment      
+----+--------------------------+-------+----------+---------+---------------+------------------
+  1 | Chefburger               |  6.35 | food     | BBQ     | f             | Extra cheese
+  2 | Nuggets                  | 12.40 | food     | BBQ     | f             | spicy
+  3 | Fries                    |  5.20 | food     | ketchup | t             | extra salt
+  4 | Longer                   |  4.89 | food     | ranch   | f             | extra pickles
+  5 | Cheeseburger             | 10.79 | food     | BBQ     | f             | extra cheese
+  6 | Cheeseburger De Lux      | 12.99 | food     | mustard | f             | add cheese souce
+  7 | Chefburger De Lux        | 10.99 | food     | ketchup | f             | add mustard
+  8 | Chefburger Junior        |  5.99 | food     | mustard | f             | add ketchup
+  9 | Basket s12               | 12.99 | food     | ketchup | f             | extra spicy
+ 10 | Basket M20               | 24.59 | food     | ketchup | f             | not spicy
+ 13 | Cake Raspberry Blueberry |  5.00 | dessert  |         | f             | 
+ 14 | Hashbrown                |  3.50 | food     | mayo    | f             | 
+ 15 | Fries po-derevensky      |  4.69 | food     | ketchup | f             | 
+ 16 | Twister                  |  6.79 | food     | mustard | f             | 
+ 17 | Pepsi 0,3                |  3.99 | beverage |         | t             | 
+ 18 | Pepsi 0,4                |  4.99 | beverage |         | t             | 
+ 19 | Pepsi 0,5                |  5.99 | beverage |         | t             | 
+ 20 | Pepsi in bottle 0,5      |  5.00 | beverage |         | t             | 
+ 21 | Juice Apple              |  3.59 | beverage |         | t             | 
+ 22 | Strawberry Milkshake     | 12.89 | beverage |         | t             | 
+ 23 | Chocolate Milkshake      | 12.89 | beverage |         | t             | 
+ 24 | Vanilla Milkshake        | 12.99 | beverage |         | t             | 
+ 25 | Boxmaster                | 23.99 | food     | ranch   | f             | 
+ 11 | Donut Apple-Cinnamon     |  4.49 | dessert  |         | f             | 
+ 12 | Donut Strawberry         |  4.49 | dessert  |         | f             | 
+(25 rows)
+
+kfc_menu=# 

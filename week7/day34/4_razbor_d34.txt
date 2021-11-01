@@ -1,0 +1,441 @@
+Классная работа
+
+По теме: Варианты операций в  PostgreSQL
+
+1. Создайте таблицу makers в БД mydb;
+2. В этой таблице создайте следующие поля:
+ Mentor_id 
+ Name
+ Position (choose from: mentor, tracker, scrum)
+ Birthdate
+ Salary
+
+3. Заполните таблицу не менее, чем 15 записями
+4. Выполните следующие запросы:
+
+ Вытащите position и name в одном столбце под
+названием mentors
+ Вытащите все поля в порядке убывания возрастов
+менторов
+ Вытащите только те записи, в которых позиция либо
+mentor, либо tracker, и имя начиналось на ‘A’ или ‘S’
+ Вытащите только те записи, в которых salary находится
+в промежутке от 5000$ до 8000$
+ Вытащите первые три записи, в которых максимальная
+зарплата
+ Вытащите количество работников, группируя по
+позиции position (сколько работников на каждой
+позиции)
+ Определите среднюю заработную плату у scrum
+ Вытащите имя и длину имён работников  в порядке
+возрастания длин их имён
+
+5. Измените одну запись в таблице (любую)
+6. Удалите одну запись из таблицы (любую)
+7. Удалите поле salary из таблицы
+8. Переименуйте поле mentor_id на employee_id
+
+----------------------------------------------------------------------
+
+
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \c mydb 
+You are now connected to database "mydb" as user "postgres".
+mydb=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ kfc_menu  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ mydb      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ shop_db   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | hello    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(8 rows)
+
+mydb=# CREATE TYPE positions AS ENUM ('mentor', 'tracker', 'scrum');
+CREATE TYPE
+mydb=# 
+mydb=# CREATE TABLE makers(
+mydb(# mentor_id SERIAL PRIMARY KEY,
+mydb(# name VARCHAR(50) NOT NULL,
+mydb(# position positions NOT NULL,
+mydb(# birthdate DATE,
+mydb(# salary INT);
+CREATE TABLE
+mydb=# \d makers
+                                        Table "public.makers"
+  Column   |         Type          | Collation | Nullable |                  Default                  
+-----------+-----------------------+-----------+----------+-------------------------------------------
+ mentor_id | integer               |           | not null | nextval('makers_mentor_id_seq'::regclass)
+ name      | character varying(50) |           | not null | 
+ position  | positions             |           | not null | 
+ birthdate | date                  |           |          | 
+ salary    | integer               |           |          | 
+Indexes:
+    "makers_pkey" PRIMARY KEY, btree (mentor_id)
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Alice', 'mentor', '1996-04-21', 6000);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Sam', 'scrum', '1998-07-12', 4000);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Bailee', 'tracker', '2001-09-23', 3500);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('John', 'mentor', '1989-12-31', 10000);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Karen', 'scrum', '1994-11-28', 2500);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Antonio', 'tracker', '2002-03-07', 3000);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Suzy', 'tracker', '1997-08-21', 1500);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Andy', 'tracker', '1995-06-06', 4000);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Bill', 'mentor', '1991-04-05', 6500);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Anvar', 'mentor', '1988-12-03', 9000);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Jade', 'scrum', '1997-09-18', 4000);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Peter', 'tracker', '2002-09-02', 1500);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Max', 'mentor', '1992-05-25', 8900);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Catherine', 'tracker', '1993-07-10', 3000);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Martin', 'scrum', '1990-09-04', 7000);
+INSERT 0 1
+mydb=# INSERT INTO makers (name, position, birthdate, salary) VALUES ('Suisane', 'tracker', '2002-09-11', 2000);
+INSERT 0 1
+mydb=# 
+mydb=# 
+mydb=# SELECT * FROM makers;
+ mentor_id |   name    | position | birthdate  | salary 
+-----------+-----------+----------+------------+--------
+         1 | Alice     | mentor   | 1996-04-21 |   6000
+         2 | Sam       | scrum    | 1998-07-12 |   4000
+         3 | Bailee    | tracker  | 2001-09-23 |   3500
+         4 | John      | mentor   | 1989-12-31 |  10000
+         5 | Karen     | scrum    | 1994-11-28 |   2500
+         6 | Antonio   | tracker  | 2002-03-07 |   3000
+         7 | Suzy      | tracker  | 1997-08-21 |   1500
+         8 | Andy      | tracker  | 1995-06-06 |   4000
+         9 | Bill      | mentor   | 1991-04-05 |   6500
+        10 | Anvar     | mentor   | 1988-12-03 |   9000
+        11 | Jade      | scrum    | 1997-09-18 |   4000
+        12 | Peter     | tracker  | 2002-09-02 |   1500
+        13 | Max       | mentor   | 1992-05-25 |   8900
+        14 | Catherine | tracker  | 1993-07-10 |   3000
+        15 | Martin    | scrum    | 1990-09-04 |   7000
+        16 | Suisane   | tracker  | 2002-09-11 |   2000
+(16 rows)
+
+mydb=# SELECT position || ' ' || name AS 'mentors' FROM makers;
+ERROR:  syntax error at or near "'mentors'"
+LINE 1: SELECT position || ' ' || name AS 'mentors' FROM makers;
+                                          ^
+mydb=# SELECT position || ' ' || name AS "mentors" FROM makers;
+      mentors      
+-------------------
+ mentor Alice
+ scrum Sam
+ tracker Bailee
+ mentor John
+ scrum Karen
+ tracker Antonio
+ tracker Suzy
+ tracker Andy
+ mentor Bill
+ mentor Anvar
+ scrum Jade
+ tracker Peter
+ mentor Max
+ tracker Catherine
+ scrum Martin
+ tracker Suisane
+(16 rows)
+
+mydb=# SELECT position || ' ' || name AS mentors FROM makers;
+      mentors      
+-------------------
+ mentor Alice
+ scrum Sam
+ tracker Bailee
+ mentor John
+ scrum Karen
+ tracker Antonio
+ tracker Suzy
+ tracker Andy
+ mentor Bill
+ mentor Anvar
+ scrum Jade
+ tracker Peter
+ mentor Max
+ tracker Catherine
+ scrum Martin
+ tracker Suisane
+(16 rows)
+
+mydb=# 
+mydb=# 
+mydb=# SELECT * FROM makers ORDER BY birthdate DESC;
+ mentor_id |   name    | position | birthdate  | salary 
+-----------+-----------+----------+------------+--------
+        16 | Suisane   | tracker  | 2002-09-11 |   2000
+        12 | Peter     | tracker  | 2002-09-02 |   1500
+         6 | Antonio   | tracker  | 2002-03-07 |   3000
+         3 | Bailee    | tracker  | 2001-09-23 |   3500
+         2 | Sam       | scrum    | 1998-07-12 |   4000
+        11 | Jade      | scrum    | 1997-09-18 |   4000
+         7 | Suzy      | tracker  | 1997-08-21 |   1500
+         1 | Alice     | mentor   | 1996-04-21 |   6000
+         8 | Andy      | tracker  | 1995-06-06 |   4000
+         5 | Karen     | scrum    | 1994-11-28 |   2500
+        14 | Catherine | tracker  | 1993-07-10 |   3000
+        13 | Max       | mentor   | 1992-05-25 |   8900
+         9 | Bill      | mentor   | 1991-04-05 |   6500
+        15 | Martin    | scrum    | 1990-09-04 |   7000
+         4 | John      | mentor   | 1989-12-31 |  10000
+        10 | Anvar     | mentor   | 1988-12-03 |   9000
+(16 rows)
+
+mydb=# SELECT * FROM makers ORDER BY birthdate ASC;
+ mentor_id |   name    | position | birthdate  | salary 
+-----------+-----------+----------+------------+--------
+        10 | Anvar     | mentor   | 1988-12-03 |   9000
+         4 | John      | mentor   | 1989-12-31 |  10000
+        15 | Martin    | scrum    | 1990-09-04 |   7000
+         9 | Bill      | mentor   | 1991-04-05 |   6500
+        13 | Max       | mentor   | 1992-05-25 |   8900
+        14 | Catherine | tracker  | 1993-07-10 |   3000
+         5 | Karen     | scrum    | 1994-11-28 |   2500
+         8 | Andy      | tracker  | 1995-06-06 |   4000
+         1 | Alice     | mentor   | 1996-04-21 |   6000
+         7 | Suzy      | tracker  | 1997-08-21 |   1500
+        11 | Jade      | scrum    | 1997-09-18 |   4000
+         2 | Sam       | scrum    | 1998-07-12 |   4000
+         3 | Bailee    | tracker  | 2001-09-23 |   3500
+         6 | Antonio   | tracker  | 2002-03-07 |   3000
+        12 | Peter     | tracker  | 2002-09-02 |   1500
+        16 | Suisane   | tracker  | 2002-09-11 |   2000
+(16 rows)
+
+mydb=# SELECT * FROM makers WHERE position = 'mentor' ORDER BY birthdate ASC;
+ mentor_id | name  | position | birthdate  | salary 
+-----------+-------+----------+------------+--------
+        10 | Anvar | mentor   | 1988-12-03 |   9000
+         4 | John  | mentor   | 1989-12-31 |  10000
+         9 | Bill  | mentor   | 1991-04-05 |   6500
+        13 | Max   | mentor   | 1992-05-25 |   8900
+         1 | Alice | mentor   | 1996-04-21 |   6000
+(5 rows)
+
+mydb=# 
+mydb=# 
+mydb=# SELECT * FROM makers WHERE (position = 'mentor' OR position = 'tracker') AND (name LIKE 'A%' OR name LIKE 'S%');
+ mentor_id |  name   | position | birthdate  | salary 
+-----------+---------+----------+------------+--------
+         1 | Alice   | mentor   | 1996-04-21 |   6000
+         6 | Antonio | tracker  | 2002-03-07 |   3000
+         7 | Suzy    | tracker  | 1997-08-21 |   1500
+         8 | Andy    | tracker  | 1995-06-06 |   4000
+        10 | Anvar   | mentor   | 1988-12-03 |   9000
+        16 | Suisane | tracker  | 2002-09-11 |   2000
+(6 rows)
+
+mydb=# 
+mydb=# 
+mydb=# SELECT * FROM makers WHERE salary BETWEEN 5000 AND 8000;
+ mentor_id |  name  | position | birthdate  | salary 
+-----------+--------+----------+------------+--------
+         1 | Alice  | mentor   | 1996-04-21 |   6000
+         9 | Bill   | mentor   | 1991-04-05 |   6500
+        15 | Martin | scrum    | 1990-09-04 |   7000
+(3 rows)
+
+mydb=# SELECT * FROM makers ORDER BY salary DESC FETCH FIRST (3) ROW ONLY;
+ mentor_id | name  | position | birthdate  | salary 
+-----------+-------+----------+------------+--------
+         4 | John  | mentor   | 1989-12-31 |  10000
+        10 | Anvar | mentor   | 1988-12-03 |   9000
+        13 | Max   | mentor   | 1992-05-25 |   8900
+(3 rows)
+
+mydb=# SELECT * FROM makers ORDER BY salary DESC LIMIT 3;
+ mentor_id | name  | position | birthdate  | salary 
+-----------+-------+----------+------------+--------
+         4 | John  | mentor   | 1989-12-31 |  10000
+        10 | Anvar | mentor   | 1988-12-03 |   9000
+        13 | Max   | mentor   | 1992-05-25 |   8900
+(3 rows)
+
+mydb=# SELECT position, COUNT(mentor_id) FROM makers GROUP BY position;
+ position | count 
+----------+-------
+ tracker  |     7
+ mentor   |     5
+ scrum    |     4
+(3 rows)
+
+mydb=# SELECT AVG(salary) FROM makers WHERE position = 'scrum';
+          avg          
+-----------------------
+ 4375.0000000000000000
+(1 row)
+
+mydb=# SELECT ROUND(AVG(salary), 0) FROM makers WHERE position = 'scrum';
+ round 
+-------
+  4375
+(1 row)
+
+mydb=# SELECT name, LENGTH(name) AS len_name FROM makers ORDER by len_name; 
+   name    | len_name 
+-----------+----------
+ Max       |        3
+ Sam       |        3
+ Andy      |        4
+ Jade      |        4
+ Suzy      |        4
+ John      |        4
+ Bill      |        4
+ Alice     |        5
+ Karen     |        5
+ Anvar     |        5
+ Peter     |        5
+ Bailee    |        6
+ Martin    |        6
+ Suisane   |        7
+ Antonio   |        7
+ Catherine |        9
+(16 rows)
+
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# SELECT * FROM makers;
+ mentor_id |   name    | position | birthdate  | salary 
+-----------+-----------+----------+------------+--------
+         1 | Alice     | mentor   | 1996-04-21 |   6000
+         2 | Sam       | scrum    | 1998-07-12 |   4000
+         3 | Bailee    | tracker  | 2001-09-23 |   3500
+         4 | John      | mentor   | 1989-12-31 |  10000
+         5 | Karen     | scrum    | 1994-11-28 |   2500
+         6 | Antonio   | tracker  | 2002-03-07 |   3000
+         7 | Suzy      | tracker  | 1997-08-21 |   1500
+         8 | Andy      | tracker  | 1995-06-06 |   4000
+         9 | Bill      | mentor   | 1991-04-05 |   6500
+        10 | Anvar     | mentor   | 1988-12-03 |   9000
+        11 | Jade      | scrum    | 1997-09-18 |   4000
+        12 | Peter     | tracker  | 2002-09-02 |   1500
+        13 | Max       | mentor   | 1992-05-25 |   8900
+        14 | Catherine | tracker  | 1993-07-10 |   3000
+        15 | Martin    | scrum    | 1990-09-04 |   7000
+        16 | Suisane   | tracker  | 2002-09-11 |   2000
+(16 rows)
+
+
+mydb=# UPDATE makers SET salary=3000 WHERE mentor_id = 12;
+UPDATE 1
+mydb=# SELECT * FROM makers;
+ mentor_id |   name    | position | birthdate  | salary 
+-----------+-----------+----------+------------+--------
+         1 | Alice     | mentor   | 1996-04-21 |   6000
+         2 | Sam       | scrum    | 1998-07-12 |   4000
+         3 | Bailee    | tracker  | 2001-09-23 |   3500
+         4 | John      | mentor   | 1989-12-31 |  10000
+         5 | Karen     | scrum    | 1994-11-28 |   2500
+         6 | Antonio   | tracker  | 2002-03-07 |   3000
+         7 | Suzy      | tracker  | 1997-08-21 |   1500
+         8 | Andy      | tracker  | 1995-06-06 |   4000
+         9 | Bill      | mentor   | 1991-04-05 |   6500
+        10 | Anvar     | mentor   | 1988-12-03 |   9000
+        11 | Jade      | scrum    | 1997-09-18 |   4000
+        13 | Max       | mentor   | 1992-05-25 |   8900
+        14 | Catherine | tracker  | 1993-07-10 |   3000
+        15 | Martin    | scrum    | 1990-09-04 |   7000
+        16 | Suisane   | tracker  | 2002-09-11 |   2000
+        12 | Peter     | tracker  | 2002-09-02 |   3000
+(16 rows)
+
+mydb=# 
+mydb=# DELETE FROM makers WHERE mentor_id = 3;
+DELETE 1
+mydb=# SELECT * FROM makers;
+ mentor_id |   name    | position | birthdate  | salary 
+-----------+-----------+----------+------------+--------
+         1 | Alice     | mentor   | 1996-04-21 |   6000
+         2 | Sam       | scrum    | 1998-07-12 |   4000
+         4 | John      | mentor   | 1989-12-31 |  10000
+         5 | Karen     | scrum    | 1994-11-28 |   2500
+         6 | Antonio   | tracker  | 2002-03-07 |   3000
+         7 | Suzy      | tracker  | 1997-08-21 |   1500
+         8 | Andy      | tracker  | 1995-06-06 |   4000
+         9 | Bill      | mentor   | 1991-04-05 |   6500
+        10 | Anvar     | mentor   | 1988-12-03 |   9000
+        11 | Jade      | scrum    | 1997-09-18 |   4000
+        13 | Max       | mentor   | 1992-05-25 |   8900
+        14 | Catherine | tracker  | 1993-07-10 |   3000
+        15 | Martin    | scrum    | 1990-09-04 |   7000
+        16 | Suisane   | tracker  | 2002-09-11 |   2000
+        12 | Peter     | tracker  | 2002-09-02 |   3000
+(15 rows)
+
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# ALTER TABLE makers DROP SALARY;
+ALTER TABLE
+mydb=# SELECT * FROM makers;
+ mentor_id |   name    | position | birthdate  
+-----------+-----------+----------+------------
+         1 | Alice     | mentor   | 1996-04-21
+         2 | Sam       | scrum    | 1998-07-12
+         4 | John      | mentor   | 1989-12-31
+         5 | Karen     | scrum    | 1994-11-28
+         6 | Antonio   | tracker  | 2002-03-07
+         7 | Suzy      | tracker  | 1997-08-21
+         8 | Andy      | tracker  | 1995-06-06
+         9 | Bill      | mentor   | 1991-04-05
+        10 | Anvar     | mentor   | 1988-12-03
+        11 | Jade      | scrum    | 1997-09-18
+        13 | Max       | mentor   | 1992-05-25
+        14 | Catherine | tracker  | 1993-07-10
+        15 | Martin    | scrum    | 1990-09-04
+        16 | Suisane   | tracker  | 2002-09-11
+        12 | Peter     | tracker  | 2002-09-02
+(15 rows)
+
+mydb=# ALTER TABLE makers RENAME COLUMN mentor_id TO employee_id;
+ALTER TABLE
+mydb=# SELECT * FROM makers;
+ employee_id |   name    | position | birthdate  
+-------------+-----------+----------+------------
+           1 | Alice     | mentor   | 1996-04-21
+           2 | Sam       | scrum    | 1998-07-12
+           4 | John      | mentor   | 1989-12-31
+           5 | Karen     | scrum    | 1994-11-28
+           6 | Antonio   | tracker  | 2002-03-07
+           7 | Suzy      | tracker  | 1997-08-21
+           8 | Andy      | tracker  | 1995-06-06
+           9 | Bill      | mentor   | 1991-04-05
+          10 | Anvar     | mentor   | 1988-12-03
+          11 | Jade      | scrum    | 1997-09-18
+          13 | Max       | mentor   | 1992-05-25
+          14 | Catherine | tracker  | 1993-07-10
+          15 | Martin    | scrum    | 1990-09-04
+          16 | Suisane   | tracker  | 2002-09-11
+          12 | Peter     | tracker  | 2002-09-02
+(15 rows)
+
+mydb=# 
+mydb=# 
+

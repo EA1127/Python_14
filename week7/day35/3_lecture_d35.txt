@@ -1,0 +1,281 @@
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \c kfc_menu 
+You are now connected to database "kfc_menu" as user "postgres".
+kfc_menu=# \l
+kfc_menu=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ kfc_menu  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ mydb      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ shop_db   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | hello    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(8 rows)
+
+kfc_menu=# \dt
+          List of relations
+ Schema |  Name   | Type  |  Owner   
+--------+---------+-------+----------
+ public | client  | table | postgres
+ public | dish    | table | postgres
+ public | myorder | table | postgres
+(3 rows)
+
+kfc_menu=# \d myorder
+                                Table "public.myorder"
+     Column     |  Type   | Collation | Nullable |               Default               
+----------------+---------+-----------+----------+-------------------------------------
+ id             | integer |           | not null | nextval('myorder_id_seq'::regclass)
+ client_id      | integer |           |          | 
+ payment_method | method  |           |          | 
+Indexes:
+    "myorder_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "fk_myorder_client" FOREIGN KEY (client_id) REFERENCES client(id)
+
+kfc_menu=# 
+
+
+
+
+
+kfc_menu=# CREATE TABLE myorder_dish(
+kfc_menu(# order_id INT,
+kfc_menu(# dish_id INT,
+kfc_menu(# CONSTRAINT fk_orderdish_order FOREIGN KEY(order_id) REFERENCES myorder(id),
+kfc_menu(# CONSTRAINT fk_orderdish_dish FOREIGN KEY(dish_id) REFERENCES dish(id));
+CREATE TABLE
+kfc_menu=# \dt
+            List of relations
+ Schema |     Name     | Type  |  Owner   
+--------+--------------+-------+----------
+ public | client       | table | postgres
+ public | dish         | table | postgres
+ public | myorder      | table | postgres
+ public | myorder_dish | table | postgres
+(4 rows)
+
+kfc_menu=# \d myorder_dish
+             Table "public.myorder_dish"
+  Column  |  Type   | Collation | Nullable | Default 
+----------+---------+-----------+----------+---------
+ order_id | integer |           |          | 
+ dish_id  | integer |           |          | 
+Foreign-key constraints:
+    "fk_orderdish_dish" FOREIGN KEY (dish_id) REFERENCES dish(id)
+    "fk_orderdish_order" FOREIGN KEY (order_id) REFERENCES myorder(id)
+
+kfc_menu=# INSERT INTO Client (name) Values('John'), ('Raychel');
+INSERT 0 2
+kfc_menu=# select * from client;
+ id |  name   | ticket 
+----+---------+--------
+  1 | John    |      1
+  2 | Raychel |      2
+(2 rows)
+
+kfc_menu=# ALTER SEQUENCE client_id_seq RESTART WITH 300;
+ALTER SEQUENCE
+kfc_menu=# ALTER SEQUENCE client_ticket_seq restart with 50;
+ALTER SEQUENCE
+kfc_menu=# INSERT INTO Client (name) VALUES('Atai'), ('Jannat');
+INSERT 0 2
+kfc_menu=# SELECT * FROM Client;
+ id  |  name   | ticket 
+-----+---------+--------
+   1 | John    |      1
+   2 | Raychel |      2
+ 300 | Atai    |     50
+ 301 | Jannat  |     51
+(4 rows)
+
+kfc_menu=# 
+kfc_menu=# 
+kfc_menu=# INSERT INTO myorder (client_id, payment_method) VALUES (1, 'cash'),
+kfc_menu-# (300,'card'),
+kfc_menu-# (301,'card'),
+kfc_menu-# (2,'cash');
+INSERT 0 4
+kfc_menu=# SELECT * FROM Client;
+ id  |  name   | ticket 
+-----+---------+--------
+   1 | John    |      1
+   2 | Raychel |      2
+ 300 | Atai    |     50
+ 301 | Jannat  |     51
+(4 rows)
+
+kfc_menu=# SELECT * FROM dish;
+ id |          title           | price |   type   |  souce  | is_vegetarian |     comment      
+----+--------------------------+-------+----------+---------+---------------+------------------
+  1 | Chefburger               |  6.35 | food     | BBQ     | f             | Extra cheese
+  2 | Nuggets                  | 12.40 | food     | BBQ     | f             | spicy
+  3 | Fries                    |  5.20 | food     | ketchup | t             | extra salt
+  4 | Longer                   |  4.89 | food     | ranch   | f             | extra pickles
+  5 | Cheeseburger             | 10.79 | food     | BBQ     | f             | extra cheese
+  6 | Cheeseburger De Lux      | 12.99 | food     | mustard | f             | add cheese souce
+  7 | Chefburger De Lux        | 10.99 | food     | ketchup | f             | add mustard
+  8 | Chefburger Junior        |  5.99 | food     | mustard | f             | add ketchup
+  9 | Basket s12               | 12.99 | food     | ketchup | f             | extra spicy
+ 10 | Basket M20               | 24.59 | food     | ketchup | f             | not spicy
+ 13 | Cake Raspberry Blueberry |  5.00 | dessert  |         | f             | 
+ 14 | Hashbrown                |  3.50 | food     | mayo    | f             | 
+ 15 | Fries po-derevensky      |  4.69 | food     | ketchup | f             | 
+ 16 | Twister                  |  6.79 | food     | mustard | f             | 
+ 17 | Pepsi 0,3                |  3.99 | beverage |         | t             | 
+ 18 | Pepsi 0,4                |  4.99 | beverage |         | t             | 
+ 19 | Pepsi 0,5                |  5.99 | beverage |         | t             | 
+ 20 | Pepsi in bottle 0,5      |  5.00 | beverage |         | t             | 
+ 21 | Juice Apple              |  3.59 | beverage |         | t             | 
+ 22 | Strawberry Milkshake     | 12.89 | beverage |         | t             | 
+ 23 | Chocolate Milkshake      | 12.89 | beverage |         | t             | 
+ 24 | Vanilla Milkshake        | 12.99 | beverage |         | t             | 
+ 25 | Boxmaster                | 23.99 | food     | ranch   | f             | 
+ 11 | Donut Apple-Cinnamon     |  4.49 | dessert  |         | f             | 
+ 12 | Donut Strawberry         |  4.49 | dessert  |         | f             | 
+(25 rows)
+
+kfc_menu=# insert into myorder_dish VALUES (1,25), (1,20), (1,22);
+INSERT 0 3
+kfc_menu=# insert into myorder_dish VALUES (2,6), (2,3), (2,12);
+INSERT 0 3
+kfc_menu=# insert into myorder_dish VALUES (2,25), (3,24), (3,23);
+INSERT 0 3
+kfc_menu=# insert into myorder_dish VALUES (4,20);
+INSERT 0 1
+kfc_menu=# SELECT * FROM dish;
+ id |          title           | price |   type   |  souce  | is_vegetarian |     comment      
+----+--------------------------+-------+----------+---------+---------------+------------------
+  1 | Chefburger               |  6.35 | food     | BBQ     | f             | Extra cheese
+  2 | Nuggets                  | 12.40 | food     | BBQ     | f             | spicy
+  3 | Fries                    |  5.20 | food     | ketchup | t             | extra salt
+  4 | Longer                   |  4.89 | food     | ranch   | f             | extra pickles
+  5 | Cheeseburger             | 10.79 | food     | BBQ     | f             | extra cheese
+  6 | Cheeseburger De Lux      | 12.99 | food     | mustard | f             | add cheese souce
+  7 | Chefburger De Lux        | 10.99 | food     | ketchup | f             | add mustard
+  8 | Chefburger Junior        |  5.99 | food     | mustard | f             | add ketchup
+  9 | Basket s12               | 12.99 | food     | ketchup | f             | extra spicy
+ 10 | Basket M20               | 24.59 | food     | ketchup | f             | not spicy
+ 13 | Cake Raspberry Blueberry |  5.00 | dessert  |         | f             | 
+ 14 | Hashbrown                |  3.50 | food     | mayo    | f             | 
+ 15 | Fries po-derevensky      |  4.69 | food     | ketchup | f             | 
+ 16 | Twister                  |  6.79 | food     | mustard | f             | 
+ 17 | Pepsi 0,3                |  3.99 | beverage |         | t             | 
+ 18 | Pepsi 0,4                |  4.99 | beverage |         | t             | 
+ 19 | Pepsi 0,5                |  5.99 | beverage |         | t             | 
+ 20 | Pepsi in bottle 0,5      |  5.00 | beverage |         | t             | 
+ 21 | Juice Apple              |  3.59 | beverage |         | t             | 
+ 22 | Strawberry Milkshake     | 12.89 | beverage |         | t             | 
+ 23 | Chocolate Milkshake      | 12.89 | beverage |         | t             | 
+ 24 | Vanilla Milkshake        | 12.99 | beverage |         | t             | 
+ 25 | Boxmaster                | 23.99 | food     | ranch   | f             | 
+ 11 | Donut Apple-Cinnamon     |  4.49 | dessert  |         | f             | 
+ 12 | Donut Strawberry         |  4.49 | dessert  |         | f             | 
+(25 rows)
+
+kfc_menu=# SELECT * FROM myorder_dish;
+ order_id | dish_id 
+----------+---------
+        1 |      25
+        1 |      20
+        1 |      22
+        2 |       6
+        2 |       3
+        2 |      12
+        2 |      25
+        3 |      24
+        3 |      23
+        4 |      20
+(10 rows)
+
+kfc_menu=# 
+kfc_menu=# SELECT myorder.id, myorder.payment_method, client.name FROM myorder INNER JOIN client ON myorder.client_id=client.id;
+ id | payment_method |  name   
+----+----------------+---------
+  1 | cash           | John
+  2 | card           | Atai
+  3 | card           | Jannat
+  4 | cash           | Raychel
+(4 rows)
+
+kfc_menu=# SELECT c.ticket, c.name, mo.payment_method, d.title, d.price FROM client AS c INNER JOIN myorder AS mo ON c.id =mo.client_id 
+INNER JOIN myorder_dish AS mod ON mo.id = mod.order_id INNER JOIN dish AS d ON d.id = mod.dish_id;
+ ticket |  name   | payment_method |        title         | price 
+--------+---------+----------------+----------------------+-------
+      1 | John    | cash           | Boxmaster            | 23.99
+      1 | John    | cash           | Pepsi in bottle 0,5  |  5.00
+      1 | John    | cash           | Strawberry Milkshake | 12.89
+     50 | Atai    | card           | Cheeseburger De Lux  | 12.99
+     50 | Atai    | card           | Fries                |  5.20
+     50 | Atai    | card           | Donut Strawberry     |  4.49
+     50 | Atai    | card           | Boxmaster            | 23.99
+     51 | Jannat  | card           | Vanilla Milkshake    | 12.99
+     51 | Jannat  | card           | Chocolate Milkshake  | 12.89
+      2 | Raychel | cash           | Pepsi in bottle 0,5  |  5.00
+(10 rows)
+
+kfc_menu=# 
+kfc_menu=# SELECT c.name, mo.payment_method, mo.id, SUM(d.price) FROM Client AS c INNER JOIN myorder AS mo ON c.id = mo.client_id 
+INNER JOIN myorder_dish AS mod ON mo.id= mod.order_id INNER JOIN dish AS d ON d.id = mod.dish_id GROUP BY c.name, mo.payment_method, mo.id;
+  name   | payment_method | id |  sum  
+---------+----------------+----+-------
+ Atai    | card           |  2 | 46.67
+ John    | cash           |  1 | 41.88
+ Raychel | cash           |  4 |  5.00
+ Jannat  | card           |  3 | 25.88
+(4 rows)
+
+kfc_menu=# select c.name, mo.payment_method, mo.id, sum(d.price)
+kfc_menu-# from client as c inner join myorder as mo on c.id = mo.client_id
+kfc_menu-# inner join myorder_dish as mod on mo.id= mod.order_id
+kfc_menu-# inner join dish as d on d.id = mod.dish_id where mo.payment_method= 'cash' GROUP BY c.name, mo.payment_method, mo.id;
+  name   | payment_method | id |  sum  
+---------+----------------+----+-------
+ John    | cash           |  1 | 41.88
+ Raychel | cash           |  4 |  5.00
+(2 rows)
+
+kfc_menu=# 
+kfc_menu=# select title, price,
+kfc_menu-# CASE when price < 10 THEN 'cheap'
+kfc_menu-# when price > 10 then 'expensive'
+kfc_menu-# else 'equals to 10' END from dish;
+          title           | price |   case    
+--------------------------+-------+-----------
+ Chefburger               |  6.35 | cheap
+ Nuggets                  | 12.40 | expensive
+ Fries                    |  5.20 | cheap
+ Longer                   |  4.89 | cheap
+ Cheeseburger             | 10.79 | expensive
+ Cheeseburger De Lux      | 12.99 | expensive
+ Chefburger De Lux        | 10.99 | expensive
+ Chefburger Junior        |  5.99 | cheap
+ Basket s12               | 12.99 | expensive
+ Basket M20               | 24.59 | expensive
+ Cake Raspberry Blueberry |  5.00 | cheap
+ Hashbrown                |  3.50 | cheap
+ Fries po-derevensky      |  4.69 | cheap
+ Twister                  |  6.79 | cheap
+ Pepsi 0,3                |  3.99 | cheap
+ Pepsi 0,4                |  4.99 | cheap
+ Pepsi 0,5                |  5.99 | cheap
+ Pepsi in bottle 0,5      |  5.00 | cheap
+ Juice Apple              |  3.59 | cheap
+ Strawberry Milkshake     | 12.89 | expensive
+ Chocolate Milkshake      | 12.89 | expensive
+ Vanilla Milkshake        | 12.99 | expensive
+ Boxmaster                | 23.99 | expensive
+ Donut Apple-Cinnamon     |  4.49 | cheap
+ Donut Strawberry         |  4.49 | cheap
+(25 rows)
+
+kfc_menu=# 

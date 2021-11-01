@@ -1,0 +1,465 @@
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+[sudo] password for hello: 
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ kfc_menu  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ mydb      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | hello    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(7 rows)
+
+postgres=# CREATE DATABASE shop_db;
+CREATE DATABASE
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ kfc_menu  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ mydb      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ shop_db   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | hello    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(8 rows)
+
+postgres=# \c shop_db 
+You are now connected to database "shop_db" as user "postgres".
+shop_db=# CREATE TABLE users (
+shop_db(# id SERIAL PRIMARY KEY,
+shop_db(# name VARCHAR(50),
+shop_db(# last_name VARCHAR(100));
+CREATE TABLE
+shop_db=# 
+shop_db=# \d users
+                                     Table "public.users"
+  Column   |          Type          | Collation | Nullable |              Default              
+-----------+------------------------+-----------+----------+-----------------------------------
+ id        | integer                |           | not null | nextval('users_id_seq'::regclass)
+ name      | character varying(50)  |           |          | 
+ last_name | character varying(100) |           |          | 
+Indexes:
+    "users_pkey" PRIMARY KEY, btree (id)
+
+shop_db=# CREATE TABLE email (
+shop_db(# user_id INT,
+shop_db(# email VARCHAR(60),
+shop_db(# CONSTRAINT email_unique UNIQUE (user_id));
+CREATE TABLE
+shop_db=# \d email
+                       Table "public.email"
+ Column  |         Type          | Collation | Nullable | Default 
+---------+-----------------------+-----------+----------+---------
+ user_id | integer               |           |          | 
+ email   | character varying(60) |           |          | 
+Indexes:
+    "email_unique" UNIQUE CONSTRAINT, btree (user_id)
+
+shop_db=# ALTER TABLE email ADD CONSTRAINT fk_email_users FOREIGN KEY (user_id) REFERENCES users (id);
+ALTER TABLE
+shop_db=# \d email
+                       Table "public.email"
+ Column  |         Type          | Collation | Nullable | Default 
+---------+-----------------------+-----------+----------+---------
+ user_id | integer               |           |          | 
+ email   | character varying(60) |           |          | 
+Indexes:
+    "email_unique" UNIQUE CONSTRAINT, btree (user_id)
+Foreign-key constraints:
+    "fk_email_users" FOREIGN KEY (user_id) REFERENCES users(id)
+
+shop_db=# 
+shop_db=# CREATE TABLE product (
+shop_db(# id SERIAL PRIMARY KEY,
+shop_db(# title VARCHAR(150),
+shop_db(# price INT,
+shop_db(# quantity INT DEFAULT 1);
+CREATE TABLE
+shop_db=# \d product
+                                     Table "public.product"
+  Column  |          Type          | Collation | Nullable |               Default               
+----------+------------------------+-----------+----------+-------------------------------------
+ id       | integer                |           | not null | nextval('product_id_seq'::regclass)
+ title    | character varying(150) |           |          | 
+ price    | integer                |           |          | 
+ quantity | integer                |           |          | 1
+Indexes:
+    "product_pkey" PRIMARY KEY, btree (id)
+
+shop_db=# 
+shop_db=# 
+shop_db=# CREATE TABLE orders (
+shop_db(# id SERIAL PRIMARY KEY,
+shop_db(# user_id INT,
+shop_db(# address VARCHAR(255),
+shop_db(# CONSTRAINT fk_orders_users FOREIGN KEY (user_id) REFERENCES users(id)); 
+CREATE TABLE
+shop_db=# \d orders
+                                    Table "public.orders"
+ Column  |          Type          | Collation | Nullable |              Default               
+---------+------------------------+-----------+----------+------------------------------------
+ id      | integer                |           | not null | nextval('orders_id_seq'::regclass)
+ user_id | integer                |           |          | 
+ address | character varying(255) |           |          | 
+Indexes:
+    "orders_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "fk_orders_users" FOREIGN KEY (user_id) REFERENCES users(id)
+
+shop_db=# 
+shop_db=# 
+shop_db=# CREATE TABLE order_product (
+product_id INT NOT NULL,
+order_id INT NOT NULL,
+CONSTRAINT fk_order_product_product FOREIGN KEY(product_id) references product(id),
+CONSTRAINT fk_order_product_order FOREIGN KEY(order_id) references orders(id));
+CREATE TABLE
+shop_db=# \d order_product 
+             Table "public.order_product"
+   Column   |  Type   | Collation | Nullable | Default 
+------------+---------+-----------+----------+---------
+ product_id | integer |           | not null | 
+ order_id   | integer |           | not null | 
+Foreign-key constraints:
+    "fk_order_product_order" FOREIGN KEY (order_id) REFERENCES orders(id)
+    "fk_order_product_product" FOREIGN KEY (product_id) REFERENCES product(id)
+
+shop_db=# 
+shop_db=# 
+shop_db=# INSERT INTO users (name, last_name) VALUES ('John', 'Snow');
+INSERT 0 1
+shop_db=# INSERT INTO users (name, last_name) VALUES ('Tony', 'Stark');
+INSERT 0 1
+shop_db=# INSERT INTO users (name, last_name) VALUES ('Jean', 'Gray');
+INSERT 0 1
+shop_db=# INSERT INTO users (name, last_name) VALUES ('Loky', 'Odinson');
+INSERT 0 1
+shop_db=# SELECT * FROM users
+shop_db-# ;
+ id | name | last_name 
+----+------+-----------
+  1 | John | Snow
+  2 | Tony | Stark
+  3 | Jean | Gray
+  4 | Loky | Odinson
+(4 rows)
+
+shop_db=# 
+shop_db=# 
+shop_db=# INSERT INTO email (user_id, email) VALUES (1, 'john_snow@gmail.com');
+INSERT 0 1
+shop_db=# INSERT INTO email (user_id, email) VALUES (2, 'tony_stark@gmail.com');
+INSERT 0 1
+shop_db=# INSERT INTO email (user_id, email) VALUES (3, 'jean_gray@gmail.com');
+INSERT 0 1
+shop_db=# SELECT * FROM email;
+ user_id |        email         
+---------+----------------------
+       1 | john_snow@gmail.com
+       2 | tony_stark@gmail.com
+       3 | jean_gray@gmail.com
+(3 rows)
+
+shop_db=# 
+shop_db=# SELECT users.id, users.name, users.last_name, email.email FROM users INNER JOIN email ON users.id=email.user_id; 
+ id | name | last_name |        email         
+----+------+-----------+----------------------
+  1 | John | Snow      | john_snow@gmail.com
+  2 | Tony | Stark     | tony_stark@gmail.com
+  3 | Jean | Gray      | jean_gray@gmail.com
+(3 rows)
+
+shop_db=# 
+shop_db=# SELECT u.id, u.name, u.last_name, e.email FROM users AS u INNER JOIN email AS e ON u.id=e.user_id;
+ id | name | last_name |        email         
+----+------+-----------+----------------------
+  1 | John | Snow      | john_snow@gmail.com
+  2 | Tony | Stark     | tony_stark@gmail.com
+  3 | Jean | Gray      | jean_gray@gmail.com
+(3 rows)
+
+shop_db=# 
+shop_db=# SELECT * FROM users;
+ id | name | last_name 
+----+------+-----------
+  1 | John | Snow
+  2 | Tony | Stark
+  3 | Jean | Gray
+  4 | Loky | Odinson
+(4 rows)
+shop_db=# SELECT u.id, u.name, u.last_name, e.email FROM users AS u LEFT OUTER JOIN email AS e ON u.id=e.user_id;
+ id | name | last_name |        email         
+----+------+-----------+----------------------
+  1 | John | Snow      | john_snow@gmail.com
+  2 | Tony | Stark     | tony_stark@gmail.com
+  3 | Jean | Gray      | jean_gray@gmail.com
+  4 | Loky | Odinson   | 
+(4 rows)
+
+shop_db=# SELECT u.id, u.name, u.last_name, e.email FROM users AS u RIGHT OUTER JOIN email AS e ON u.id=e.user_id;
+ id | name | last_name |        email         
+----+------+-----------+----------------------
+  1 | John | Snow      | john_snow@gmail.com
+  2 | Tony | Stark     | tony_stark@gmail.com
+  3 | Jean | Gray      | jean_gray@gmail.com
+(3 rows)
+
+shop_db=# 
+shop_db=# SELECT u.id, u.name, u.last_name, e.email FROM users AS u FULL OUTER JOIN email AS e ON u.id=e.user_id;
+ id | name | last_name |        email         
+----+------+-----------+----------------------
+  1 | John | Snow      | john_snow@gmail.com
+  2 | Tony | Stark     | tony_stark@gmail.com
+  3 | Jean | Gray      | jean_gray@gmail.com
+  4 | Loky | Odinson   | 
+(4 rows)
+
+shop_db=# 
+shop_db=# 
+shop_db=# 
+shop_db=# INSERT INTO orders (user_id, address) VALUES (1, 'London, Bakers ST.11');
+INSERT 0 1
+shop_db=# INSERT INTO orders (user_id, address) VALUES (4, 'Oslo, Asgardia ST.44');
+INSERT 0 1
+shop_db=# INSERT INTO orders (user_id, address) VALUES (4, 'Oslo, Asgardia ST.44');
+INSERT 0 1
+shop_db=# SELECT * FROM orders;
+ id | user_id |       address        
+----+---------+----------------------
+  1 |       1 | London, Bakers ST.11
+  2 |       4 | Oslo, Asgardia ST.44
+  3 |       4 | Oslo, Asgardia ST.44
+(3 rows)
+
+shop_db=# INSERT INTO orders (user_id, address) VALUES (3, 'New York, W.Pheonix ST.33');
+INSERT 0 1
+shop_db=# 
+shop_db=# SELECT * FROM orders;
+ id | user_id |          address          
+----+---------+---------------------------
+  1 |       1 | London, Bakers ST.11
+  2 |       4 | Oslo, Asgardia ST.44
+  3 |       4 | Oslo, Asgardia ST.44
+  4 |       3 | New York, W.Pheonix ST.33
+(4 rows)
+
+shop_db=# SELECT o.id, o.address, u.name, u.last_name FROM orders AS o INNER JOIN users AS u ON o.user_id=u.id;
+ id |          address          | name | last_name 
+----+---------------------------+------+-----------
+  1 | London, Bakers ST.11      | John | Snow
+  2 | Oslo, Asgardia ST.44      | Loky | Odinson
+  3 | Oslo, Asgardia ST.44      | Loky | Odinson
+  4 | New York, W.Pheonix ST.33 | Jean | Gray
+(4 rows)
+
+shop_db=# 
+shop_db=# SELECT u.name, u.last_name, e.email, o.address FROM users AS u INNER JOIN email AS e ON u.id=e.user_id INNER JOIN orders AS o ON o.user_id=u.id;
+ name | last_name |        email        |          address          
+------+-----------+---------------------+---------------------------
+ John | Snow      | john_snow@gmail.com | London, Bakers ST.11
+ Jean | Gray      | jean_gray@gmail.com | New York, W.Pheonix ST.33
+(2 rows)
+
+shop_db=# 
+shop_db=# 
+shop_db=# SELECT u.name, u.last_name, e.email, o.address FROM users AS u FULL JOIN email AS e ON u.id=e.user_id FULL JOIN orders AS o ON o.user_id=u.id;
+ name | last_name |        email         |          address          
+------+-----------+----------------------+---------------------------
+ John | Snow      | john_snow@gmail.com  | London, Bakers ST.11
+ Tony | Stark     | tony_stark@gmail.com | 
+ Jean | Gray      | jean_gray@gmail.com  | New York, W.Pheonix ST.33
+ Loky | Odinson   |                      | Oslo, Asgardia ST.44
+ Loky | Odinson   |                      | Oslo, Asgardia ST.44
+(5 rows)
+
+shop_db=# 
+shop_db=# 
+shop_db=# 
+shop_db=# INSERT INTO product (title, price, quantity) VALUES('Samsung', 40000, 15);
+INSERT 0 1
+shop_db=# INSERT INTO product (title, price, quantity) VALUES('Iphone', 60000, 5);
+INSERT 0 1
+shop_db=# INSERT INTO product (title, price, quantity) VALUES('ASUS', 55000, 27);
+INSERT 0 1
+shop_db=# INSERT INTO product (title, price, quantity) VALUES('MacBook', 110000, 3);
+INSERT 0 1
+shop_db=# SELECT * FROM product;
+ id |  title  | price  | quantity 
+----+---------+--------+----------
+  1 | Samsung |  40000 |       15
+  2 | Iphone  |  60000 |        5
+  3 | ASUS    |  55000 |       27
+  4 | MacBook | 110000 |        3
+(4 rows)
+
+shop_db=# SELECT * FROM order_product;
+ product_id | order_id 
+------------+----------
+(0 rows)
+
+shop_db=# SELECT * FROM orders;
+ id | user_id |          address          
+----+---------+---------------------------
+  1 |       1 | London, Bakers ST.11
+  2 |       4 | Oslo, Asgardia ST.44
+  3 |       4 | Oslo, Asgardia ST.44
+  4 |       3 | New York, W.Pheonix ST.33
+(4 rows)
+
+shop_db=# INSERT INTO order_product (product_id, order_id) VALUES (2, 1);
+INSERT 0 1
+shop_db=# INSERT INTO order_product (product_id, order_id) VALUES (4, 1);
+INSERT 0 1
+shop_db=# INSERT INTO order_product (product_id, order_id) VALUES (4, 2);
+INSERT 0 1
+shop_db=# INSERT INTO order_product (product_id, order_id) VALUES (1, 4);
+INSERT 0 1
+shop_db=# INSERT INTO order_product (product_id, order_id) VALUES (3, 4);
+INSERT 0 1
+shop_db=# 
+shop_db=# SELECT * FROM order_product;
+ product_id | order_id 
+------------+----------
+          2 |        1
+          4 |        1
+          4 |        2
+          1 |        4
+          3 |        4
+(5 rows)
+
+shop_db=# SELECT p.title, o.address FROM order_product AS op INNER JOIN product AS p ON op.product_id=p.id INNER JOIN orders as o ON o.id=op.order_id;
+  title  |          address          
+---------+---------------------------
+ Iphone  | London, Bakers ST.11
+ MacBook | London, Bakers ST.11
+ MacBook | Oslo, Asgardia ST.44
+ Samsung | New York, W.Pheonix ST.33
+ ASUS    | New York, W.Pheonix ST.33
+(5 rows)
+
+shop_db=# 
+shop_db=# 
+shop_db=# 
+shop_db=# SELECT u.name, u.last_name, p.title, o.address FROM order_product AS op INNER JOIN product AS p ON op.product_id=p.id INNER JOIN orders 
+as o ON op.order_id=o.id INNER JOIN users AS u ON o.user_id=u.id;
+
+ name | last_name |  title  |          address          
+------+-----------+---------+---------------------------
+ John | Snow      | Iphone  | London, Bakers ST.11
+ John | Snow      | MacBook | London, Bakers ST.11
+ Loky | Odinson   | MacBook | Oslo, Asgardia ST.44
+ Jean | Gray      | Samsung | New York, W.Pheonix ST.33
+ Jean | Gray      | ASUS    | New York, W.Pheonix ST.33
+(5 rows)
+
+shop_db=# 
+shop_db=# SELECT u.name, e.email, p.title, o.address, o.id FROM order_product AS op INNER JOIN product AS p ON op.product_id=p.id INNER JOIN orders 
+as o ON op.order_id=o.id INNER JOIN users AS u ON o.user_id=u.id INNER JOIN email AS e ON u.id=e.user_id;
+
+ name |        email        |  title  |          address          | id 
+------+---------------------+---------+---------------------------+----
+ John | john_snow@gmail.com | Iphone  | London, Bakers ST.11      |  1
+ John | john_snow@gmail.com | MacBook | London, Bakers ST.11      |  1
+ Jean | jean_gray@gmail.com | Samsung | New York, W.Pheonix ST.33 |  4
+ Jean | jean_gray@gmail.com | ASUS    | New York, W.Pheonix ST.33 |  4
+(4 rows)
+
+shop_db=# 
+shop_db=# SELECT u.name, e.email, p.title, o.address, o.id FROM order_product AS op FULL JOIN product AS p ON op.product_id=p.id FULL JOIN orders 
+as o ON op.order_id=o.id FULL JOIN users AS u ON o.user_id=u.id FULL JOIN email AS e ON u.id=e.user_id;
+
+ name |        email         |  title  |          address          | id 
+------+----------------------+---------+---------------------------+----
+ John | john_snow@gmail.com  | Iphone  | London, Bakers ST.11      |  1
+ John | john_snow@gmail.com  | MacBook | London, Bakers ST.11      |  1
+ Loky |                      | MacBook | Oslo, Asgardia ST.44      |  2
+ Jean | jean_gray@gmail.com  | Samsung | New York, W.Pheonix ST.33 |  4
+ Jean | jean_gray@gmail.com  | ASUS    | New York, W.Pheonix ST.33 |  4
+ Loky |                      |         | Oslo, Asgardia ST.44      |  3
+ Tony | tony_stark@gmail.com |         |                           |   
+(7 rows)
+
+shop_db=# 
+shop_db=# 
+shop_db=# 
+shop_db=# SELECT * FROM product;
+ id |  title  | price  | quantity 
+----+---------+--------+----------
+  1 | Samsung |  40000 |       15
+  2 | Iphone  |  60000 |        5
+  3 | ASUS    |  55000 |       27
+  4 | MacBook | 110000 |        3
+(4 rows)
+
+shop_db=# SELECT title, price, CASE WHEN price > 40000 THEN 'too much' ELSE 'ok' END FROM product;
+  title  | price  |   case   
+---------+--------+----------
+ Samsung |  40000 | ok
+ Iphone  |  60000 | too much
+ ASUS    |  55000 | too much
+ MacBook | 110000 | too much
+(4 rows)
+
+shop_db=# SELECT title, price, CASE WHEN price > 40000 THEN 'too much' ELSE 'ok' END affordability FROM product;
+  title  | price  | affordability 
+---------+--------+---------------
+ Samsung |  40000 | ok
+ Iphone  |  60000 | too much
+ ASUS    |  55000 | too much
+ MacBook | 110000 | too much
+(4 rows)
+
+shop_db=# 
+shop_db=# 
+shop_db=# 
+shop_db=# SELECT title, price, quantity, CASE WHEN quantity = 0 THEN 'out of stock' WHEN quantity BETWEEN 5 AND 10 THEN 'hurry up!!!' ELSE 'in stock' 
+END stock FROM product;
+
+  title  | price  | quantity |    stock    
+---------+--------+----------+-------------
+ Samsung |  40000 |       15 | in stock
+ Iphone  |  60000 |        5 | hurry up!!!
+ ASUS    |  55000 |       27 | in stock
+ MacBook | 110000 |        3 | in stock
+(4 rows)
+
+shop_db=# SELECT title, price, quantity, CASE WHEN quantity = 0 THEN 'out of stock' WHEN quantity BETWEEN 1 AND 10 THEN 'hurry up!!!' ELSE 'in stock' 
+END stock FROM product;
+
+  title  | price  | quantity |    stock    
+---------+--------+----------+-------------
+ Samsung |  40000 |       15 | in stock
+ Iphone  |  60000 |        5 | hurry up!!!
+ ASUS    |  55000 |       27 | in stock
+ MacBook | 110000 |        3 | hurry up!!!
+(4 rows)
+
+shop_db=# INSERT INTO product (title, price, quantity) VALUES ('Xiaomi', 28000, 0);
+INSERT 0 1
+shop_db=# SELECT title, price, quantity, CASE WHEN quantity = 0 THEN 'out of stock' WHEN quantity BETWEEN 1 AND 10 THEN 'hurry up!!!' ELSE 'in stock' 
+END stock FROM product;
+  title  | price  | quantity |    stock     
+---------+--------+----------+--------------
+ Samsung |  40000 |       15 | in stock
+ Iphone  |  60000 |        5 | hurry up!!!
+ ASUS    |  55000 |       27 | in stock
+ MacBook | 110000 |        3 | hurry up!!!
+ Xiaomi  |  28000 |        0 | out of stock
+(5 rows)
+
+shop_db=# 
+shop_db=# 

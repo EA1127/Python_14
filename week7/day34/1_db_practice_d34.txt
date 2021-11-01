@@ -1,0 +1,2832 @@
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+[sudo] password for hello: 
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \c mydb
+You are now connected to database "mydb" as user "postgres".
+mydb=# \l
+mydb=# \d info
+mydb=# \dt
+        List of relations
+ Schema | Name | Type  |  Owner   
+--------+------+-------+----------
+ public | info | table | postgres
+(1 row)
+
+mydb=# \dt
+        List of relations
+ Schema | Name | Type  |  Owner   
+--------+------+-------+----------
+ public | info | table | postgres
+(1 row)
+
+mydb=# select name from info;
+  name   
+---------
+ John
+ Alice
+ Sandy
+ Andy
+ Emely
+ Emil
+ Talant
+ Alima
+ Jannet
+ Atai
+ Kani
+ Biatrix
+ Kianu
+ Alex
+ Maria
+ Loky
+ Jean
+ Ryan
+ Zain
+ Shan
+(20 rows)
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Xia', 'Nihua', 'China', 'nihua@yahoo.com', '16', 'Python', 1);  
+INSERT 0 1
+mydb=# INSERT INTO info (name, last_name, country, email, age, programming_language, experiance) VALUES ('Nimuea', 'Murriel', 'Great Britain', 'nimuea@yahoo.com', '200', 'Javascript', 3);  
+INSERT 0 1
+mydb=# select * from info;
+mydb=# 
+mydb=# select name, last_name, email from info;
+mydb=# 
+mydb=# select name, programming_language from info;
+  name   | programming_language 
+---------+----------------------
+ John    | Python
+ Alice   | Javascript
+ Sandy   | Javascript
+ Andy    | Python
+ Emely   | Python
+ Emil    | Python
+ Talant  | Javascript
+ Alima   | Python
+ Jannet  | Python
+ Atai    | Javascript
+ Kani    | Javascript
+ Biatrix | Python
+ Kianu   | Javascript
+ Alex    | Javascript
+ Maria   | Python
+ Loky    | Python
+ Jean    | Javascript
+ Ryan    | Python
+ Zain    | Javascript
+ Shan    | Python
+ Xia     | Python
+ Nimuea  | Javascript
+(22 rows)
+
+mydb=# 
+mydb=# 
+mydb=# select name || ' ' || last_name from info;
+      ?column?       
+---------------------
+ John Snow
+ Alice Snow
+ Sandy Smith
+ Andy Sacks
+ Emely Chart
+ Emil Avazov
+ Talant Talantbekov
+ Alima Dzhanybayeva
+ Jannet Jannetova
+ Atai Ataibekov
+ Kani Mentor
+ Biatrix Kiddo
+ Kianu Reeves
+ Alex Smartungschaft
+ Maria Sharapova
+ Loky Asgardson
+ Jean Gray
+ Ryan Deadpool
+ Zain Malik
+ Shan Chi
+ Xia Nihua
+ Nimuea Murriel
+(22 rows)
+
+mydb=# select name || ' ' || last_name AS full_name from info;
+      full_name      
+---------------------
+ John Snow
+ Alice Snow
+ Sandy Smith
+ Andy Sacks
+ Emely Chart
+ Emil Avazov
+ Talant Talantbekov
+ Alima Dzhanybayeva
+ Jannet Jannetova
+ Atai Ataibekov
+ Kani Mentor
+ Biatrix Kiddo
+ Kianu Reeves
+ Alex Smartungschaft
+ Maria Sharapova
+ Loky Asgardson
+ Jean Gray
+ Ryan Deadpool
+ Zain Malik
+ Shan Chi
+ Xia Nihua
+ Nimuea Murriel
+(22 rows)
+
+mydb=# select name || ' ' || last_name AS "full name" from info;
+      full name      
+---------------------
+ John Snow
+ Alice Snow
+ Sandy Smith
+ Andy Sacks
+ Emely Chart
+ Emil Avazov
+ Talant Talantbekov
+ Alima Dzhanybayeva
+ Jannet Jannetova
+ Atai Ataibekov
+ Kani Mentor
+ Biatrix Kiddo
+ Kianu Reeves
+ Alex Smartungschaft
+ Maria Sharapova
+ Loky Asgardson
+ Jean Gray
+ Ryan Deadpool
+ Zain Malik
+ Shan Chi
+ Xia Nihua
+ Nimuea Murriel
+(22 rows)
+
+mydb=# select name || ' ' || last_name AS 'full name' from info;
+ERROR:  syntax error at or near "'full name'"
+LINE 1: select name || ' ' || last_name AS 'full name' from info;
+                                           ^
+mydb=# 
+mydb=# select name || ' ' || last_name AS "full name", email from info;
+      full name      |          email          
+---------------------+-------------------------
+ John Snow           | jsnow@gmail.com
+ Alice Snow          | asnow@hotmail.com
+ Sandy Smith         | ssandy@yahoo.com
+ Andy Sacks          | sandrea@yahoo.com
+ Emely Chart         | cemely@gmail.com
+ Emil Avazov         | eayvazov@yahoo.com
+ Talant Talantbekov  | talasuper@gmail.com
+ Alima Dzhanybayeva  | dalima@hotmail.com
+ Jannet Jannetova    | jjannet@yahoo.com
+ Atai Ataibekov      | atai_atai@gmail.com
+ Kani Mentor         | kani@yahoo.com
+ Biatrix Kiddo       | bikiddo@hotmail.com
+ Kianu Reeves        | kianu@gmail.com
+ Alex Smartungschaft | alexsmart@gmail.com
+ Maria Sharapova     | sugarpova@gmail.com
+ Loky Asgardson      | lokyloky@gmail.com
+ Jean Gray           | white_pheonix@gmail.com
+ Ryan Deadpool       | dead_pool@gmail.com
+ Zain Malik          | zain@hotmail.com
+ Shan Chi            | 10rings@yahoo.com
+ Xia Nihua           | nihua@yahoo.com
+ Nimuea Murriel      | nimuea@yahoo.com
+(22 rows)
+
+mydb=# 
+mydb=# 
+mydb=# select name, last_name AS surname from info;
+  name   |    surname     
+---------+----------------
+ John    | Snow
+ Alice   | Snow
+ Sandy   | Smith
+ Andy    | Sacks
+ Emely   | Chart
+ Emil    | Avazov
+ Talant  | Talantbekov
+ Alima   | Dzhanybayeva
+ Jannet  | Jannetova
+ Atai    | Ataibekov
+ Kani    | Mentor
+ Biatrix | Kiddo
+ Kianu   | Reeves
+ Alex    | Smartungschaft
+ Maria   | Sharapova
+ Loky    | Asgardson
+ Jean    | Gray
+ Ryan    | Deadpool
+ Zain    | Malik
+ Shan    | Chi
+ Xia     | Nihua
+ Nimuea  | Murriel
+(22 rows)
+
+mydb=# select name as n, last_name as l_n from info;
+    n    |      l_n       
+---------+----------------
+ John    | Snow
+ Alice   | Snow
+ Sandy   | Smith
+ Andy    | Sacks
+ Emely   | Chart
+ Emil    | Avazov
+ Talant  | Talantbekov
+ Alima   | Dzhanybayeva
+ Jannet  | Jannetova
+ Atai    | Ataibekov
+ Kani    | Mentor
+ Biatrix | Kiddo
+ Kianu   | Reeves
+ Alex    | Smartungschaft
+ Maria   | Sharapova
+ Loky    | Asgardson
+ Jean    | Gray
+ Ryan    | Deadpool
+ Zain    | Malik
+ Shan    | Chi
+ Xia     | Nihua
+ Nimuea  | Murriel
+(22 rows)
+
+mydb=# 
+mydb=# 
+mydb=# ORDER BY
+mydb-# 
+mydb-# ;
+ERROR:  syntax error at or near "ORDER"
+LINE 1: ORDER BY
+        ^
+mydb=# select * from info;
+mydb=# 
+mydb=# select * from info ORDER BY last_name;
+mydb=# 
+mydb=# 
+mydb=# select * from info ORDER BY last_name;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+(22 rows)
+
+mydb=# 
+mydb=# 
+mydb=# select * from info ORDER BY id;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+(22 rows)
+
+mydb=# 
+mydb=# select * from info ORDER BY id desc;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+(22 rows)
+
+mydb=# select * from info ORDER BY last_name desc;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+(22 rows)
+
+mydb=# select * from info ORDER BY last_name, name desc;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+(22 rows)
+
+mydb=# 
+mydb=# select * from info ORDER BY last_name asc, name desc;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+(22 rows)
+
+mydb=# select * from info;
+mydb=# select * from info;
+mydb=# \d info:
+Did not find any relation named "info:".
+mydb=# \d info;
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(50)  |           | not null | 
+ last_name            | character varying(150) |           |          | 
+ country              | character varying(60)  |           |          | 
+ email                | character varying(50)  |           |          | 
+ age                  | integer                |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "info_email_key" UNIQUE CONSTRAINT, btree (email)
+
+mydb=# 
+mydb=# 
+mydb=# INSERT INTO info (name, country, programming_language, email, experiance) values ('Kate', 'USA', 'Javascript', 'katty@hotmail.com', 2)
+mydb-# ;
+INSERT 0 1
+mydb=# select * from info;
+mydb=# select * from info order by last_name asc NULLS FIRST;
+mydb=# select * from info order by last_name asc NULLS LAST;
+mydb=# select * from info order by last_name asc NULLS LAST;
+mydb=# 
+mydb=# 
+mydb=# select * from info;
+mydb=# 
+mydb=# 
+mydb=# select DISTINCT country from info;
+    country    
+---------------
+ USA
+ Germany
+ Canada
+ India
+ Kyrgyzstan
+ Japan
+ China
+ Russia
+ Norway
+ Australia
+ Island
+ Great Britain
+(12 rows)
+
+mydb=# select DISTINCT programming_language from info;
+ programming_language 
+----------------------
+ Python
+ Javascript
+(2 rows)
+
+mydb=# select DISTINCT on (country) country, last_name from info order by country, last_name;
+    country    |   last_name    
+---------------+----------------
+ Australia     | Kiddo
+ Canada        | Deadpool
+ China         | Chi
+ Germany       | Smartungschaft
+ Great Britain | Chart
+ India         | Malik
+ Island        | Snow
+ Japan         | Reeves
+ Kyrgyzstan    | Ataibekov
+ Norway        | Asgardson
+ Russia        | Sharapova
+ USA           | Gray
+(12 rows)
+
+mydb=# select DISTINCT on (country) country, last_name from info order by country;
+    country    |   last_name    
+---------------+----------------
+ Australia     | Kiddo
+ Canada        | Deadpool
+ China         | Chi
+ Germany       | Smartungschaft
+ Great Britain | Chart
+ India         | Malik
+ Island        | Snow
+ Japan         | Reeves
+ Kyrgyzstan    | Jannetova
+ Norway        | Asgardson
+ Russia        | Sharapova
+ USA           | 
+(12 rows)
+
+mydb=# 
+mydb=# 
+mydb=# select DISTINCT country, last_name from info order by country, last_name;
+    country    |   last_name    
+---------------+----------------
+ Australia     | Kiddo
+ Canada        | Deadpool
+ China         | Chi
+ China         | Nihua
+ Germany       | Smartungschaft
+ Great Britain | Chart
+ Great Britain | Murriel
+ India         | Malik
+ Island        | Snow
+ Japan         | Reeves
+ Kyrgyzstan    | Ataibekov
+ Kyrgyzstan    | Avazov
+ Kyrgyzstan    | Dzhanybayeva
+ Kyrgyzstan    | Jannetova
+ Kyrgyzstan    | Mentor
+ Kyrgyzstan    | Talantbekov
+ Norway        | Asgardson
+ Russia        | Sharapova
+ USA           | Gray
+ USA           | Sacks
+ USA           | Smith
+ USA           | 
+(22 rows)
+
+mydb=# 
+mydb=# select DISTINCT on (country) country, last_name from info order by country;
+    country    |   last_name    
+---------------+----------------
+ Australia     | Kiddo
+ Canada        | Deadpool
+ China         | Chi
+ Germany       | Smartungschaft
+ Great Britain | Chart
+ India         | Malik
+ Island        | Snow
+ Japan         | Reeves
+ Kyrgyzstan    | Jannetova
+ Norway        | Asgardson
+ Russia        | Sharapova
+ USA           | 
+(12 rows)
+
+mydb=# select DISTINCT on (country) country, last_name from info order by country, last_name;
+    country    |   last_name    
+---------------+----------------
+ Australia     | Kiddo
+ Canada        | Deadpool
+ China         | Chi
+ Germany       | Smartungschaft
+ Great Britain | Chart
+ India         | Malik
+ Island        | Snow
+ Japan         | Reeves
+ Kyrgyzstan    | Ataibekov
+ Norway        | Asgardson
+ Russia        | Sharapova
+ USA           | Gray
+(12 rows)
+
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# select * from info where country = 'Kyrgyzstan';
+ id |  name  |  last_name   |  country   |        email        | age | programming_language | experiance 
+----+--------+--------------+------------+---------------------+-----+----------------------+------------
+  7 | Emil   | Avazov       | Kyrgyzstan | eayvazov@yahoo.com  |  28 | Python               |          1
+  8 | Talant | Talantbekov  | Kyrgyzstan | talasuper@gmail.com |  34 | Javascript           |          1
+  9 | Alima  | Dzhanybayeva | Kyrgyzstan | dalima@hotmail.com  |  23 | Python               |          1
+ 10 | Jannet | Jannetova    | Kyrgyzstan | jjannet@yahoo.com   |  34 | Python               |          1
+ 11 | Atai   | Ataibekov    | Kyrgyzstan | atai_atai@gmail.com |  25 | Javascript           |          3
+ 12 | Kani   | Mentor       | Kyrgyzstan | kani@yahoo.com      |  26 | Javascript           |          4
+(6 rows)
+
+mydb=# select * from info where country = 'USA';
+ id | name  | last_name | country |          email          | age | programming_language | experiance 
+----+-------+-----------+---------+-------------------------+-----+----------------------+------------
+  3 | Sandy | Smith     | USA     | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy  | Sacks     | USA     | sandrea@yahoo.com       |  22 | Python               |          3
+ 18 | Jean  | Gray      | USA     | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 24 | Kate  |           | USA     | katty@hotmail.com       |     | Javascript           |          2
+(4 rows)
+
+mydb=# select * from info where age > 20;
+ id |  name   |   last_name    |    country    |        email        | age | programming_language | experiance 
+----+---------+----------------+---------------+---------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com     |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com   |  23 | Javascript           |          2
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com   |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com    |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com  |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com  |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com   |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com      |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com     |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com |  34 | Python               |          2
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com  | 300 | Python               |          5
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com    |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com   |  25 | Python               |          5
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com    | 200 | Javascript           |          3
+(19 rows)
+
+mydb=# select * from info where age < 20;
+ id | name  | last_name | country |          email          | age | programming_language | experiance 
+----+-------+-----------+---------+-------------------------+-----+----------------------+------------
+  3 | Sandy | Smith     | USA     | ssandy@yahoo.com        |  18 | Javascript           |          4
+ 18 | Jean  | Gray      | USA     | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 22 | Xia   | Nihua     | China   | nihua@yahoo.com         |  16 | Python               |          1
+(3 rows)
+
+mydb=# select * from info where experiance <=3;
+ id |  name  |  last_name   |    country    |          email          | age | programming_language | experiance 
+----+--------+--------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John   | Snow         | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice  | Snow         | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  5 | Andy   | Sacks        | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  7 | Emil   | Avazov       | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant | Talantbekov  | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima  | Dzhanybayeva | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet | Jannetova    | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai   | Ataibekov    | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 16 | Maria  | Sharapova    | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean   | Gray         | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan   | Deadpool     | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 22 | Xia    | Nihua        | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea | Murriel      | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate   |              | USA           | katty@hotmail.com       |     | Javascript           |          2
+(14 rows)
+
+mydb=# select * from info where experiance >=3;
+mydb=# 
+mydb=# select * from info where experiance >=3;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+(14 rows)
+
+mydb=# select * from info where experiance >=5;
+ id |  name   |   last_name    |    country    |        email        | age | programming_language | experiance 
+----+---------+----------------+---------------+---------------------+-----+----------------------+------------
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com    |  23 | Python               |          5
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com     |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com |  29 | Javascript           |          9
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com  | 300 | Python               |          5
+ 20 | Zain    | Malik          | India         | zain@hotmail.com    |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com   |  25 | Python               |          5
+(7 rows)
+
+mydb=# select name || ' ' || last_name as "ful name", experiance from info where experiance >= 4;
+      ful name       | experiance 
+---------------------+------------
+ Sandy Smith         |          4
+ Emely Chart         |          5
+ Kani Mentor         |          4
+ Biatrix Kiddo       |          6
+ Kianu Reeves        |          7
+ Alex Smartungschaft |          9
+ Loky Asgardson      |          5
+ Zain Malik          |          6
+ Shan Chi            |          5
+(9 rows)
+
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# select name, last_name, email from info where name <> 'Snow';
+  name   |   last_name    |          email          
+---------+----------------+-------------------------
+ John    | Snow           | jsnow@gmail.com
+ Alice   | Snow           | asnow@hotmail.com
+ Sandy   | Smith          | ssandy@yahoo.com
+ Andy    | Sacks          | sandrea@yahoo.com
+ Emely   | Chart          | cemely@gmail.com
+ Emil    | Avazov         | eayvazov@yahoo.com
+ Talant  | Talantbekov    | talasuper@gmail.com
+ Alima   | Dzhanybayeva   | dalima@hotmail.com
+ Jannet  | Jannetova      | jjannet@yahoo.com
+ Atai    | Ataibekov      | atai_atai@gmail.com
+ Kani    | Mentor         | kani@yahoo.com
+ Biatrix | Kiddo          | bikiddo@hotmail.com
+ Kianu   | Reeves         | kianu@gmail.com
+ Alex    | Smartungschaft | alexsmart@gmail.com
+ Maria   | Sharapova      | sugarpova@gmail.com
+ Loky    | Asgardson      | lokyloky@gmail.com
+ Jean    | Gray           | white_pheonix@gmail.com
+ Ryan    | Deadpool       | dead_pool@gmail.com
+ Zain    | Malik          | zain@hotmail.com
+ Shan    | Chi            | 10rings@yahoo.com
+ Xia     | Nihua          | nihua@yahoo.com
+ Nimuea  | Murriel        | nimuea@yahoo.com
+ Kate    |                | katty@hotmail.com
+(23 rows)
+
+mydb=# select name, last_name, email from info where last_name <> 'Snow';
+  name   |   last_name    |          email          
+---------+----------------+-------------------------
+ Sandy   | Smith          | ssandy@yahoo.com
+ Andy    | Sacks          | sandrea@yahoo.com
+ Emely   | Chart          | cemely@gmail.com
+ Emil    | Avazov         | eayvazov@yahoo.com
+ Talant  | Talantbekov    | talasuper@gmail.com
+ Alima   | Dzhanybayeva   | dalima@hotmail.com
+ Jannet  | Jannetova      | jjannet@yahoo.com
+ Atai    | Ataibekov      | atai_atai@gmail.com
+ Kani    | Mentor         | kani@yahoo.com
+ Biatrix | Kiddo          | bikiddo@hotmail.com
+ Kianu   | Reeves         | kianu@gmail.com
+ Alex    | Smartungschaft | alexsmart@gmail.com
+ Maria   | Sharapova      | sugarpova@gmail.com
+ Loky    | Asgardson      | lokyloky@gmail.com
+ Jean    | Gray           | white_pheonix@gmail.com
+ Ryan    | Deadpool       | dead_pool@gmail.com
+ Zain    | Malik          | zain@hotmail.com
+ Shan    | Chi            | 10rings@yahoo.com
+ Xia     | Nihua          | nihua@yahoo.com
+ Nimuea  | Murriel        | nimuea@yahoo.com
+(20 rows)
+
+mydb=# select name, last_name, email from info where last_name <> 'Snow' and name <> Zain;
+ERROR:  column "zain" does not exist
+LINE 1: ... email from info where last_name <> 'Snow' and name <> Zain;
+                                                                  ^
+mydb=# select name, last_name, email from info where last_name <> 'Snow' and name <> "Zain";
+ERROR:  column "Zain" does not exist
+LINE 1: ...mail from info where last_name <> 'Snow' and name <> "Zain";
+                                                                ^
+mydb=# select name, last_name, email from info where last_name <> 'Snow' and name <> 'Zain';
+  name   |   last_name    |          email          
+---------+----------------+-------------------------
+ Sandy   | Smith          | ssandy@yahoo.com
+ Andy    | Sacks          | sandrea@yahoo.com
+ Emely   | Chart          | cemely@gmail.com
+ Emil    | Avazov         | eayvazov@yahoo.com
+ Talant  | Talantbekov    | talasuper@gmail.com
+ Alima   | Dzhanybayeva   | dalima@hotmail.com
+ Jannet  | Jannetova      | jjannet@yahoo.com
+ Atai    | Ataibekov      | atai_atai@gmail.com
+ Kani    | Mentor         | kani@yahoo.com
+ Biatrix | Kiddo          | bikiddo@hotmail.com
+ Kianu   | Reeves         | kianu@gmail.com
+ Alex    | Smartungschaft | alexsmart@gmail.com
+ Maria   | Sharapova      | sugarpova@gmail.com
+ Loky    | Asgardson      | lokyloky@gmail.com
+ Jean    | Gray           | white_pheonix@gmail.com
+ Ryan    | Deadpool       | dead_pool@gmail.com
+ Shan    | Chi            | 10rings@yahoo.com
+ Xia     | Nihua          | nihua@yahoo.com
+ Nimuea  | Murriel        | nimuea@yahoo.com
+(19 rows)
+
+mydb=# select name, last_name, email from info where last_name = 'Snow' or name = 'Malik';
+ name  | last_name |       email       
+-------+-----------+-------------------
+ John  | Snow      | jsnow@gmail.com
+ Alice | Snow      | asnow@hotmail.com
+(2 rows)
+
+mydb=# select name, last_name, email from info where last_name = 'Snow' or name = 'Gray';
+ name  | last_name |       email       
+-------+-----------+-------------------
+ John  | Snow      | jsnow@gmail.com
+ Alice | Snow      | asnow@hotmail.com
+(2 rows)
+
+mydb=# select name, last_name, email from info where last_name = 'Snow' or name = 'Zain';
+ name  | last_name |       email       
+-------+-----------+-------------------
+ John  | Snow      | jsnow@gmail.com
+ Alice | Snow      | asnow@hotmail.com
+ Zain  | Malik     | zain@hotmail.com
+(3 rows)
+
+mydb=# select name, last_name, email from info where not last_name = 'Snow';
+  name   |   last_name    |          email          
+---------+----------------+-------------------------
+ Sandy   | Smith          | ssandy@yahoo.com
+ Andy    | Sacks          | sandrea@yahoo.com
+ Emely   | Chart          | cemely@gmail.com
+ Emil    | Avazov         | eayvazov@yahoo.com
+ Talant  | Talantbekov    | talasuper@gmail.com
+ Alima   | Dzhanybayeva   | dalima@hotmail.com
+ Jannet  | Jannetova      | jjannet@yahoo.com
+ Atai    | Ataibekov      | atai_atai@gmail.com
+ Kani    | Mentor         | kani@yahoo.com
+ Biatrix | Kiddo          | bikiddo@hotmail.com
+ Kianu   | Reeves         | kianu@gmail.com
+ Alex    | Smartungschaft | alexsmart@gmail.com
+ Maria   | Sharapova      | sugarpova@gmail.com
+ Loky    | Asgardson      | lokyloky@gmail.com
+ Jean    | Gray           | white_pheonix@gmail.com
+ Ryan    | Deadpool       | dead_pool@gmail.com
+ Zain    | Malik          | zain@hotmail.com
+ Shan    | Chi            | 10rings@yahoo.com
+ Xia     | Nihua          | nihua@yahoo.com
+ Nimuea  | Murriel        | nimuea@yahoo.com
+(20 rows)
+
+mydb=# select name, last_name, country from info where not country = 'USA';
+  name   |   last_name    |    country    
+---------+----------------+---------------
+ John    | Snow           | Island
+ Alice   | Snow           | Island
+ Emely   | Chart          | Great Britain
+ Emil    | Avazov         | Kyrgyzstan
+ Talant  | Talantbekov    | Kyrgyzstan
+ Alima   | Dzhanybayeva   | Kyrgyzstan
+ Jannet  | Jannetova      | Kyrgyzstan
+ Atai    | Ataibekov      | Kyrgyzstan
+ Kani    | Mentor         | Kyrgyzstan
+ Biatrix | Kiddo          | Australia
+ Kianu   | Reeves         | Japan
+ Alex    | Smartungschaft | Germany
+ Maria   | Sharapova      | Russia
+ Loky    | Asgardson      | Norway
+ Ryan    | Deadpool       | Canada
+ Zain    | Malik          | India
+ Shan    | Chi            | China
+ Xia     | Nihua          | China
+ Nimuea  | Murriel        | Great Britain
+(19 rows)
+
+mydb=# select name, last_name, country from info where not country IN ('USA', 'Great Britain', 'Kyrgyzstan');
+  name   |   last_name    |  country  
+---------+----------------+-----------
+ John    | Snow           | Island
+ Alice   | Snow           | Island
+ Biatrix | Kiddo          | Australia
+ Kianu   | Reeves         | Japan
+ Alex    | Smartungschaft | Germany
+ Maria   | Sharapova      | Russia
+ Loky    | Asgardson      | Norway
+ Ryan    | Deadpool       | Canada
+ Zain    | Malik          | India
+ Shan    | Chi            | China
+ Xia     | Nihua          | China
+(11 rows)
+
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# select name, last_name, country from info where country IN ('India', 'Russia', 'Germany');
+ name  |   last_name    | country 
+-------+----------------+---------
+ Alex  | Smartungschaft | Germany
+ Maria | Sharapova      | Russia
+ Zain  | Malik          | India
+(3 rows)
+
+mydb=# 
+mydb=# 
+mydb=# select * from info where age BETWEEN 20 AND 30;
+ id |  name   |   last_name    |    country    |        email        | age | programming_language | experiance 
+----+---------+----------------+---------------+---------------------+-----+----------------------+------------
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com   |  23 | Javascript           |          2
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com   |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com    |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com  |  28 | Python               |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com  |  23 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com      |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com |  30 | Python               |          6
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com |  29 | Javascript           |          9
+ 20 | Zain    | Malik          | India         | zain@hotmail.com    |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com   |  25 | Python               |          5
+(11 rows)
+
+mydb=# select * from info where experiance  BETWEEN 3 AND 9;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+(14 rows)
+
+mydb=# select * from info where (experiance BETWEEN 3 AND 6) and (age BETWEEN 25 and 30);
+ id |  name   | last_name |  country   |        email        | age | programming_language | experiance 
+----+---------+-----------+------------+---------------------+-----+----------------------+------------
+ 11 | Atai    | Ataibekov | Kyrgyzstan | atai_atai@gmail.com |  25 | Javascript           |          3
+ 12 | Kani    | Mentor    | Kyrgyzstan | kani@yahoo.com      |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo     | Australia  | bikiddo@hotmail.com |  30 | Python               |          6
+ 20 | Zain    | Malik     | India      | zain@hotmail.com    |  26 | Javascript           |          6
+ 21 | Shan    | Chi       | China      | 10rings@yahoo.com   |  25 | Python               |          5
+(5 rows)
+
+mydb=# 
+mydb=# select * from info where (experiance BETWEEN 1 AND 10) and (age BETWEEN 15 and 35);
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+(17 rows)
+
+mydb=# select * from info where (experiance BETWEEN 1 AND 10) and (age BETWEEN 15 and 45);
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+(19 rows)
+
+mydb=# select * from info where (experiance BETWEEN 1 AND 10) and (age BETWEEN 10 and 45);
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+(19 rows)
+
+mydb=# 
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+mydb=# SELECT * FROM info LIKE 'A%';
+ERROR:  syntax error at or near "LIKE"
+LINE 1: SELECT * FROM info LIKE 'A%';
+                           ^
+mydb=# SELECT * FROM info WHERE name LIKE 'A%';
+ id | name  |   last_name    |  country   |        email        | age | programming_language | experiance 
+----+-------+----------------+------------+---------------------+-----+----------------------+------------
+  2 | Alice | Snow           | Island     | asnow@hotmail.com   |  23 | Javascript           |          2
+  5 | Andy  | Sacks          | USA        | sandrea@yahoo.com   |  22 | Python               |          3
+  9 | Alima | Dzhanybayeva   | Kyrgyzstan | dalima@hotmail.com  |  23 | Python               |          1
+ 11 | Atai  | Ataibekov      | Kyrgyzstan | atai_atai@gmail.com |  25 | Javascript           |          3
+ 15 | Alex  | Smartungschaft | Germany    | alexsmart@gmail.com |  29 | Javascript           |          9
+(5 rows)
+
+mydb=# 
+mydb=# SELECT * FROM info WHERE email LIKE ^Z';
+[1]+  Stopped                 psql
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \c mydb 
+You are now connected to database "mydb" as user "postgres".
+mydb=# SELECT * FROM info WHERE email LIKE '%@gmail.com';
+ id |  name  |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+--------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John   | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  6 | Emely  | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  8 | Talant | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+ 11 | Atai   | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 14 | Kianu  | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex   | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria  | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky   | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean   | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan   | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+(10 rows)
+
+mydb=# SELECT * FROM info WHERE name LIKE '%al%';
+ id |  name  |  last_name  |  country   |        email        | age | programming_language | experiance 
+----+--------+-------------+------------+---------------------+-----+----------------------+------------
+  8 | Talant | Talantbekov | Kyrgyzstan | talasuper@gmail.com |  34 | Javascript           |          1
+(1 row)
+
+mydb=# SELECT * FROM info WHERE last_name LIKE 'B%';
+ id | name | last_name | country | email | age | programming_language | experiance 
+----+------+-----------+---------+-------+-----+----------------------+------------
+(0 rows)
+
+mydb=# SELECT * FROM info WHERE last_name LIKE 'A%';
+ id | name | last_name |  country   |        email        | age | programming_language | experiance 
+----+------+-----------+------------+---------------------+-----+----------------------+------------
+  7 | Emil | Avazov    | Kyrgyzstan | eayvazov@yahoo.com  |  28 | Python               |          1
+ 11 | Atai | Ataibekov | Kyrgyzstan | atai_atai@gmail.com |  25 | Javascript           |          3
+ 17 | Loky | Asgardson | Norway     | lokyloky@gmail.com  | 300 | Python               |          5
+(3 rows)
+
+mydb=# SELECT * FROM info WHERE last_name LIKE 'US_';
+ id | name | last_name | country | email | age | programming_language | experiance 
+----+------+-----------+---------+-------+-----+----------------------+------------
+(0 rows)
+
+mydb=# SELECT * FROM info WHERE country LIKE 'US_';
+ id | name  | last_name | country |          email          | age | programming_language | experiance 
+----+-------+-----------+---------+-------------------------+-----+----------------------+------------
+  3 | Sandy | Smith     | USA     | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy  | Sacks     | USA     | sandrea@yahoo.com       |  22 | Python               |          3
+ 18 | Jean  | Gray      | USA     | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 24 | Kate  |           | USA     | katty@hotmail.com       |     | Javascript           |          2
+(4 rows)
+
+mydb=# 
+mydb=# SELECT * FROM info WHERE last_name LIKE '%m' OR name LIKE '%m';
+ id | name | last_name | country | email | age | programming_language | experiance 
+----+------+-----------+---------+-------+-----+----------------------+------------
+(0 rows)
+
+mydb=# SELECT * FROM info WHERE last_name LIKE '%y' OR name LIKE '%y';
+ id | name  | last_name |    country    |          email          | age | programming_language | experiance 
+----+-------+-----------+---------------+-------------------------+-----+----------------------+------------
+  3 | Sandy | Smith     | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy  | Sacks     | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely | Chart     | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 17 | Loky  | Asgardson | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean  | Gray      | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+(5 rows)
+
+mydb=# SELECT * FROM info WHERE last_name LIKE '___y' OR name LIKE '%y';
+ id | name  | last_name |    country    |          email          | age | programming_language | experiance 
+----+-------+-----------+---------------+-------------------------+-----+----------------------+------------
+  3 | Sandy | Smith     | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy  | Sacks     | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely | Chart     | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 17 | Loky  | Asgardson | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean  | Gray      | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+(5 rows)
+
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# SELECT * FROM info WHERE last_name ILIKE 's%';
+ id | name  |   last_name    | country |        email        | age | programming_language | experiance 
+----+-------+----------------+---------+---------------------+-----+----------------------+------------
+  1 | John  | Snow           | Island  | jsnow@gmail.com     |  43 | Python               |          3
+  2 | Alice | Snow           | Island  | asnow@hotmail.com   |  23 | Javascript           |          2
+  3 | Sandy | Smith          | USA     | ssandy@yahoo.com    |  18 | Javascript           |          4
+  5 | Andy  | Sacks          | USA     | sandrea@yahoo.com   |  22 | Python               |          3
+ 15 | Alex  | Smartungschaft | Germany | alexsmart@gmail.com |  29 | Javascript           |          9
+ 16 | Maria | Sharapova      | Russia  | sugarpova@gmail.com |  34 | Python               |          2
+(6 rows)
+
+mydb=# SELECT * FROM info WHERE last_name ILIKE 's%' AND age BETWEEN 20 and 35;
+ id | name  |   last_name    | country |        email        | age | programming_language | experiance 
+----+-------+----------------+---------+---------------------+-----+----------------------+------------
+  2 | Alice | Snow           | Island  | asnow@hotmail.com   |  23 | Javascript           |          2
+  5 | Andy  | Sacks          | USA     | sandrea@yahoo.com   |  22 | Python               |          3
+ 15 | Alex  | Smartungschaft | Germany | alexsmart@gmail.com |  29 | Javascript           |          9
+ 16 | Maria | Sharapova      | Russia  | sugarpova@gmail.com |  34 | Python               |          2
+(4 rows)
+
+mydb=# SELECT * FROM info WHERE age IS NULL;
+ id | name | last_name | country |       email       | age | programming_language | experiance 
+----+------+-----------+---------+-------------------+-----+----------------------+------------
+ 24 | Kate |           | USA     | katty@hotmail.com |     | Javascript           |          2
+(1 row)
+
+mydb=# SELECT * FROM info WHERE NOT last_name IS NULL;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+(22 rows)
+
+mydb=# 
+mydb=# 
+mydb=# SELECT * FROM info LIMIT 10;
+ id |  name  |  last_name   |    country    |        email        | age | programming_language | experiance 
+----+--------+--------------+---------------+---------------------+-----+----------------------+------------
+  1 | John   | Snow         | Island        | jsnow@gmail.com     |  43 | Python               |          3
+  2 | Alice  | Snow         | Island        | asnow@hotmail.com   |  23 | Javascript           |          2
+  3 | Sandy  | Smith        | USA           | ssandy@yahoo.com    |  18 | Javascript           |          4
+  5 | Andy   | Sacks        | USA           | sandrea@yahoo.com   |  22 | Python               |          3
+  6 | Emely  | Chart        | Great Britain | cemely@gmail.com    |  23 | Python               |          5
+  7 | Emil   | Avazov       | Kyrgyzstan    | eayvazov@yahoo.com  |  28 | Python               |          1
+  8 | Talant | Talantbekov  | Kyrgyzstan    | talasuper@gmail.com |  34 | Javascript           |          1
+  9 | Alima  | Dzhanybayeva | Kyrgyzstan    | dalima@hotmail.com  |  23 | Python               |          1
+ 10 | Jannet | Jannetova    | Kyrgyzstan    | jjannet@yahoo.com   |  34 | Python               |          1
+ 11 | Atai   | Ataibekov    | Kyrgyzstan    | atai_atai@gmail.com |  25 | Javascript           |          3
+(10 rows)
+
+mydb=# SELECT * FROM info ORDER BY id LIMIT 10;
+ id |  name  |  last_name   |    country    |        email        | age | programming_language | experiance 
+----+--------+--------------+---------------+---------------------+-----+----------------------+------------
+  1 | John   | Snow         | Island        | jsnow@gmail.com     |  43 | Python               |          3
+  2 | Alice  | Snow         | Island        | asnow@hotmail.com   |  23 | Javascript           |          2
+  3 | Sandy  | Smith        | USA           | ssandy@yahoo.com    |  18 | Javascript           |          4
+  5 | Andy   | Sacks        | USA           | sandrea@yahoo.com   |  22 | Python               |          3
+  6 | Emely  | Chart        | Great Britain | cemely@gmail.com    |  23 | Python               |          5
+  7 | Emil   | Avazov       | Kyrgyzstan    | eayvazov@yahoo.com  |  28 | Python               |          1
+  8 | Talant | Talantbekov  | Kyrgyzstan    | talasuper@gmail.com |  34 | Javascript           |          1
+  9 | Alima  | Dzhanybayeva | Kyrgyzstan    | dalima@hotmail.com  |  23 | Python               |          1
+ 10 | Jannet | Jannetova    | Kyrgyzstan    | jjannet@yahoo.com   |  34 | Python               |          1
+ 11 | Atai   | Ataibekov    | Kyrgyzstan    | atai_atai@gmail.com |  25 | Javascript           |          3
+(10 rows)
+
+mydb=# SELECT * FROM info ORDER BY experiance DESC LIMIT 10;
+ id |  name   |   last_name    |    country    |        email        | age | programming_language | experiance 
+----+---------+----------------+---------------+---------------------+-----+----------------------+------------
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com |  29 | Javascript           |          9
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com     |  50 | Javascript           |          7
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com |  30 | Python               |          6
+ 20 | Zain    | Malik          | India         | zain@hotmail.com    |  26 | Javascript           |          6
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com    |  23 | Python               |          5
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com  | 300 | Python               |          5
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com   |  25 | Python               |          5
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com    |  18 | Javascript           |          4
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com      |  26 | Javascript           |          4
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com |  25 | Javascript           |          3
+(10 rows)
+
+mydb=# SELECT * FROM info ORDER BY experiance DESC LIMIT 10 OFFSET 4;
+ id |  name  | last_name |    country    |          email          | age | programming_language | experiance 
+----+--------+-----------+---------------+-------------------------+-----+----------------------+------------
+  6 | Emely  | Chart     | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 21 | Shan   | Chi       | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 17 | Loky   | Asgardson | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+  3 | Sandy  | Smith     | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+ 12 | Kani   | Mentor    | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+  1 | John   | Snow      | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  5 | Andy   | Sacks     | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+ 11 | Atai   | Ataibekov | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 18 | Jean   | Gray      | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 23 | Nimuea | Murriel   | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+(10 rows)
+
+mydb=# SELECT * FROM info ORDER BY experiance DESC FETCH FIRST (10) ROW ONLY;
+ id |  name   |   last_name    |    country    |        email        | age | programming_language | experiance 
+----+---------+----------------+---------------+---------------------+-----+----------------------+------------
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com |  29 | Javascript           |          9
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com     |  50 | Javascript           |          7
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com |  30 | Python               |          6
+ 20 | Zain    | Malik          | India         | zain@hotmail.com    |  26 | Javascript           |          6
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com    |  23 | Python               |          5
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com  | 300 | Python               |          5
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com   |  25 | Python               |          5
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com    |  18 | Javascript           |          4
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com      |  26 | Javascript           |          4
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com |  25 | Javascript           |          3
+(10 rows)
+
+mydb=# SELECT * FROM info ORDER BY experiance DESC OFFSET 5 FETCH FIRST (10) ROW ONLY;
+ id |  name  | last_name |    country    |          email          | age | programming_language | experiance 
+----+--------+-----------+---------------+-------------------------+-----+----------------------+------------
+ 21 | Shan   | Chi       | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 17 | Loky   | Asgardson | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+  3 | Sandy  | Smith     | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+ 12 | Kani   | Mentor    | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+  1 | John   | Snow      | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  5 | Andy   | Sacks     | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+ 11 | Atai   | Ataibekov | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 18 | Jean   | Gray      | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 23 | Nimuea | Murriel   | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+  2 | Alice  | Snow      | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+(10 rows)
+
+mydb=# SELECT * FROM info ORDER BY experiance DESC OFFSET 5 FETCH FIRST (5) ROW ONLY;
+ id | name  | last_name |  country   |        email        | age | programming_language | experiance 
+----+-------+-----------+------------+---------------------+-----+----------------------+------------
+ 17 | Loky  | Asgardson | Norway     | lokyloky@gmail.com  | 300 | Python               |          5
+ 21 | Shan  | Chi       | China      | 10rings@yahoo.com   |  25 | Python               |          5
+  3 | Sandy | Smith     | USA        | ssandy@yahoo.com    |  18 | Javascript           |          4
+ 12 | Kani  | Mentor    | Kyrgyzstan | kani@yahoo.com      |  26 | Javascript           |          4
+ 11 | Atai  | Ataibekov | Kyrgyzstan | atai_atai@gmail.com |  25 | Javascript           |          3
+(5 rows)
+
+mydb=# 
+mydb=# 
+mydb=# SELECT SUM(age) AS AGE_SUM FROM info WHERE country = 'USA';
+ age_sum 
+---------
+      57
+(1 row)
+
+mydb=# SELECT SUM(age) AS AGE_SUM FROM info;
+ age_sum 
+---------
+    1064
+(1 row)
+
+mydb=# SELECT SUM(experiance) AS EXP_SUM FROM info WHERE country = 'Kyrgyzstan';
+ exp_sum 
+---------
+      11
+(1 row)
+
+mydb=# SELECT * FROM info WHERE country = 'Kyrgyzstan';
+ id |  name  |  last_name   |  country   |        email        | age | programming_language | experiance 
+----+--------+--------------+------------+---------------------+-----+----------------------+------------
+  7 | Emil   | Avazov       | Kyrgyzstan | eayvazov@yahoo.com  |  28 | Python               |          1
+  8 | Talant | Talantbekov  | Kyrgyzstan | talasuper@gmail.com |  34 | Javascript           |          1
+  9 | Alima  | Dzhanybayeva | Kyrgyzstan | dalima@hotmail.com  |  23 | Python               |          1
+ 10 | Jannet | Jannetova    | Kyrgyzstan | jjannet@yahoo.com   |  34 | Python               |          1
+ 11 | Atai   | Ataibekov    | Kyrgyzstan | atai_atai@gmail.com |  25 | Javascript           |          3
+ 12 | Kani   | Mentor       | Kyrgyzstan | kani@yahoo.com      |  26 | Javascript           |          4
+(6 rows)
+
+mydb=# SELECT COUNT(id) FROM info WHERE email LIKE '%hotmail.com';
+ count 
+-------
+     5
+(1 row)
+
+mydb=# SELECT * FROM info WHERE email LIKE '%hotmail.com';
+ id |  name   |  last_name   |  country   |        email        | age | programming_language | experiance 
+----+---------+--------------+------------+---------------------+-----+----------------------+------------
+  2 | Alice   | Snow         | Island     | asnow@hotmail.com   |  23 | Javascript           |          2
+  9 | Alima   | Dzhanybayeva | Kyrgyzstan | dalima@hotmail.com  |  23 | Python               |          1
+ 13 | Biatrix | Kiddo        | Australia  | bikiddo@hotmail.com |  30 | Python               |          6
+ 20 | Zain    | Malik        | India      | zain@hotmail.com    |  26 | Javascript           |          6
+ 24 | Kate    |              | USA        | katty@hotmail.com   |     | Javascript           |          2
+(5 rows)
+
+mydb=# SELECT COUNT(id) FROM info;
+ count 
+-------
+    23
+(1 row)
+
+mydb=# SELECT AVG(experiance) FROM info;
+        avg         
+--------------------
+ 3.4347826086956522
+(1 row)
+
+mydb=# SELECT AVG(experiance) FROM info WHERE country = 'USA';
+        avg         
+--------------------
+ 3.0000000000000000
+(1 row)
+
+mydb=# SELECT MAX(age), name FROM info;
+ERROR:  column "info.name" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT MAX(age), name FROM info;
+                         ^
+mydb=# SELECT MAX(age), name FROM info GROUP BY age;
+ERROR:  column "info.name" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT MAX(age), name FROM info GROUP BY age;
+                         ^
+mydb=# SELECT MAX(age), name FROM info GROUP BY name;
+ max |  name   
+-----+---------
+  25 | Shan
+  50 | Kianu
+  28 | Emil
+  23 | Alice
+  26 | Kani
+  18 | Sandy
+ 200 | Nimuea
+  34 | Talant
+  30 | Biatrix
+  38 | Ryan
+  43 | John
+     | Kate
+  25 | Atai
+  23 | Emely
+  34 | Jannet
+  26 | Zain
+ 300 | Loky
+  16 | Xia
+  23 | Alima
+  22 | Andy
+  29 | Alex
+  17 | Jean
+  34 | Maria
+(23 rows)
+
+mydb=# 
+mydb=# 
+mydb=# SELECT country, count(id) FROM info GROUP BY country;
+    country    | count 
+---------------+-------
+ USA           |     4
+ Germany       |     1
+ Canada        |     1
+ India         |     1
+ Kyrgyzstan    |     6
+ Japan         |     1
+ China         |     2
+ Russia        |     1
+ Norway        |     1
+ Australia     |     1
+ Island        |     2
+ Great Britain |     2
+(12 rows)
+
+mydb=# SELECT programming_language, count(id) FROM info GROUP BY programming_language;
+ programming_language | count 
+----------------------+-------
+ Python               |    12
+ Javascript           |    11
+(2 rows)
+
+mydb=# 
+mydb=# SELECT country, SUM(experiance) FROM info GROUP BY country;
+    country    | sum 
+---------------+-----
+ USA           |  12
+ Germany       |   9
+ Canada        |   2
+ India         |   6
+ Kyrgyzstan    |  11
+ Japan         |   7
+ China         |   6
+ Russia        |   2
+ Norway        |   5
+ Australia     |   6
+ Island        |   5
+ Great Britain |   8
+(12 rows)
+
+mydb=# SELECT country, AVG(experiance) FROM info GROUP BY country;
+    country    |        avg         
+---------------+--------------------
+ USA           | 3.0000000000000000
+ Germany       | 9.0000000000000000
+ Canada        | 2.0000000000000000
+ India         | 6.0000000000000000
+ Kyrgyzstan    | 1.8333333333333333
+ Japan         | 7.0000000000000000
+ China         | 3.0000000000000000
+ Russia        | 2.0000000000000000
+ Norway        | 5.0000000000000000
+ Australia     | 6.0000000000000000
+ Island        | 2.5000000000000000
+ Great Britain | 4.0000000000000000
+(12 rows)
+
+mydb=# SELECT country, ROUND(AVG(experiance), 2) FROM info GROUP BY country;
+    country    | round 
+---------------+-------
+ USA           |  3.00
+ Germany       |  9.00
+ Canada        |  2.00
+ India         |  6.00
+ Kyrgyzstan    |  1.83
+ Japan         |  7.00
+ China         |  3.00
+ Russia        |  2.00
+ Norway        |  5.00
+ Australia     |  6.00
+ Island        |  2.50
+ Great Britain |  4.00
+(12 rows)
+
+mydb=# SELECT country, ROUND(AVG(age), 2) FROM info GROUP BY country;
+    country    | round  
+---------------+--------
+ USA           |  19.00
+ Germany       |  29.00mydb=# SELECT * FROM info LIKE 'A%';
+ERROR:  syntax error at or near "LIKE"
+LINE 1: SELECT * FROM info LIKE 'A%';
+                           ^
+mydb=# SELECT * FROM info WHERE name LIKE 'A%';
+ id | name  |   last_name    |  country   |        email        | age | programming_language | experiance 
+----+-------+----------------+------------+---------------------+-----+----------------------+------------
+  2 | Alice | Snow           | Island     | asnow@hotmail.com   |  23 | Javascript           |          2
+  5 | Andy  | Sacks          | USA        | sandrea@yahoo.com   |  22 | Python               |          3
+  9 | Alima | Dzhanybayeva   | Kyrgyzstan | dalima@hotmail.com  |  23 | Python               |          1
+ 11 | Atai  | Ataibekov      | Kyrgyzstan | atai_atai@gmail.com |  25 | Javascript           |          3
+ 15 | Alex  | Smartungschaft | Germany    | alexsmart@gmail.com |  29 | Javascript           |          9
+(5 rows)
+
+mydb=# 
+mydb=# SELECT * FROM info WHERE email LIKE ^Z';
+[1]+  Stopped                 psql
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \c mydb 
+You are now connected to database "mydb" as user "postgres".
+mydb=# SELECT * FROM info WHERE email LIKE '%@gmail.com';
+ id |  name  |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+--------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John   | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  6 | Emely  | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  8 | Talant | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+ 11 | Atai   | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 14 | Kianu  | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex   | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria  | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky   | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean   | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan   | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+(10 rows)
+
+mydb=# SELECT * FROM info WHERE name LIKE '%al%';
+ id |  name  |  last_name  |  country   |        email        | age | programming_language | experiance 
+----+--------+-------------+------------+---------------------+-----+----------------------+------------
+  8 | Talant | Talantbekov | Kyrgyzstan | talasuper@gmail.com |  34 | Javascript           |          1
+(1 row)
+
+mydb=# SELECT * FROM info WHERE last_name LIKE 'B%';
+ id | name | last_name | country | email | age | programming_language | experiance 
+----+------+-----------+---------+-------+-----+----------------------+------------
+(0 rows)
+
+mydb=# SELECT * FROM info WHERE last_name LIKE 'A%';
+ id | name | last_name |  country   |        email        | age | programming_language | experiance 
+----+------+-----------+------------+---------------------+-----+----------------------+------------
+  7 | Emil | Avazov    | Kyrgyzstan | eayvazov@yahoo.com  |  28 | Python               |          1
+ 11 | Atai | Ataibekov | Kyrgyzstan | atai_atai@gmail.com |  25 | Javascript           |          3
+ 17 | Loky | Asgardson | Norway     | lokyloky@gmail.com  | 300 | Python               |          5
+(3 rows)
+
+mydb=# SELECT * FROM info WHERE last_name LIKE 'US_';
+ id | name | last_name | country | email | age | programming_language | experiance 
+----+------+-----------+---------+-------+-----+----------------------+------------
+(0 rows)
+
+mydb=# SELECT * FROM info WHERE country LIKE 'US_';
+ id | name  | last_name | country |          email          | age | programming_language | experiance 
+----+-------+-----------+---------+-------------------------+-----+----------------------+------------
+  3 | Sandy | Smith     | USA     | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy  | Sacks     | USA     | sandrea@yahoo.com       |  22 | Python               |          3
+ 18 | Jean  | Gray      | USA     | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 24 | Kate  |           | USA     | katty@hotmail.com       |     | Javascript           |          2
+(4 rows)
+
+mydb=# 
+mydb=# SELECT * FROM info WHERE last_name LIKE '%m' OR name LIKE '%m';
+ id | name | last_name | country | email | age | programming_language | experiance 
+----+------+-----------+---------+-------+-----+----------------------+------------
+(0 rows)
+
+mydb=# SELECT * FROM info WHERE last_name LIKE '%y' OR name LIKE '%y';
+ id | name  | last_name |    country    |          email          | age | programming_language | experiance 
+----+-------+-----------+---------------+-------------------------+-----+----------------------+------------
+  3 | Sandy | Smith     | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy  | Sacks     | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely | Chart     | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 17 | Loky  | Asgardson | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean  | Gray      | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+(5 rows)
+
+mydb=# SELECT * FROM info WHERE last_name LIKE '___y' OR name LIKE '%y';
+ id | name  | last_name |    country    |          email          | age | programming_language | experiance 
+----+-------+-----------+---------------+-------------------------+-----+----------------------+------------
+  3 | Sandy | Smith     | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy  | Sacks     | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely | Chart     | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 17 | Loky  | Asgardson | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean  | Gray      | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+(5 rows)
+
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# SELECT * FROM info WHERE last_name ILIKE 's%';
+ id | name  |   last_name    | country |        email        | age | programming_language | experiance 
+----+-------+----------------+---------+---------------------+-----+----------------------+------------
+  1 | John  | Snow           | Island  | jsnow@gmail.com     |  43 | Python               |          3
+  2 | Alice | Snow           | Island  | asnow@hotmail.com   |  23 | Javascript           |          2
+  3 | Sandy | Smith          | USA     | ssandy@yahoo.com    |  18 | Javascript           |          4
+  5 | Andy  | Sacks          | USA     | sandrea@yahoo.com   |  22 | Python               |          3
+ 15 | Alex  | Smartungschaft | Germany | alexsmart@gmail.com |  29 | Javascript           |          9
+ 16 | Maria | Sharapova      | Russia  | sugarpova@gmail.com |  34 | Python               |          2
+(6 rows)
+
+mydb=# SELECT * FROM info WHERE last_name ILIKE 's%' AND age BETWEEN 20 and 35;
+ id | name  |   last_name    | country |        email        | age | programming_language | experiance 
+----+-------+----------------+---------+---------------------+-----+----------------------+------------
+  2 | Alice | Snow           | Island  | asnow@hotmail.com   |  23 | Javascript           |          2
+  5 | Andy  | Sacks          | USA     | sandrea@yahoo.com   |  22 | Python               |          3
+ 15 | Alex  | Smartungschaft | Germany | alexsmart@gmail.com |  29 | Javascript           |          9
+ 16 | Maria | Sharapova      | Russia  | sugarpova@gmail.com |  34 | Python               |          2
+(4 rows)
+
+mydb=# SELECT * FROM info WHERE age IS NULL;
+ id | name | last_name | country |       email       | age | programming_language | experiance 
+----+------+-----------+---------+-------------------+-----+----------------------+------------
+ 24 | Kate |           | USA     | katty@hotmail.com |     | Javascript           |          2
+(1 row)
+
+mydb=# SELECT * FROM info WHERE NOT last_name IS NULL;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+(22 rows)
+
+mydb=# 
+mydb=# 
+mydb=# SELECT * FROM info LIMIT 10;
+ id |  name  |  last_name   |    country    |        email        | age | programming_language | experiance 
+----+--------+--------------+---------------+---------------------+-----+----------------------+------------
+  1 | John   | Snow         | Island        | jsnow@gmail.com     |  43 | Python               |          3
+  2 | Alice  | Snow         | Island        | asnow@hotmail.com   |  23 | Javascript           |          2
+  3 | Sandy  | Smith        | USA           | ssandy@yahoo.com    |  18 | Javascript           |          4
+  5 | Andy   | Sacks        | USA           | sandrea@yahoo.com   |  22 | Python               |          3
+  6 | Emely  | Chart        | Great Britain | cemely@gmail.com    |  23 | Python               |          5
+  7 | Emil   | Avazov       | Kyrgyzstan    | eayvazov@yahoo.com  |  28 | Python               |          1
+  8 | Talant | Talantbekov  | Kyrgyzstan    | talasuper@gmail.com |  34 | Javascript           |          1
+  9 | Alima  | Dzhanybayeva | Kyrgyzstan    | dalima@hotmail.com  |  23 | Python               |          1
+ 10 | Jannet | Jannetova    | Kyrgyzstan    | jjannet@yahoo.com   |  34 | Python               |          1
+ 11 | Atai   | Ataibekov    | Kyrgyzstan    | atai_atai@gmail.com |  25 | Javascript           |          3
+(10 rows)
+
+mydb=# SELECT * FROM info ORDER BY id LIMIT 10;
+ id |  name  |  last_name   |    country    |        email        | age | programming_language | experiance 
+----+--------+--------------+---------------+---------------------+-----+----------------------+------------
+  1 | John   | Snow         | Island        | jsnow@gmail.com     |  43 | Python               |          3
+  2 | Alice  | Snow         | Island        | asnow@hotmail.com   |  23 | Javascript           |          2
+  3 | Sandy  | Smith        | USA           | ssandy@yahoo.com    |  18 | Javascript           |          4
+  5 | Andy   | Sacks        | USA           | sandrea@yahoo.com   |  22 | Python               |          3
+  6 | Emely  | Chart        | Great Britain | cemely@gmail.com    |  23 | Python               |          5
+  7 | Emil   | Avazov       | Kyrgyzstan    | eayvazov@yahoo.com  |  28 | Python               |          1
+  8 | Talant | Talantbekov  | Kyrgyzstan    | talasuper@gmail.com |  34 | Javascript           |          1
+  9 | Alima  | Dzhanybayeva | Kyrgyzstan    | dalima@hotmail.com  |  23 | Python               |          1
+ 10 | Jannet | Jannetova    | Kyrgyzstan    | jjannet@yahoo.com   |  34 | Python               |          1
+ 11 | Atai   | Ataibekov    | Kyrgyzstan    | atai_atai@gmail.com |  25 | Javascript           |          3
+(10 rows)
+
+mydb=# SELECT * FROM info ORDER BY experiance DESC LIMIT 10;
+ id |  name   |   last_name    |    country    |        email        | age | programming_language | experiance 
+----+---------+----------------+---------------+---------------------+-----+----------------------+------------
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com |  29 | Javascript           |          9
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com     |  50 | Javascript           |          7
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com |  30 | Python               |          6
+ 20 | Zain    | Malik          | India         | zain@hotmail.com    |  26 | Javascript           |          6
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com    |  23 | Python               |          5
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com  | 300 | Python               |          5
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com   |  25 | Python               |          5
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com    |  18 | Javascript           |          4
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com      |  26 | Javascript           |          4
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com |  25 | Javascript           |          3
+(10 rows)
+
+mydb=# SELECT * FROM info ORDER BY experiance DESC LIMIT 10 OFFSET 4;
+ id |  name  | last_name |    country    |          email          | age | programming_language | experiance 
+----+--------+-----------+---------------+-------------------------+-----+----------------------+------------
+  6 | Emely  | Chart     | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 21 | Shan   | Chi       | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 17 | Loky   | Asgardson | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+  3 | Sandy  | Smith     | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+ 12 | Kani   | Mentor    | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+  1 | John   | Snow      | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  5 | Andy   | Sacks     | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+ 11 | Atai   | Ataibekov | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 18 | Jean   | Gray      | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 23 | Nimuea | Murriel   | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+(10 rows)
+
+mydb=# SELECT * FROM info ORDER BY experiance DESC FETCH FIRST (10) ROW ONLY;
+ id |  name   |   last_name    |    country    |        email        | age | programming_language | experiance 
+----+---------+----------------+---------------+---------------------+-----+----------------------+------------
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com |  29 | Javascript           |          9
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com     |  50 | Javascript           |          7
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com |  30 | Python               |          6
+ 20 | Zain    | Malik          | India         | zain@hotmail.com    |  26 | Javascript           |          6
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com    |  23 | Python               |          5
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com  | 300 | Python               |          5
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com   |  25 | Python               |          5
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com    |  18 | Javascript           |          4
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com      |  26 | Javascript           |          4
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com |  25 | Javascript           |          3
+(10 rows)
+
+mydb=# SELECT * FROM info ORDER BY experiance DESC OFFSET 5 FETCH FIRST (10) ROW ONLY;
+ id |  name  | last_name |    country    |          email          | age | programming_language | experiance 
+----+--------+-----------+---------------+-------------------------+-----+----------------------+------------
+ 21 | Shan   | Chi       | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 17 | Loky   | Asgardson | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+  3 | Sandy  | Smith     | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+ 12 | Kani   | Mentor    | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+  1 | John   | Snow      | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  5 | Andy   | Sacks     | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+ 11 | Atai   | Ataibekov | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 18 | Jean   | Gray      | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 23 | Nimuea | Murriel   | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+  2 | Alice  | Snow      | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+(10 rows)
+
+mydb=# SELECT * FROM info ORDER BY experiance DESC OFFSET 5 FETCH FIRST (5) ROW ONLY;
+ id | name  | last_name |  country   |        email        | age | programming_language | experiance 
+----+-------+-----------+------------+---------------------+-----+----------------------+------------
+ 17 | Loky  | Asgardson | Norway     | lokyloky@gmail.com  | 300 | Python               |          5
+ 21 | Shan  | Chi       | China      | 10rings@yahoo.com   |  25 | Python               |          5
+  3 | Sandy | Smith     | USA        | ssandy@yahoo.com    |  18 | Javascript           |          4
+ 12 | Kani  | Mentor    | Kyrgyzstan | kani@yahoo.com      |  26 | Javascript           |          4
+ 11 | Atai  | Ataibekov | Kyrgyzstan | atai_atai@gmail.com |  25 | Javascript           |          3
+(5 rows)
+
+mydb=# 
+mydb=# 
+mydb=# SELECT SUM(age) AS AGE_SUM FROM info WHERE country = 'USA';
+ age_sum 
+---------
+      57
+(1 row)
+
+mydb=# SELECT SUM(age) AS AGE_SUM FROM info;
+ age_sum 
+---------
+    1064
+(1 row)
+
+mydb=# SELECT SUM(experiance) AS EXP_SUM FROM info WHERE country = 'Kyrgyzstan';
+ exp_sum 
+---------
+      11
+(1 row)
+
+mydb=# SELECT * FROM info WHERE country = 'Kyrgyzstan';
+ id |  name  |  last_name   |  country   |        email        | age | programming_language | experiance 
+----+--------+--------------+------------+---------------------+-----+----------------------+------------
+  7 | Emil   | Avazov       | Kyrgyzstan | eayvazov@yahoo.com  |  28 | Python               |          1
+  8 | Talant | Talantbekov  | Kyrgyzstan | talasuper@gmail.com |  34 | Javascript           |          1
+  9 | Alima  | Dzhanybayeva | Kyrgyzstan | dalima@hotmail.com  |  23 | Python               |          1
+ 10 | Jannet | Jannetova    | Kyrgyzstan | jjannet@yahoo.com   |  34 | Python               |          1
+ 11 | Atai   | Ataibekov    | Kyrgyzstan | atai_atai@gmail.com |  25 | Javascript           |          3
+ 12 | Kani   | Mentor       | Kyrgyzstan | kani@yahoo.com      |  26 | Javascript           |          4
+(6 rows)
+
+mydb=# SELECT COUNT(id) FROM info WHERE email LIKE '%hotmail.com';
+ count 
+-------
+     5
+(1 row)
+
+mydb=# SELECT * FROM info WHERE email LIKE '%hotmail.com';
+ id |  name   |  last_name   |  country   |        email        | age | programming_language | experiance 
+----+---------+--------------+------------+---------------------+-----+----------------------+------------
+  2 | Alice   | Snow         | Island     | asnow@hotmail.com   |  23 | Javascript           |          2
+  9 | Alima   | Dzhanybayeva | Kyrgyzstan | dalima@hotmail.com  |  23 | Python               |          1
+ 13 | Biatrix | Kiddo        | Australia  | bikiddo@hotmail.com |  30 | Python               |          6
+ 20 | Zain    | Malik        | India      | zain@hotmail.com    |  26 | Javascript           |          6
+ 24 | Kate    |              | USA        | katty@hotmail.com   |     | Javascript           |          2
+(5 rows)
+
+mydb=# SELECT COUNT(id) FROM info;
+ count 
+-------
+    23
+(1 row)
+
+mydb=# SELECT AVG(experiance) FROM info;
+        avg         
+--------------------
+ 3.4347826086956522
+(1 row)
+
+mydb=# SELECT AVG(experiance) FROM info WHERE country = 'USA';
+        avg         
+--------------------
+ 3.0000000000000000
+(1 row)
+
+mydb=# SELECT MAX(age), name FROM info;
+ERROR:  column "info.name" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT MAX(age), name FROM info;
+                         ^
+mydb=# SELECT MAX(age), name FROM info GROUP BY age;
+ERROR:  column "info.name" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT MAX(age), name FROM info GROUP BY age;
+                         ^
+mydb=# SELECT MAX(age), name FROM info GROUP BY name;
+ max |  name   
+-----+---------
+  25 | Shan
+  50 | Kianu
+  28 | Emil
+  23 | Alice
+  26 | Kani
+  18 | Sandy
+ 200 | Nimuea
+  34 | Talant
+  30 | Biatrix
+  38 | Ryan
+  43 | John
+     | Kate
+  25 | Atai
+  23 | Emely
+  34 | Jannet
+  26 | Zain
+ 300 | Loky
+  16 | Xia
+  23 | Alima
+  22 | Andy
+  29 | Alex
+  17 | Jean
+  34 | Maria
+(23 rows)
+
+mydb=# 
+mydb=# 
+mydb=# SELECT country, count(id) FROM info GROUP BY country;
+    country    | count 
+---------------+-------
+ USA           |     4
+ Germany       |     1
+ Canada        |     1
+ India         |     1
+ Kyrgyzstan    |     6
+ Japan         |     1
+ China         |     2
+ Russia        |     1
+ Norway        |     1
+ Australia     |     1
+ Island        |     2
+ Great Britain |     2
+(12 rows)
+
+mydb=# SELECT programming_language, count(id) FROM info GROUP BY programming_language;
+ programming_language | count 
+----------------------+-------
+ Python               |    12
+ Javascript           |    11
+(2 rows)
+
+mydb=# 
+mydb=# SELECT country, SUM(experiance) FROM info GROUP BY country;
+    country    | sum 
+---------------+-----
+ USA           |  12
+ Germany       |   9
+ Canada        |   2
+ India         |   6
+ Kyrgyzstan    |  11
+ Japan         |   7
+ China         |   6
+ Russia        |   2
+ Norway        |   5
+ Australia     |   6
+ Island        |   5
+ Great Britain |   8
+(12 rows)
+
+mydb=# SELECT country, AVG(experiance) FROM info GROUP BY country;
+    country    |        avg         
+---------------+--------------------
+ USA           | 3.0000000000000000
+ Germany       | 9.0000000000000000
+ Canada        | 2.0000000000000000
+ India         | 6.0000000000000000
+ Kyrgyzstan    | 1.8333333333333333
+ Japan         | 7.0000000000000000
+ China         | 3.0000000000000000
+ Russia        | 2.0000000000000000
+ Norway        | 5.0000000000000000
+ Australia     | 6.0000000000000000
+ Island        | 2.5000000000000000
+ Great Britain | 4.0000000000000000
+(12 rows)
+
+mydb=# SELECT country, ROUND(AVG(experiance), 2) FROM info GROUP BY country;
+    country    | round 
+---------------+-------
+ USA           |  3.00
+ Germany       |  9.00
+ Canada        |  2.00
+ India         |  6.00
+ Kyrgyzstan    |  1.83
+ Japan         |  7.00
+ China         |  3.00
+ Russia        |  2.00
+ Norway        |  5.00
+ Australia     |  6.00
+ Island        |  2.50
+ Great Britain |  4.00
+(12 rows)
+
+mydb=# SELECT country, ROUND(AVG(age), 2) FROM info GROUP BY country;
+    country    | round  
+---------------+--------
+ USA           |  19.00
+ Germany       |  29.00
+ Canada        |  38.00
+ India         |  26.00
+ Kyrgyzstan    |  28.33
+ Japan         |  50.00
+ China         |  20.50
+ Russia        |  34.00
+ Norway        | 300.00
+ Australia     |  30.00
+ Island        |  33.00
+ Great Britain | 111.50
+(12 rows)
+
+mydb=# SELECT programming_language, ROUND(AVG(age), 2) FROM info GROUP BY programming_language HAVING AVG(experiance) > 2;
+ programming_language | round 
+----------------------+-------
+ Python               | 51.33
+ Javascript           | 44.80
+(2 rows)
+
+mydb=# SELECT programming_language, ROUND(AVG(age), 2) FROM info GROUP BY programming_language HAVING AVG(experiance) > 3;
+ programming_language | round 
+----------------------+-------
+ Javascript           | 44.80
+(1 row)
+
+mydb=# SELECT programming_language, ROUND(AVG(experiance), 2) FROM info GROUP BY country HAVING AVG(experiance) > 2;
+ERROR:  column "info.programming_language" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT programming_language, ROUND(AVG(experiance), 2) FROM ...
+               ^
+mydb=# SELECT country, ROUND(AVG(experiance), 2) FROM info GROUP BY country HAVING AVG(experiance) >= 2;
+    country    | round 
+---------------+-------
+ USA           |  3.00
+ Germany       |  9.00
+ Canada        |  2.00
+ India         |  6.00
+ Japan         |  7.00
+ China         |  3.00
+ Russia        |  2.00
+ Norway        |  5.00
+ Australia     |  6.00
+ Island        |  2.50
+ Great Britain |  4.00
+(11 rows)
+
+mydb=# SELECT country, ROUND(AVG(experiance), 2) FROM info GROUP BY country HAVING AVG(experiance) >= 3;
+    country    | round 
+---------------+-------
+ USA           |  3.00
+ Germany       |  9.00
+ India         |  6.00
+ Japan         |  7.00
+ China         |  3.00
+ Norway        |  5.00
+ Australia     |  6.00
+ Great Britain |  4.00
+(8 rows)
+
+mydb=# 
+mydb=# 
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate    |                | USA           | katty@hotmail.com       |     | Javascript           |          2
+(23 rows)
+
+mydb=# UPDATE info SET last_name='Summers', country='Canada' WHERE id=24;
+UPDATE 1
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate    | Summers        | Canada        | katty@hotmail.com       |     | Javascript           |          2
+(23 rows)
+
+mydb=# UPDATE info SET age=25 WHERE id=24;
+UPDATE 1
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate    | Summers        | Canada        | katty@hotmail.com       |  25 | Javascript           |          2
+(23 rows)
+
+mydb=# UPDATE info SET email='lokkky@hotmail.com', experiance=11 WHERE id=17;
+UPDATE 1
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate    | Summers        | Canada        | katty@hotmail.com       |  25 | Javascript           |          2
+ 17 | Loky    | Asgardson      | Norway        | lokkky@hotmail.com      | 300 | Python               |         11
+(23 rows)
+
+mydb=# UPDATE info SET experiance=3 WHERE country='Kyrgyzstan';
+UPDATE 6
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate    | Summers        | Canada        | katty@hotmail.com       |  25 | Javascript           |          2
+ 17 | Loky    | Asgardson      | Norway        | lokkky@hotmail.com      | 300 | Python               |         11
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          3
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          3
+(23 rows)
+
+mydb=# 
+mydb=# 
+mydb=# DELETE FROM info WHERE id=3;
+DELETE 1
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate    | Summers        | Canada        | katty@hotmail.com       |  25 | Javascript           |          2
+ 17 | Loky    | Asgardson      | Norway        | lokkky@hotmail.com      | 300 | Python               |         11
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          3
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          3
+(22 rows)
+
+mydb=# DELETE FROM info WHERE name='Kate';
+DELETE 1
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 17 | Loky    | Asgardson      | Norway        | lokkky@hotmail.com      | 300 | Python               |         11
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          3
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          3
+(21 rows)
+
+mydb=# DELETE FROM info WHERE email LIKE 'zain%';
+DELETE 1
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 17 | Loky    | Asgardson      | Norway        | lokkky@hotmail.com      | 300 | Python               |         11
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          3
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          3
+(20 rows)
+
+mydb=# SELECT * FROM info ORDER BY id;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          3
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          3
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky    | Asgardson      | Norway        | lokkky@hotmail.com      | 300 | Python               |         11
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+(20 rows)
+
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# \d
+             List of relations
+ Schema |    Name     |   Type   |  Owner   
+--------+-------------+----------+----------
+ public | info        | table    | postgres
+ public | info_id_seq | sequence | postgres
+(2 rows)
+
+mydb=# \d info
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(50)  |           | not null | 
+ last_name            | character varying(150) |           |          | 
+ country              | character varying(60)  |           |          | 
+ email                | character varying(50)  |           |          | 
+ age                  | integer                |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "info_email_key" UNIQUE CONSTRAINT, btree (email)
+
+mydb=# ALTER TABLE info ALTER COLUMN NAME TYPE VARCHAR(80);
+ALTER TABLE
+mydb=# \d info
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(80)  |           | not null | 
+ last_name            | character varying(150) |           |          | 
+ country              | character varying(60)  |           |          | 
+ email                | character varying(50)  |           |          | 
+ age                  | integer                |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "info_email_key" UNIQUE CONSTRAINT, btree (email)
+
+mydb=# ALTER TABLE info ALTER COLUMN last_name SET NOT NULL;
+ALTER TABLE
+mydb=# \d info
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(80)  |           | not null | 
+ last_name            | character varying(150) |           | not null | 
+ country              | character varying(60)  |           |          | 
+ email                | character varying(50)  |           |          | 
+ age                  | integer                |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "info_email_key" UNIQUE CONSTRAINT, btree (email)
+
+mydb=# 
+mydb=# ALTER TABLE info RENAME COLUMN last_name TO surname;
+ALTER TABLE
+mydb=# \d info
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(80)  |           | not null | 
+ surname              | character varying(150) |           | not null | 
+ country              | character varying(60)  |           |          | 
+ email                | character varying(50)  |           |          | 
+ age                  | integer                |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "info_email_key" UNIQUE CONSTRAINT, btree (email)
+
+mydb=# ALTER TABLE info ADD CONSTRAINT UNIQUE name;
+ERROR:  syntax error at or near "UNIQUE"
+LINE 1: ALTER TABLE info ADD CONSTRAINT UNIQUE name;
+                                        ^
+mydb=# 
+mydb=# ALTER TABLE info ADD CONSTRAINT NAME_OF_CONSTRAINT UNIQUE (name);
+ALTER TABLE
+mydb=# \d info
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(80)  |           | not null | 
+ surname              | character varying(150) |           | not null | 
+ country              | character varying(60)  |           |          | 
+ email                | character varying(50)  |           |          | 
+ age                  | integer                |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "info_email_key" UNIQUE CONSTRAINT, btree (email)
+    "name_of_constraint" UNIQUE CONSTRAINT, btree (name)
+
+mydb=# 
+mydb=# ALTER TABLE info DROP age, DROP email;
+ALTER TABLE
+mydb=# \d info
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(80)  |           | not null | 
+ surname              | character varying(150) |           | not null | 
+ country              | character varying(60)  |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "name_of_constraint" UNIQUE CONSTRAINT, btree (name)
+
+mydb=# SELECT * FROM info;
+ id |  name   |    surname     |    country    | programming_language | experiance 
+----+---------+----------------+---------------+----------------------+------------
+  1 | John    | Snow           | Island        | Python               |          3
+  2 | Alice   | Snow           | Island        | Javascript           |          2
+  5 | Andy    | Sacks          | USA           | Python               |          3
+  6 | Emely   | Chart          | Great Britain | Python               |          5
+ 13 | Biatrix | Kiddo          | Australia     | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | Python               |          2
+ 18 | Jean    | Gray           | USA           | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | Python               |          2
+ 21 | Shan    | Chi            | China         | Python               |          5
+ 22 | Xia     | Nihua          | China         | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | Javascript           |          3
+ 17 | Loky    | Asgardson      | Norway        | Python               |         11
+  7 | Emil    | Avazov         | Kyrgyzstan    | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | Python               |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | Python               |          3
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | Javascript           |          3
+(20 rows)
+
+mydb=# 
+
+ Norway        | 300.00
+ Australia     |  30.00
+ Island        |  33.00
+ Great Britain | 111.50
+(12 rows)
+
+mydb=# SELECT programming_language, ROUND(AVG(age), 2) FROM info GROUP BY programming_language HAVING AVG(experiance) > 2;
+ programming_language | round 
+----------------------+-------
+ Python               | 51.33
+ Javascript           | 44.80
+(2 rows)
+
+mydb=# SELECT programming_language, ROUND(AVG(age), 2) FROM info GROUP BY programming_language HAVING AVG(experiance) > 3;
+ programming_language | round 
+----------------------+-------
+ Javascript           | 44.80
+(1 row)
+
+mydb=# SELECT programming_language, ROUND(AVG(experiance), 2) FROM info GROUP BY country HAVING AVG(experiance) > 2;
+ERROR:  column "info.programming_language" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT programming_language, ROUND(AVG(experiance), 2) FROM ...
+               ^
+mydb=# SELECT country, ROUND(AVG(experiance), 2) FROM info GROUP BY country HAVING AVG(experiance) >= 2;
+    country    | round 
+---------------+-------
+ USA           |  3.00
+ Germany       |  9.00
+ Canada        |  2.00
+ India         |  6.00
+ Japan         |  7.00
+ China         |  3.00
+ Russia        |  2.00
+ Norway        |  5.00
+ Australia     |  6.00
+ Island        |  2.50
+ Great Britain |  4.00
+(11 rows)
+
+mydb=# SELECT country, ROUND(AVG(experiance), 2) FROM info GROUP BY country HAVING AVG(experiance) >= 3;
+    country    | round 
+---------------+-------
+ USA           |  3.00
+ Germany       |  9.00
+ India         |  6.00
+ Japan         |  7.00
+ China         |  3.00
+ Norway        |  5.00
+ Australia     |  6.00
+ Great Britain |  4.00
+(8 rows)
+
+mydb=# 
+mydb=# 
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate    |                | USA           | katty@hotmail.com       |     | Javascript           |          2
+(23 rows)
+
+mydb=# UPDATE info SET last_name='Summers', country='Canada' WHERE id=24;
+UPDATE 1
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate    | Summers        | Canada        | katty@hotmail.com       |     | Javascript           |          2
+(23 rows)
+
+mydb=# UPDATE info SET age=25 WHERE id=24;
+UPDATE 1
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky    | Asgardson      | Norway        | lokyloky@gmail.com      | 300 | Python               |          5
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate    | Summers        | Canada        | katty@hotmail.com       |  25 | Javascript           |          2
+(23 rows)
+
+mydb=# UPDATE info SET email='lokkky@hotmail.com', experiance=11 WHERE id=17;
+UPDATE 1
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          1
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          1
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          1
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          1
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          4
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate    | Summers        | Canada        | katty@hotmail.com       |  25 | Javascript           |          2
+ 17 | Loky    | Asgardson      | Norway        | lokkky@hotmail.com      | 300 | Python               |         11
+(23 rows)
+
+mydb=# UPDATE info SET experiance=3 WHERE country='Kyrgyzstan';
+UPDATE 6
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  3 | Sandy   | Smith          | USA           | ssandy@yahoo.com        |  18 | Javascript           |          4
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate    | Summers        | Canada        | katty@hotmail.com       |  25 | Javascript           |          2
+ 17 | Loky    | Asgardson      | Norway        | lokkky@hotmail.com      | 300 | Python               |         11
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          3
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          3
+(23 rows)
+
+mydb=# 
+mydb=# 
+mydb=# DELETE FROM info WHERE id=3;
+DELETE 1
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 24 | Kate    | Summers        | Canada        | katty@hotmail.com       |  25 | Javascript           |          2
+ 17 | Loky    | Asgardson      | Norway        | lokkky@hotmail.com      | 300 | Python               |         11
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          3
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          3
+(22 rows)
+
+mydb=# DELETE FROM info WHERE name='Kate';
+DELETE 1
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 20 | Zain    | Malik          | India         | zain@hotmail.com        |  26 | Javascript           |          6
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 17 | Loky    | Asgardson      | Norway        | lokkky@hotmail.com      | 300 | Python               |         11
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          3
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          3
+(21 rows)
+
+mydb=# DELETE FROM info WHERE email LIKE 'zain%';
+DELETE 1
+mydb=# SELECT * FROM info;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+ 17 | Loky    | Asgardson      | Norway        | lokkky@hotmail.com      | 300 | Python               |         11
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          3
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          3
+(20 rows)
+
+mydb=# SELECT * FROM info ORDER BY id;
+ id |  name   |   last_name    |    country    |          email          | age | programming_language | experiance 
+----+---------+----------------+---------------+-------------------------+-----+----------------------+------------
+  1 | John    | Snow           | Island        | jsnow@gmail.com         |  43 | Python               |          3
+  2 | Alice   | Snow           | Island        | asnow@hotmail.com       |  23 | Javascript           |          2
+  5 | Andy    | Sacks          | USA           | sandrea@yahoo.com       |  22 | Python               |          3
+  6 | Emely   | Chart          | Great Britain | cemely@gmail.com        |  23 | Python               |          5
+  7 | Emil    | Avazov         | Kyrgyzstan    | eayvazov@yahoo.com      |  28 | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | talasuper@gmail.com     |  34 | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | dalima@hotmail.com      |  23 | Python               |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | jjannet@yahoo.com       |  34 | Python               |          3
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | atai_atai@gmail.com     |  25 | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | kani@yahoo.com          |  26 | Javascript           |          3
+ 13 | Biatrix | Kiddo          | Australia     | bikiddo@hotmail.com     |  30 | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | kianu@gmail.com         |  50 | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | alexsmart@gmail.com     |  29 | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | sugarpova@gmail.com     |  34 | Python               |          2
+ 17 | Loky    | Asgardson      | Norway        | lokkky@hotmail.com      | 300 | Python               |         11
+ 18 | Jean    | Gray           | USA           | white_pheonix@gmail.com |  17 | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | dead_pool@gmail.com     |  38 | Python               |          2
+ 21 | Shan    | Chi            | China         | 10rings@yahoo.com       |  25 | Python               |          5
+ 22 | Xia     | Nihua          | China         | nihua@yahoo.com         |  16 | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | nimuea@yahoo.com        | 200 | Javascript           |          3
+(20 rows)
+
+mydb=# 
+mydb=# 
+mydb=# 
+mydb=# \d
+             List of relations
+ Schema |    Name     |   Type   |  Owner   
+--------+-------------+----------+----------
+ public | info        | table    | postgres
+ public | info_id_seq | sequence | postgres
+(2 rows)
+
+mydb=# \d info
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(50)  |           | not null | 
+ last_name            | character varying(150) |           |          | 
+ country              | character varying(60)  |           |          | 
+ email                | character varying(50)  |           |          | 
+ age                  | integer                |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "info_email_key" UNIQUE CONSTRAINT, btree (email)
+
+mydb=# ALTER TABLE info ALTER COLUMN NAME TYPE VARCHAR(80);
+ALTER TABLE
+mydb=# \d info
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(80)  |           | not null | 
+ last_name            | character varying(150) |           |          | 
+ country              | character varying(60)  |           |          | 
+ email                | character varying(50)  |           |          | 
+ age                  | integer                |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "info_email_key" UNIQUE CONSTRAINT, btree (email)
+
+mydb=# ALTER TABLE info ALTER COLUMN last_name SET NOT NULL;
+ALTER TABLE
+mydb=# \d info
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(80)  |           | not null | 
+ last_name            | character varying(150) |           | not null | 
+ country              | character varying(60)  |           |          | 
+ email                | character varying(50)  |           |          | 
+ age                  | integer                |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "info_email_key" UNIQUE CONSTRAINT, btree (email)
+
+mydb=# 
+mydb=# ALTER TABLE info RENAME COLUMN last_name TO surname;
+ALTER TABLE
+mydb=# \d info
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(80)  |           | not null | 
+ surname              | character varying(150) |           | not null | 
+ country              | character varying(60)  |           |          | 
+ email                | character varying(50)  |           |          | 
+ age                  | integer                |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "info_email_key" UNIQUE CONSTRAINT, btree (email)
+
+mydb=# ALTER TABLE info ADD CONSTRAINT UNIQUE name;
+ERROR:  syntax error at or near "UNIQUE"
+LINE 1: ALTER TABLE info ADD CONSTRAINT UNIQUE name;
+                                        ^
+mydb=# 
+mydb=# ALTER TABLE info ADD CONSTRAINT NAME_OF_CONSTRAINT UNIQUE (name);
+ALTER TABLE
+mydb=# \d info
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(80)  |           | not null | 
+ surname              | character varying(150) |           | not null | 
+ country              | character varying(60)  |           |          | 
+ email                | character varying(50)  |           |          | 
+ age                  | integer                |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "info_email_key" UNIQUE CONSTRAINT, btree (email)
+    "name_of_constraint" UNIQUE CONSTRAINT, btree (name)
+
+mydb=# 
+mydb=# ALTER TABLE info DROP age, DROP email;
+ALTER TABLE
+mydb=# \d info
+                                           Table "public.info"
+        Column        |          Type          | Collation | Nullable |             Default              
+----------------------+------------------------+-----------+----------+----------------------------------
+ id                   | integer                |           | not null | nextval('info_id_seq'::regclass)
+ name                 | character varying(80)  |           | not null | 
+ surname              | character varying(150) |           | not null | 
+ country              | character varying(60)  |           |          | 
+ programming_language | language               |           | not null | 
+ experiance           | integer                |           |          | 
+Indexes:
+    "info_pkey" PRIMARY KEY, btree (id)
+    "name_of_constraint" UNIQUE CONSTRAINT, btree (name)
+
+mydb=# SELECT * FROM info;
+ id |  name   |    surname     |    country    | programming_language | experiance 
+----+---------+----------------+---------------+----------------------+------------
+  1 | John    | Snow           | Island        | Python               |          3
+  2 | Alice   | Snow           | Island        | Javascript           |          2
+  5 | Andy    | Sacks          | USA           | Python               |          3
+  6 | Emely   | Chart          | Great Britain | Python               |          5
+ 13 | Biatrix | Kiddo          | Australia     | Python               |          6
+ 14 | Kianu   | Reeves         | Japan         | Javascript           |          7
+ 15 | Alex    | Smartungschaft | Germany       | Javascript           |          9
+ 16 | Maria   | Sharapova      | Russia        | Python               |          2
+ 18 | Jean    | Gray           | USA           | Javascript           |          3
+ 19 | Ryan    | Deadpool       | Canada        | Python               |          2
+ 21 | Shan    | Chi            | China         | Python               |          5
+ 22 | Xia     | Nihua          | China         | Python               |          1
+ 23 | Nimuea  | Murriel        | Great Britain | Javascript           |          3
+ 17 | Loky    | Asgardson      | Norway        | Python               |         11
+  7 | Emil    | Avazov         | Kyrgyzstan    | Python               |          3
+  8 | Talant  | Talantbekov    | Kyrgyzstan    | Javascript           |          3
+  9 | Alima   | Dzhanybayeva   | Kyrgyzstan    | Python               |          3
+ 10 | Jannet  | Jannetova      | Kyrgyzstan    | Python               |          3
+ 11 | Atai    | Ataibekov      | Kyrgyzstan    | Javascript           |          3
+ 12 | Kani    | Mentor         | Kyrgyzstan    | Javascript           |          3
+(20 rows)
+
+mydb=# 

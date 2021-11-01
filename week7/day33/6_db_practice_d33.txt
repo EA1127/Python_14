@@ -1,0 +1,1205 @@
+
+============================================================================================================================================================
+
+
+hello@hello-Extensa-215-51:~$ $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+$: command not found
+hello@hello-Extensa-215-51:~$ $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+$: command not found
+hello@hello-Extensa-215-51:~$ $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+$: command not found
+hello@hello-Extensa-215-51:~$ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+[sudo] password for hello: 
+hello@hello-Extensa-215-51:~$ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+OK
+hello@hello-Extensa-215-51:~$ $ sudo apt-get update
+$: command not found
+hello@hello-Extensa-215-51:~$ sudo apt-get update
+Hit:1 http://kg.archive.ubuntu.com/ubuntu focal InRelease           
+Get:2 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Get:3 http://apt.postgresql.org/pub/repos/apt focal-pgdg InRelease [86,6 kB]    
+Get:4 http://kg.archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]                  
+Get:5 http://kg.archive.ubuntu.com/ubuntu focal-backports InRelease [101 kB]                           
+Get:6 http://kg.archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [1 284 kB]
+Get:7 http://apt.postgresql.org/pub/repos/apt focal-pgdg/main amd64 Packages [220 kB]
+Get:8 http://kg.archive.ubuntu.com/ubuntu focal-updates/main i386 Packages [549 kB]
+Fetched 2 468 kB in 3s (961 kB/s)                                                          
+Reading package lists... Done
+N: Skipping acquire of configured file 'main/binary-i386/Packages' as repository 'http://apt.postgresql.org/pub/repos/apt focal-pgdg InRelease' doesn't support architecture 'i386'
+hello@hello-Extensa-215-51:~$ sudo apt-get install postgresql
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  libllvm11
+Use 'sudo apt autoremove' to remove it.
+The following additional packages will be installed:
+  libcommon-sense-perl libjson-perl libjson-xs-perl libpq5 libtypes-serialiser-perl pgdg-keyring postgresql-14 postgresql-client-14 postgresql-client-common
+  postgresql-common sysstat
+Suggested packages:
+  postgresql-doc postgresql-doc-14 isag
+The following NEW packages will be installed:
+  libcommon-sense-perl libjson-perl libjson-xs-perl libpq5 libtypes-serialiser-perl pgdg-keyring postgresql postgresql-14 postgresql-client-14 postgresql-client-common
+  postgresql-common sysstat
+0 upgraded, 12 newly installed, 0 to remove and 21 not upgraded.
+Need to get 18,5 MB of archives.
+After this operation, 62,2 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://kg.archive.ubuntu.com/ubuntu focal/main amd64 libcommon-sense-perl amd64 3.74-2build6 [20,1 kB]
+Get:2 http://apt.postgresql.org/pub/repos/apt focal-pgdg/main amd64 libpq5 amd64 14.0-1.pgdg20.04+1 [170 kB]
+Get:3 http://kg.archive.ubuntu.com/ubuntu focal/main amd64 libjson-perl all 4.02000-2 [80,9 kB]
+Get:4 http://kg.archive.ubuntu.com/ubuntu focal/main amd64 libtypes-serialiser-perl all 1.0-1 [12,1 kB]
+Get:5 http://kg.archive.ubuntu.com/ubuntu focal/main amd64 libjson-xs-perl amd64 4.020-1build1 [83,7 kB]
+Get:6 http://kg.archive.ubuntu.com/ubuntu focal-updates/main amd64 sysstat amd64 12.2.0-2ubuntu0.1 [448 kB]
+Get:7 http://apt.postgresql.org/pub/repos/apt focal-pgdg/main amd64 pgdg-keyring all 2018.2 [10,7 kB]
+Get:8 http://apt.postgresql.org/pub/repos/apt focal-pgdg/main amd64 postgresql-client-common all 231.pgdg20.04+1 [91,4 kB]
+Get:9 http://apt.postgresql.org/pub/repos/apt focal-pgdg/main amd64 postgresql-client-14 amd64 14.0-1.pgdg20.04+1 [1 600 kB]
+Get:10 http://apt.postgresql.org/pub/repos/apt focal-pgdg/main amd64 postgresql-common all 231.pgdg20.04+1 [225 kB]                                                          
+Get:11 http://apt.postgresql.org/pub/repos/apt focal-pgdg/main amd64 postgresql-14 amd64 14.0-1.pgdg20.04+1 [15,7 MB]                                                        
+Get:12 http://apt.postgresql.org/pub/repos/apt focal-pgdg/main amd64 postgresql all 14+231.pgdg20.04+1 [66,0 kB]                                                             
+Fetched 18,5 MB in 1min 17s (242 kB/s)                                                                                                                                       
+Preconfiguring packages ...
+Selecting previously unselected package libcommon-sense-perl.
+(Reading database ... 211631 files and directories currently installed.)
+Preparing to unpack .../00-libcommon-sense-perl_3.74-2build6_amd64.deb ...
+Unpacking libcommon-sense-perl (3.74-2build6) ...
+Selecting previously unselected package libjson-perl.
+Preparing to unpack .../01-libjson-perl_4.02000-2_all.deb ...
+Unpacking libjson-perl (4.02000-2) ...
+Selecting previously unselected package libtypes-serialiser-perl.
+Preparing to unpack .../02-libtypes-serialiser-perl_1.0-1_all.deb ...
+Unpacking libtypes-serialiser-perl (1.0-1) ...
+Selecting previously unselected package libjson-xs-perl.
+Preparing to unpack .../03-libjson-xs-perl_4.020-1build1_amd64.deb ...
+Unpacking libjson-xs-perl (4.020-1build1) ...
+Selecting previously unselected package libpq5:amd64.
+Preparing to unpack .../04-libpq5_14.0-1.pgdg20.04+1_amd64.deb ...
+Unpacking libpq5:amd64 (14.0-1.pgdg20.04+1) ...
+Selecting previously unselected package pgdg-keyring.
+Preparing to unpack .../05-pgdg-keyring_2018.2_all.deb ...
+Unpacking pgdg-keyring (2018.2) ...
+Selecting previously unselected package postgresql-client-common.
+Preparing to unpack .../06-postgresql-client-common_231.pgdg20.04+1_all.deb ...
+Unpacking postgresql-client-common (231.pgdg20.04+1) ...
+Selecting previously unselected package postgresql-client-14.
+Preparing to unpack .../07-postgresql-client-14_14.0-1.pgdg20.04+1_amd64.deb ...
+Unpacking postgresql-client-14 (14.0-1.pgdg20.04+1) ...
+Selecting previously unselected package postgresql-common.
+Preparing to unpack .../08-postgresql-common_231.pgdg20.04+1_all.deb ...
+Adding 'diversion of /usr/bin/pg_config to /usr/bin/pg_config.libpq-dev by postgresql-common'
+Unpacking postgresql-common (231.pgdg20.04+1) ...
+Selecting previously unselected package postgresql-14.
+Preparing to unpack .../09-postgresql-14_14.0-1.pgdg20.04+1_amd64.deb ...
+Unpacking postgresql-14 (14.0-1.pgdg20.04+1) ...
+Selecting previously unselected package postgresql.
+Preparing to unpack .../10-postgresql_14+231.pgdg20.04+1_all.deb ...
+Unpacking postgresql (14+231.pgdg20.04+1) ...
+Selecting previously unselected package sysstat.
+Preparing to unpack .../11-sysstat_12.2.0-2ubuntu0.1_amd64.deb ...
+Unpacking sysstat (12.2.0-2ubuntu0.1) ...
+Setting up pgdg-keyring (2018.2) ...
+Removing apt.postgresql.org key from trusted.gpg: OK
+Setting up libpq5:amd64 (14.0-1.pgdg20.04+1) ...
+Setting up libcommon-sense-perl (3.74-2build6) ...
+Setting up libtypes-serialiser-perl (1.0-1) ...
+Setting up libjson-perl (4.02000-2) ...
+Setting up sysstat (12.2.0-2ubuntu0.1) ...
+
+Creating config file /etc/default/sysstat with new version
+update-alternatives: using /usr/bin/sar.sysstat to provide /usr/bin/sar (sar) in auto mode
+Created symlink /etc/systemd/system/multi-user.target.wants/sysstat.service → /lib/systemd/system/sysstat.service.
+Setting up postgresql-client-common (231.pgdg20.04+1) ...
+Setting up libjson-xs-perl (4.020-1build1) ...
+Setting up postgresql-client-14 (14.0-1.pgdg20.04+1) ...
+update-alternatives: using /usr/share/postgresql/14/man/man1/psql.1.gz to provide /usr/share/man/man1/psql.1.gz (psql.1.gz) in auto mode
+Setting up postgresql-common (231.pgdg20.04+1) ...
+Adding user postgres to group ssl-cert
+
+Creating config file /etc/postgresql-common/createcluster.conf with new version
+Building PostgreSQL dictionaries from installed myspell/hunspell packages...
+  en_au
+  en_ca
+  en_gb
+  en_us
+  en_za
+  ru_ru
+Removing obsolete dictionary files:
+Created symlink /etc/systemd/system/multi-user.target.wants/postgresql.service → /lib/systemd/system/postgresql.service.
+Setting up postgresql-14 (14.0-1.pgdg20.04+1) ...
+Creating new PostgreSQL cluster 14/main ...
+/usr/lib/postgresql/14/bin/initdb -D /var/lib/postgresql/14/main --auth-local peer --auth-host scram-sha-256 --no-instructions
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locales
+  COLLATE:  en_US.UTF-8
+  CTYPE:    en_US.UTF-8
+  MESSAGES: en_US.UTF-8
+  MONETARY: ky_KG
+  NUMERIC:  ky_KG
+  TIME:     ky_KG
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/14/main ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting default time zone ... Asia/Bishkek
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... ok
+update-alternatives: using /usr/share/postgresql/14/man/man1/postmaster.1.gz to provide /usr/share/man/man1/postmaster.1.gz (postmaster.1.gz) in auto mode
+Setting up postgresql (14+231.pgdg20.04+1) ...
+Processing triggers for systemd (245.4-4ubuntu3.13) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.2) ...
+hello@hello-Extensa-215-51:~$ psql -u postgres
+/usr/lib/postgresql/14/bin/psql: invalid option -- 'u'
+Try "psql --help" for more information.
+hello@hello-Extensa-215-51:~$ sudo -u psql
+sudo: unknown user: psql
+sudo: unable to initialize policy plugin
+hello@hello-Extensa-215-51:~$ psql --help
+psql is the PostgreSQL interactive terminal.
+
+Usage:
+  psql [OPTION]... [DBNAME [USERNAME]]
+
+General options:
+  -c, --command=COMMAND    run only single command (SQL or internal) and exit
+  -d, --dbname=DBNAME      database name to connect to (default: "hello")
+  -f, --file=FILENAME      execute commands from file, then exit
+  -l, --list               list available databases, then exit
+  -v, --set=, --variable=NAME=VALUE
+                           set psql variable NAME to VALUE
+                           (e.g., -v ON_ERROR_STOP=1)
+  -V, --version            output version information, then exit
+  -X, --no-psqlrc          do not read startup file (~/.psqlrc)
+  -1 ("one"), --single-transaction
+                           execute as a single transaction (if non-interactive)
+  -?, --help[=options]     show this help, then exit
+      --help=commands      list backslash commands, then exit
+      --help=variables     list special variables, then exit
+
+Input and output options:
+  -a, --echo-all           echo all input from script
+  -b, --echo-errors        echo failed commands
+  -e, --echo-queries       echo commands sent to server
+  -E, --echo-hidden        display queries that internal commands generate
+  -L, --log-file=FILENAME  send session log to file
+  -n, --no-readline        disable enhanced command line editing (readline)
+  -o, --output=FILENAME    send query results to file (or |pipe)
+  -q, --quiet              run quietly (no messages, only query output)
+  -s, --single-step        single-step mode (confirm each query)
+  -S, --single-line        single-line mode (end of line terminates SQL command)
+
+Output format options:
+  -A, --no-align           unaligned table output mode
+      --csv                CSV (Comma-Separated Values) table output mode
+  -F, --field-separator=STRING
+                           field separator for unaligned output (default: "|")
+  -H, --html               HTML table output mode
+  -P, --pset=VAR[=ARG]     set printing option VAR to ARG (see \pset command)
+  -R, --record-separator=STRING
+                           record separator for unaligned output (default: newline)
+  -t, --tuples-only        print rows only
+  -T, --table-attr=TEXT    set HTML table tag attributes (e.g., width, border)
+  -x, --expanded           turn on expanded table output
+  -z, --field-separator-zero
+                           set field separator for unaligned output to zero byte
+  -0, --record-separator-zero
+                           set record separator for unaligned output to zero byte
+
+Connection options:
+  -h, --host=HOSTNAME      database server host or socket directory (default: "/var/run/postgresql")
+  -p, --port=PORT          database server port (default: "5432")
+  -U, --username=USERNAME  database user name (default: "hello")
+  -w, --no-password        never prompt for password
+  -W, --password           force password prompt (should happen automatically)
+
+For more information, type "\?" (for internal commands) or "\help" (for SQL
+commands) from within psql, or consult the psql section in the PostgreSQL
+documentation.
+
+Report bugs to <pgsql-bugs@lists.postgresql.org>.
+PostgreSQL home page: <https://www.postgresql.org/>
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \q
+postgres@hello-Extensa-215-51:~$ exit
+logout
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(3 rows)
+
+postgres=# create database test:
+postgres-# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(3 rows)
+
+postgres-# exit
+Use \q to quit.
+postgres-# \q
+postgres@hello-Extensa-215-51:~$ exit
+logout
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+postgres@hello-Extensa-215-51:~$ curl -O https://sp.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip
+
+Command 'curl' not found, but can be installed with:
+
+snap install curl  # version 7.79.1, or
+apt  install curl  # version 7.68.0-1ubuntu2.7
+
+See 'snap info curl' for additional versions.
+
+postgres@hello-Extensa-215-51:~$ snap info curl
+name:      curl
+summary:   CLI tool for transferring data with URL syntax (HTTP, HTTPS, etc)
+publisher: Wouter van Bommel (woutervb)
+store-url: https://snapcraft.io/curl
+contact:   https://github.com/woutervb/snap-curl
+license:   curl
+description: |
+  A command line tool and library for transferring data with URL syntax,
+  supporting HTTP, HTTPS, FTP, FTPS, GOPHER, TFTP, SCP, SFTP, SMB, TELNET,
+  DICT, LDAP, LDAPS, FILE, IMAP, SMTP, POP3, RTSP and RTMP.
+  curl offers a myriad of powerful features
+snap-id: jFJhGxzO7zh4xPun3oLzsYPesPvyGblh
+channels:
+  latest/stable:    7.79.1 2021-10-13 (412) 6MB -
+  latest/candidate: ↑                           
+  latest/beta:      ↑                           
+  latest/edge:      7.79.1 2021-10-18 (428) 6MB -
+postgres@hello-Extensa-215-51:~$ snap install curl
+curl 7.79.1 from Wouter van Bommel (woutervb) installed
+postgres@hello-Extensa-215-51:~$ curl -O https://sp.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip
+Sorry, home directories outside of /home are not currently supported. 
+See https://forum.snapcraft.io/t/11209 for details.
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# create database tesr;
+CREATE DATABASE
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ tesr      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(4 rows)
+
+postgres=# alter database test rename to test1;
+ERROR:  database "test" does not exist
+postgres=# alter database tesr rename to test;
+ALTER DATABASE
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(4 rows)
+
+postgres=# \c test
+You are now connected to database "test" as user "postgres".
+test=# \d
+Did not find any relations.
+test=# \dt
+Did not find any relations.
+test=# \c postgres
+You are now connected to database "postgres" as user "postgres".
+postgres=# \dt
+Did not find any relations.
+postgres=# \d
+Did not find any relations.
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(4 rows)
+
+postgres=# drop database test;
+DROP DATABASE
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(3 rows)
+
+
+                                ОСНОВНЫЕ КОМАНДЫ 
+
+postgres=# create database name_of_database
+postgres-# alter database name1 rename to name2
+postgres-# drop database name_of_database
+
+
+
+postgres-# 
+postgres-# 
+postgres-# 
+postgres-# \du
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+
+postgres-# 
+postgres-# CREATE USER test_user WITH PASSWORD 'test1';
+ERROR:  syntax error at or near "alter"
+LINE 2: alter database name1 rename to name2
+        ^
+postgres=# create user test_user with password 'test1';
+CREATE ROLE
+postgres=# \du
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ test_user |                                                            | {}
+
+postgres=# alter role test_user with superuser;
+ALTER ROLE
+postgres=# \du
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ test_user | Superuser                                                  | {}
+
+postgres=# exit
+postgres@hello-Extensa-215-51:~$ exit
+logout
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+[sudo] password for hello: 
+Sorry, try again.
+[sudo] password for hello: 
+postgres@hello-Extensa-215-51:~$ exit
+logout
+hello@hello-Extensa-215-51:~$ sudo -i -u test_user
+sudo: unknown user: test_user
+sudo: unable to initialize policy plugin
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+postgres@hello-Extensa-215-51:~$ exit
+logout
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres test_user
+-bash: test_user: command not found
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+postgres@hello-Extensa-215-51:~$ psql test_user
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "test_user" does not exist
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# exit
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# create database test_user;
+CREATE DATABASE
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(4 rows)
+
+postgres=# exit
+postgres@hello-Extensa-215-51:~$ exit
+logout
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+postgres@hello-Extensa-215-51:~$ psql test_user
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+test_user=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(4 rows)
+
+test_user=# \c postgres
+You are now connected to database "postgres" as user "postgres".
+postgres=# exit
+postgres@hello-Extensa-215-51:~$ psql -U test_user
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  Peer authentication failed for user "test_user"
+postgres@hello-Extensa-215-51:~$ psql -u test_user
+/usr/lib/postgresql/14/bin/psql: invalid option -- 'u'
+Try "psql --help" for more information.
+postgres@hello-Extensa-215-51:~$ psql test_user
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+test_user=# \c postgres
+You are now connected to database "postgres" as user "postgres".
+postgres=# exit
+postgres@hello-Extensa-215-51:~$ help
+GNU bash, version 5.0.17(1)-release (x86_64-pc-linux-gnu)
+These shell commands are defined internally.  Type `help' to see this list.
+Type `help name' to find out more about the function `name'.
+Use `info bash' to find out more about the shell in general.
+Use `man -k' or `info' to find out more about commands not in this list.
+
+A star (*) next to a name means that the command is disabled.
+
+ job_spec [&]                                      history [-c] [-d offset] [n] or history -anrw >
+ (( expression ))                                  if COMMANDS; then COMMANDS; [ elif COMMANDS; t>
+ . filename [arguments]                            jobs [-lnprs] [jobspec ...] or jobs -x command>
+ :                                                 kill [-s sigspec | -n signum | -sigspec] pid |>
+ [ arg... ]                                        let arg [arg ...]
+ [[ expression ]]                                  local [option] name[=value] ...
+ alias [-p] [name[=value] ... ]                    logout [n]
+ bg [job_spec ...]                                 mapfile [-d delim] [-n count] [-O origin] [-s >
+ bind [-lpsvPSVX] [-m keymap] [-f filename] [-q >  popd [-n] [+N | -N]
+ break [n]                                         printf [-v var] format [arguments]
+ builtin [shell-builtin [arg ...]]                 pushd [-n] [+N | -N | dir]
+ caller [expr]                                     pwd [-LP]
+ case WORD in [PATTERN [| PATTERN]...) COMMANDS >  read [-ers] [-a array] [-d delim] [-i text] [->
+ cd [-L|[-P [-e]] [-@]] [dir]                      readarray [-d delim] [-n count] [-O origin] [->
+ command [-pVv] command [arg ...]                  readonly [-aAf] [name[=value] ...] or readonly>
+ compgen [-abcdefgjksuv] [-o option] [-A action]>  return [n]
+ complete [-abcdefgjksuv] [-pr] [-DEI] [-o optio>  select NAME [in WORDS ... ;] do COMMANDS; done
+ compopt [-o|+o option] [-DEI] [name ...]          set [-abefhkmnptuvxBCHP] [-o option-name] [--]>
+ continue [n]                                      shift [n]
+ coproc [NAME] command [redirections]              shopt [-pqsu] [-o] [optname ...]
+ declare [-aAfFgilnrtux] [-p] [name[=value] ...>   source filename [arguments]
+ dirs [-clpv] [+N] [-N]                            suspend [-f]
+ disown [-h] [-ar] [jobspec ... | pid ...]         test [expr]
+ echo [-neE] [arg ...]                             time [-p] pipeline
+ enable [-a] [-dnps] [-f filename] [name ...]      times
+ eval [arg ...]                                    trap [-lp] [[arg] signal_spec ...]
+ exec [-cl] [-a name] [command [arguments ...]] >  true
+ exit [n]                                          type [-afptP] name [name ...]
+ export [-fn] [name[=value] ...] or export -p      typeset [-aAfFgilnrtux] [-p] name[=value] ...
+ false                                             ulimit [-SHabcdefiklmnpqrstuvxPT] [limit]
+ fc [-e ename] [-lnr] [first] [last] or fc -s [p>  umask [-p] [-S] [mode]
+ fg [job_spec]                                     unalias [-a] name [name ...]
+ for NAME [in WORDS ... ] ; do COMMANDS; done      unset [-f] [-v] [-n] [name ...]
+ for (( exp1; exp2; exp3 )); do COMMANDS; done     until COMMANDS; do COMMANDS; done
+ function name { COMMANDS ; } or name () { COMMA>  variables - Names and meanings of some shell v>
+ getopts optstring name [arg]                      wait [-fn] [id ...]
+ hash [-lr] [-p pathname] [-dt] [name ...]         while COMMANDS; do COMMANDS; done
+ help [-dms] [pattern ...]                         { COMMANDS ; }
+postgres@hello-Extensa-215-51:~$ psql -I -U test_user
+/usr/lib/postgresql/14/bin/psql: invalid option -- 'I'
+Try "psql --help" for more information.
+postgres@hello-Extensa-215-51:~$ psql -I test_user
+/usr/lib/postgresql/14/bin/psql: invalid option -- 'I'
+Try "psql --help" for more information.
+postgres@hello-Extensa-215-51:~$ psql --help
+psql is the PostgreSQL interactive terminal.
+
+Usage:
+  psql [OPTION]... [DBNAME [USERNAME]]
+
+General options:
+  -c, --command=COMMAND    run only single command (SQL or internal) and exit
+  -d, --dbname=DBNAME      database name to connect to (default: "postgres")
+  -f, --file=FILENAME      execute commands from file, then exit
+  -l, --list               list available databases, then exit
+  -v, --set=, --variable=NAME=VALUE
+                           set psql variable NAME to VALUE
+                           (e.g., -v ON_ERROR_STOP=1)
+  -V, --version            output version information, then exit
+  -X, --no-psqlrc          do not read startup file (~/.psqlrc)
+  -1 ("one"), --single-transaction
+                           execute as a single transaction (if non-interactive)
+  -?, --help[=options]     show this help, then exit
+      --help=commands      list backslash commands, then exit
+      --help=variables     list special variables, then exit
+
+Input and output options:
+  -a, --echo-all           echo all input from script
+  -b, --echo-errors        echo failed commands
+  -e, --echo-queries       echo commands sent to server
+  -E, --echo-hidden        display queries that internal commands generate
+  -L, --log-file=FILENAME  send session log to file
+  -n, --no-readline        disable enhanced command line editing (readline)
+  -o, --output=FILENAME    send query results to file (or |pipe)
+  -q, --quiet              run quietly (no messages, only query output)
+  -s, --single-step        single-step mode (confirm each query)
+  -S, --single-line        single-line mode (end of line terminates SQL command)
+
+Output format options:
+  -A, --no-align           unaligned table output mode
+      --csv                CSV (Comma-Separated Values) table output mode
+  -F, --field-separator=STRING
+                           field separator for unaligned output (default: "|")
+  -H, --html               HTML table output mode
+  -P, --pset=VAR[=ARG]     set printing option VAR to ARG (see \pset command)
+  -R, --record-separator=STRING
+                           record separator for unaligned output (default: newline)
+  -t, --tuples-only        print rows only
+  -T, --table-attr=TEXT    set HTML table tag attributes (e.g., width, border)
+  -x, --expanded           turn on expanded table output
+  -z, --field-separator-zero
+                           set field separator for unaligned output to zero byte
+  -0, --record-separator-zero
+                           set record separator for unaligned output to zero byte
+
+Connection options:
+  -h, --host=HOSTNAME      database server host or socket directory (default: "/var/run/postgresql")
+  -p, --port=PORT          database server port (default: "5432")
+  -U, --username=USERNAME  database user name (default: "postgres")
+  -w, --no-password        never prompt for password
+  -W, --password           force password prompt (should happen automatically)
+
+For more information, type "\?" (for internal commands) or "\help" (for SQL
+commands) from within psql, or consult the psql section in the PostgreSQL
+documentation.
+
+Report bugs to <pgsql-bugs@lists.postgresql.org>.
+PostgreSQL home page: <https://www.postgresql.org/>
+postgres@hello-Extensa-215-51:~$ psql -U test_user
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  Peer authentication failed for user "test_user"
+postgres@hello-Extensa-215-51:~$ psql test_user
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+test_user=# \c test_user
+You are now connected to database "test_user" as user "postgres".
+test_user=# exit
+postgres@hello-Extensa-215-51:~$ psql test_user
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+test_user=# \c
+You are now connected to database "test_user" as user "postgres".
+test_user=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(4 rows)
+
+test_user=# exit
+
+
+=======================================================================================================================================================
+
+СДЕЛАЛИ МАНИПУЛЯЦИИ ПО СОЗДАНИЮ ЮЗЕРА СОГЛАСНО ФАЙЛУ linux_postgre.txt !!!!!
+
+=======================================================================================================================================================
+
+hello@hello-Extensa-215-51:~$ sudo -i -u test_user
+[sudo] password for hello: 
+test_user@hello-Extensa-215-51:~$ exit
+logout
+hello@hello-Extensa-215-51:~$ sudo -i -u hello
+hello@hello-Extensa-215-51:~$ psql test_user 
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+test_user=# \l
+
+[1]+  Stopped                 psql test_user
+hello@hello-Extensa-215-51:~$ psql test_user
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+test_user=# \l
+
+[2]+  Stopped                 psql test_user
+hello@hello-Extensa-215-51:~$ exit
+logout
+There are stopped jobs.
+hello@hello-Extensa-215-51:~$ exit
+logout
+hello@hello-Extensa-215-51:~$ sudo -i -u test_user 
+test_user@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+test_user=# \l
+
+[1]+  Stopped                 psql
+test_user@hello-Extensa-215-51:~$ psql test_user 
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+test_user=# \l
+test_user=# \l
+test_user=# \q
+test_user@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+test_user=# \l
+test_user=# create database my_db
+test_user-# \l
+test_user-# create database my_db;
+ERROR:  syntax error at or near "create"
+LINE 2: create database my_db;
+        ^
+test_user=# create database my_db;
+CREATE DATABASE
+test_user=# \l
+                                   List of databases
+   Name    |   Owner   | Encoding |   Collate   |    Ctype    |   Access privileges    
+-----------+-----------+----------+-------------+-------------+------------------------
+ hello     | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ my_db     | test_user | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+           |           |          |             |             | postgres=CTc/postgres
+ template1 | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+           |           |          |             |             | postgres=CTc/postgres
+ test_user | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =Tc/postgres          +
+           |           |          |             |             | postgres=CTc/postgres +
+           |           |          |             |             | test_user=CTc/postgres
+(6 rows)
+
+test_user=# exit
+test_user@hello-Extensa-215-51:~$ psql postgres 
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \l
+                                   List of databases
+   Name    |   Owner   | Encoding |   Collate   |    Ctype    |   Access privileges    
+-----------+-----------+----------+-------------+-------------+------------------------
+ hello     | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ my_db     | test_user | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+           |           |          |             |             | postgres=CTc/postgres
+ template1 | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+           |           |          |             |             | postgres=CTc/postgres
+ test_user | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =Tc/postgres          +
+           |           |          |             |             | postgres=CTc/postgres +
+           |           |          |             |             | test_user=CTc/postgres
+(6 rows)
+
+postgres=# create database my_db_test_user with owner test_user;
+CREATE DATABASE
+postgres=# \l
+postgres=# 
+postgres=# 
+
+                                    ОСНОВНЫЕ КОМАНДЫ
+
+postgres=# create database name_of_database
+postgres-# create user name_user with password 'password_name'
+postgres-# alter user name_user with superuser
+postgres-# grant all privileges on database name_of_database to name_user
+postgres-# create database name_of_database with owner name_user
+
+
+postgres-# 
+postgres-# \l
+                                      List of databases
+      Name       |   Owner   | Encoding |   Collate   |    Ctype    |   Access privileges    
+-----------------+-----------+----------+-------------+-------------+------------------------
+ hello           | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ my_db           | test_user | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ my_db_test_user | test_user | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres        | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0       | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+                 |           |          |             |             | postgres=CTc/postgres
+ template1       | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+                 |           |          |             |             | postgres=CTc/postgres
+ test_user       | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =Tc/postgres          +
+                 |           |          |             |             | postgres=CTc/postgres +
+                 |           |          |             |             | test_user=CTc/postgres
+(7 rows)
+
+postgres-# drop my_db;
+ERROR:  syntax error at or near "create"
+LINE 2: create user name_user with password 'password_name'
+        ^
+postgres=# drop database my_db;
+DROP DATABASE
+postgres=# \c my_db_test_user 
+You are now connected to database "my_db_test_user" as user "test_user".
+my_db_test_user=# drop database my_db_test_user;
+ERROR:  cannot drop the currently open database
+my_db_test_user=# \l
+                                      List of databases
+      Name       |   Owner   | Encoding |   Collate   |    Ctype    |   Access privileges    
+-----------------+-----------+----------+-------------+-------------+------------------------
+ hello           | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ my_db_test_user | test_user | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres        | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0       | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+                 |           |          |             |             | postgres=CTc/postgres
+ template1       | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+                 |           |          |             |             | postgres=CTc/postgres
+ test_user       | postgres  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =Tc/postgres          +
+                 |           |          |             |             | postgres=CTc/postgres +
+                 |           |          |             |             | test_user=CTc/postgres
+(6 rows)
+
+my_db_test_user=# \c test_user 
+You are now connected to database "test_user" as user "test_user".
+test_user=# drop database my_db_test_user;
+DROP DATABASE
+test_user=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges    
+-----------+----------+----------+-------------+-------------+------------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =Tc/postgres          +
+           |          |          |             |             | postgres=CTc/postgres +
+           |          |          |             |             | test_user=CTc/postgres
+(5 rows)
+
+test_user=# \c postgres 
+You are now connected to database "postgres" as user "test_user".
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges    
+-----------+----------+----------+-------------+-------------+------------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =Tc/postgres          +
+           |          |          |             |             | postgres=CTc/postgres +
+           |          |          |             |             | test_user=CTc/postgres
+(5 rows)
+
+postgres=# \du
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ hello     | Superuser, Create role, Create DB                          | {}
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ test_user | Superuser, Create role, Create DB                          | {}
+
+postgres=# exit
+test_user@hello-Extensa-215-51:~$ exit
+logout
+There are stopped jobs.
+test_user@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+test_user=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges    
+-----------+----------+----------+-------------+-------------+------------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres           +
+           |          |          |             |             | postgres=CTc/postgres
+ test_user | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =Tc/postgres          +
+           |          |          |             |             | postgres=CTc/postgres +
+           |          |          |             |             | test_user=CTc/postgres
+(5 rows)
+
+test_user=# drop database test_user;
+ERROR:  cannot drop the currently open database
+test_user=# \c postgres 
+You are now connected to database "postgres" as user "test_user".
+postgres=# drop database test_user;
+ERROR:  database "test_user" is being accessed by other users
+DETAIL:  There is 1 other session using the database.
+postgres=# exit
+test_user@hello-Extensa-215-51:~$ psql postgres 
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# drop database test_user;
+ERROR:  database "test_user" is being accessed by other users
+DETAIL:  There is 1 other session using the database.
+postgres=# exit
+test_user@hello-Extensa-215-51:~$ exit
+logout
+There are stopped jobs.
+test_user@hello-Extensa-215-51:~$ exit
+logout
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres 
+[sudo] password for hello: 
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# drop database test_user;
+DROP DATABASE
+postgres=# create user my_user with password '2'
+postgres-# ;
+CREATE ROLE
+postgres=# \du
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ hello     | Superuser, Create role, Create DB                          | {}
+ my_user   |                                                            | {}
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ test_user | Superuser, Create role, Create DB                          | {}
+
+postgres=# 
+postgres=# 
+postgres=# create database my_user;
+CREATE DATABASE
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ my_user   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(5 rows)
+
+postgres=# exit
+postgres@hello-Extensa-215-51:~$ psql my_user 
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+my_user=# exit
+postgres@hello-Extensa-215-51:~$ psql -U my_user
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  Peer authentication failed for user "my_user"
+postgres@hello-Extensa-215-51:~$ exit
+logout
+hello@hello-Extensa-215-51:~$ sudo -i -u my_user
+sudo: unknown user: my_user
+sudo: unable to initialize policy plugin
+hello@hello-Extensa-215-51:~$ sudo -u my_user
+sudo: unknown user: my_user
+sudo: unable to initialize policy plugin
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres 
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ my_user   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(5 rows)
+
+postgres=# \c
+You are now connected to database "postgres" as user "postgres".
+postgres=# \c my_user 
+You are now connected to database "my_user" as user "postgres".
+my_user=# \c my_user 
+You are now connected to database "my_user" as user "postgres".
+my_user=# exit
+postgres@hello-Extensa-215-51:~$ psql my_user
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+my_user=# \c my_user 
+You are now connected to database "my_user" as user "postgres".
+my_user=# \c postgres 
+You are now connected to database "postgres" as user "postgres".
+postgres=# drop user my_user;
+DROP ROLE
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ hello     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ my_user   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(5 rows)
+
+postgres=# drop database my_user;
+DROP DATABASE
+postgres=# /du
+postgres-# /l
+postgres-# /c
+postgres-# exit
+Use \q to quit.
+postgres-# \du
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ hello     | Superuser, Create role, Create DB                          | {}
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ test_user | Superuser, Create role, Create DB                          | {}
+
+postgres-# \q
+postgres@hello-Extensa-215-51:~$ psql postgres 
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \du
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ hello     | Superuser, Create role, Create DB                          | {}
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ test_user | Superuser, Create role, Create DB                          | {}
+
+postgres=# exit
+postgres@hello-Extensa-215-51:~$ 
+
+
+===============================================================================================
+
+hello@hello-Extensa-215-51:~$ sudo -i -u test_user psql
+[sudo] password for hello: 
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+test_user=# \c test_user 
+You are now connected to database "test_user" as user "test_user".
+test_user=# CREATE TABLE Person(
+test_user(# id serial primary key,
+test_user(# name varchar(50) NOT NULL.
+test_user(# last_name varchar(100)
+test_user(# age int);
+ERROR:  syntax error at or near "."
+LINE 3: name varchar(50) NOT NULL.
+                                 ^
+test_user=# CREATE TABLE Person(
+test_user(# id serial primary key,
+test_user(# name varchar(50) NOT NULL,
+test_user(# last_name varchar(100),
+test_user(# age int);
+CREATE TABLE
+test_user=# \dt
+          List of relations
+ Schema |  Name  | Type  |   Owner   
+--------+--------+-------+-----------
+ public | person | table | test_user
+(1 row)
+
+test_user=# \dt person
+          List of relations
+ Schema |  Name  | Type  |   Owner   
+--------+--------+-------+-----------
+ public | person | table | test_user
+(1 row)
+
+test_user=# \d person
+test_user=# \d person
+test_user=# 
+test_user=# 
+test_user=# INSERT INTO person (name, last_name, age) VALUES ('John', 'Snow', 34);
+INSERT 0 1
+test_user=# select * from person;
+ id | name | last_name | age 
+----+------+-----------+-----
+  1 | John | Snow      |  34
+(1 row)
+
+test_user=# INSERT INTO person (name, last_name, age) VALUES ('Emily', 'Clark', 23);
+INSERT 0 1
+test_user=# select * from person;
+ id | name  | last_name | age 
+----+-------+-----------+-----
+  1 | John  | Snow      |  34
+  2 | Emily | Clark     |  23
+(2 rows)
+
+test_user=# INSERT INTO person (name, last_name, age) VALUES ('Emily', 'Clark', 23), ('Karen', 'Davis', 30);
+INSERT 0 2
+test_user=# select * from person;
+ id | name  | last_name | age 
+----+-------+-----------+-----
+  1 | John  | Snow      |  34
+  2 | Emily | Clark     |  23
+  3 | Emily | Clark     |  23
+  4 | Karen | Davis     |  30
+(4 rows)
+
+test_user=# select name, last_name from person;
+ name  | last_name 
+-------+-----------
+ John  | Snow
+ Emily | Clark
+ Emily | Clark
+ Karen | Davis
+(4 rows)
+
+test_user=# select name from person;
+ name  
+-------
+ John
+ Emily
+ Emily
+ Karen
+(4 rows)
+
+test_user=# select * from person;
+ id | name  | last_name | age 
+----+-------+-----------+-----
+  1 | John  | Snow      |  34
+  2 | Emily | Clark     |  23
+  3 | Emily | Clark     |  23
+  4 | Karen | Davis     |  30
+(4 rows)
+
+test_user=# select * from person where age > 40;
+ id | name | last_name | age 
+----+------+-----------+-----
+(0 rows)
+
+test_user=# select * from person where age > 23;
+ id | name  | last_name | age 
+----+-------+-----------+-----
+  1 | John  | Snow      |  34
+  4 | Karen | Davis     |  30
+(2 rows)
+
+test_user=# >
+test_user-# <
+test_user-# =
+test_user-# !=
+test_user-# <>
+test_user-# >=
+test_user-# <=
+test_user-# 
+test_user-# 
+test_user-# +
+test_user-# -
+test_user-# /
+test_user-# *
+test_user-# %
+
+hello@hello-Extensa-215-51:~$ sudo -i -u test_user psql
+[sudo] password for hello: 
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+test_user=# \dt
+          List of relations
+ Schema |  Name  | Type  |   Owner   
+--------+--------+-------+-----------
+ public | person | table | test_user
+(1 row)
+
+test_user=# \d person
+test_user=# select * from person
+test_user-# ;
+ id | name  | last_name | age 
+----+-------+-----------+-----
+  1 | John  | Snow      |  34
+  2 | Emily | Clark     |  23
+  3 | Emily | Clark     |  23
+  4 | Karen | Davis     |  30
+(4 rows)
+
+test_user=# select * from person where name = 'John';
+ id | name | last_name | age 
+----+------+-----------+-----
+  1 | John | Snow      |  34
+(1 row)
+
+test_user=# select * from person where name = 'Emily';
+ id | name  | last_name | age 
+----+-------+-----------+-----
+  2 | Emily | Clark     |  23
+  3 | Emily | Clark     |  23
+(2 rows)
+
+test_user=# INSERT INTO (name, age) VALUES ('Tom', 35);
+ERROR:  syntax error at or near "("
+LINE 1: INSERT INTO (name, age) VALUES ('Tom', 35);
+                    ^
+test_user=# INSERT INTO person (name, age) VALUES ('Tom', 35);
+INSERT 0 1
+test_user=# select * from person;         
+ id | name  | last_name | age 
+----+-------+-----------+-----
+  1 | John  | Snow      |  34
+  2 | Emily | Clark     |  23
+  3 | Emily | Clark     |  23
+  4 | Karen | Davis     |  30
+  5 | Tom   |           |  35
+(5 rows)
+
+test_user=# INSERT INTO person (name, last_name) VALUES ('Tim', 'Huston');
+INSERT 0 1
+test_user=# select * from person;
+ id | name  | last_name | age 
+----+-------+-----------+-----
+  1 | John  | Snow      |  34
+  2 | Emily | Clark     |  23
+  3 | Emily | Clark     |  23
+  4 | Karen | Davis     |  30
+  5 | Tom   |           |  35
+  6 | Tim   | Huston    |    
+(6 rows)
+
+test_user=# 

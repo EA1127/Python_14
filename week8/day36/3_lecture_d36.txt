@@ -1,0 +1,683 @@
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+[sudo] password for hello: 
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \c sh
+shakespeare  shop_db      
+postgres=# \l
+                                    List of databases
+      Name      |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+----------------+----------+----------+-------------+-------------+-----------------------
+ hello          | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ kfc_menu       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ my_db_postgres | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ mydb           | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ shakespeare    | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ shop_db        | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ template1      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ test_user      | hello    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(10 rows)
+
+postgres=# \c shakespeare
+You are now connected to database "shakespeare" as user "postgres".
+shakespeare=# \dt
+            List of relations
+ Schema |      Name      | Type  | Owner 
+--------+----------------+-------+-------
+ public | chapter        | table | hello
+ public | character      | table | hello
+ public | character_work | table | hello
+ public | paragraph      | table | hello
+ public | wordform       | table | hello
+ public | work           | table | hello
+(6 rows)
+
+shakespeare=# \d chapter
+                        Table "public.chapter"
+   Column    |          Type          | Collation | Nullable | Default 
+-------------+------------------------+-----------+----------+---------
+ workid      | character varying(32)  |           | not null | 
+ chapterid   | integer                |           | not null | 
+ section     | integer                |           | not null | 
+ chapter     | integer                |           | not null | 
+ description | character varying(256) |           | not null | 
+Indexes:
+    "chapter_pkey" PRIMARY KEY, btree (chapterid)
+Foreign-key constraints:
+    "chapter_workid_fkey" FOREIGN KEY (workid) REFERENCES work(workid)
+
+shakespeare=# \d character
+                        Table "public.character"
+   Column    |          Type           | Collation | Nullable | Default 
+-------------+-------------------------+-----------+----------+---------
+ charid      | character varying(32)   |           | not null | 
+ charname    | character varying(64)   |           | not null | 
+ abbrev      | character varying(32)   |           |          | 
+ description | character varying(2056) |           |          | 
+ speechcount | integer                 |           | not null | 
+Indexes:
+    "character_pkey" PRIMARY KEY, btree (charid)
+Referenced by:
+    TABLE "character_work" CONSTRAINT "character_work_charid_fkey" FOREIGN KEY (charid) REFERENCES "character"(charid)
+    TABLE "paragraph" CONSTRAINT "paragraph_charid_fkey" FOREIGN KEY (charid) REFERENCES "character"(charid)
+
+shakespeare=# \d character_work
+                  Table "public.character_work"
+ Column |         Type          | Collation | Nullable | Default 
+--------+-----------------------+-----------+----------+---------
+ charid | character varying(32) |           | not null | 
+ workid | character varying(32) |           | not null | 
+Indexes:
+    "character_work_pkey" PRIMARY KEY, btree (charid, workid)
+Foreign-key constraints:
+    "character_work_charid_fkey" FOREIGN KEY (charid) REFERENCES "character"(charid)
+    "character_work_workid_fkey" FOREIGN KEY (workid) REFERENCES work(workid)
+
+shakespeare=# \d
+            List of relations
+ Schema |      Name      | Type  | Owner 
+--------+----------------+-------+-------
+ public | chapter        | table | hello
+ public | character      | table | hello
+ public | character_work | table | hello
+ public | paragraph      | table | hello
+ public | wordform       | table | hello
+ public | work           | table | hello
+(6 rows)
+
+shakespeare=# \d paragraph
+                        Table "public.paragraph"
+    Column     |         Type          | Collation | Nullable | Default 
+---------------+-----------------------+-----------+----------+---------
+ workid        | character varying(32) |           | not null | 
+ paragraphid   | integer               |           | not null | 
+ paragraphnum  | integer               |           | not null | 
+ charid        | character varying(32) |           | not null | 
+ plaintext     | text                  |           | not null | 
+ phonetictext  | text                  |           | not null | 
+ stemtext      | text                  |           | not null | 
+ paragraphtype | character varying(1)  |           | not null | 
+ section       | integer               |           | not null | 
+ chapter       | integer               |           | not null | 
+ charcount     | integer               |           | not null | 
+ wordcount     | integer               |           | not null | 
+Indexes:
+    "paragraph_pkey" PRIMARY KEY, btree (paragraphid)
+Foreign-key constraints:
+    "paragraph_charid_fkey" FOREIGN KEY (charid) REFERENCES "character"(charid)
+    "paragraph_workid_fkey" FOREIGN KEY (workid) REFERENCES work(workid)
+
+shakespeare=# \d wordform
+                        Table "public.wordform"
+    Column    |         Type          | Collation | Nullable | Default 
+--------------+-----------------------+-----------+----------+---------
+ wordformid   | integer               |           | not null | 
+ plaintext    | character varying(64) |           | not null | 
+ phonetictext | character varying(64) |           | not null | 
+ stemtext     | character varying(64) |           | not null | 
+ occurences   | integer               |           | not null | 
+Indexes:
+    "wordform_pkey" PRIMARY KEY, btree (wordformid)
+
+shakespeare=# \d work
+                           Table "public.work"
+     Column      |         Type          | Collation | Nullable | Default 
+-----------------+-----------------------+-----------+----------+---------
+ workid          | character varying(32) |           | not null | 
+ title           | character varying(32) |           | not null | 
+ longtitle       | character varying(64) |           | not null | 
+ year            | integer               |           | not null | 
+ genretype       | character varying(1)  |           | not null | 
+ notes           | text                  |           |          | 
+ source          | character varying(16) |           | not null | 
+ totalwords      | integer               |           | not null | 
+ totalparagraphs | integer               |           | not null | 
+Indexes:
+    "work_pkey" PRIMARY KEY, btree (workid)
+Referenced by:
+    TABLE "chapter" CONSTRAINT "chapter_workid_fkey" FOREIGN KEY (workid) REFERENCES work(workid)
+    TABLE "character_work" CONSTRAINT "character_work_workid_fkey" FOREIGN KEY (workid) REFERENCES work(workid)
+    TABLE "paragraph" CONSTRAINT "paragraph_workid_fkey" FOREIGN KEY (workid) REFERENCES work(workid)
+
+shakespeare=# select * from wordform;
+shakespeare=# select * from wordform;
+shakespeare=# 
+shakespeare=# 
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+shakespeare=# \timing
+Timing is on.
+shakespeare=# 
+shakespeare=# \timing
+Timing is off.
+shakespeare=# \timing
+Timing is on.
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 1,389 ms
+shakespeare=# 
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 1,409 ms
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 0,564 ms
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 1,378 ms
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 1,507 ms
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 1,405 ms
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 1,362 ms
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 1,352 ms
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 1,085 ms
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 1,348 ms
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 1,345 ms
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 1,357 ms
+shakespeare=# select charname from character where charname = 'Romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 1,405 ms
+shakespeare=# select charname from character where charid = 'romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 0,951 ms
+shakespeare=# select charname from character where charid = 'romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 0,921 ms
+shakespeare=# select charname from character where charid = 'romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 0,899 ms
+shakespeare=# select charname from character where charid = 'romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 0,923 ms
+shakespeare=# select charname from character where charid = 'romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 0,868 ms
+shakespeare=# select charname from character where charid = 'romeo';
+ charname 
+----------
+ Romeo
+(1 row)
+
+Time: 0,892 ms
+shakespeare=# 
+shakespeare=# \dt
+            List of relations
+ Schema |      Name      | Type  | Owner 
+--------+----------------+-------+-------
+ public | chapter        | table | hello
+ public | character      | table | hello
+ public | character_work | table | hello
+ public | paragraph      | table | hello
+ public | wordform       | table | hello
+ public | work           | table | hello
+(6 rows)
+
+shakespeare=# select workid, source from work;
+      workid       |  source   
+-------------------+-----------
+ 12night           | Moby
+ allswell          | Moby
+ antonycleo        | Moby
+ asyoulikeit       | Gutenberg
+ comedyerrors      | Moby
+ coriolanus        | Moby
+ cymbeline         | Moby
+ hamlet            | Gutenberg
+ henry4p1          | Moby
+ henry4p2          | Gutenberg
+ henry5            | Moby
+ henry6p1          | Moby
+ henry6p2          | Moby
+ henry6p3          | Moby
+ henry8            | Moby
+ juliuscaesar      | Moby
+ kingjohn          | Moby
+ kinglear          | Gutenberg
+ loverscomplaint   | Moby
+ loveslabours      | Moby
+ macbeth           | Moby
+ measure           | Moby
+ merchantvenice    | Moby
+ merrywives        | Moby
+ midsummer         | Moby
+ muchado           | Moby
+ othello           | Moby
+ passionatepilgrim | Moby
+ pericles          | Moby
+ phoenixturtle     | Moby
+ rapelucrece       | Moby
+ richard2          | Moby
+ richard3          | Moby
+ romeojuliet       | Moby
+ sonnets           | Moby
+ tamingshrew       | Gutenberg
+ tempest           | Moby
+ timonathens       | Moby
+ titus             | Moby
+ troilus           | Moby
+ twogents          | Moby
+ venusadonis       | Moby
+ winterstale       | Moby
+(43 rows)
+
+Time: 1,177 ms
+shakespeare=# select workid, source, totalparagraphs from work;
+      workid       |  source   | totalparagraphs 
+-------------------+-----------+-----------------
+ 12night           | Moby      |            1031
+ allswell          | Moby      |            1025
+ antonycleo        | Moby      |            1344
+ asyoulikeit       | Gutenberg |             872
+ comedyerrors      | Moby      |             661
+ coriolanus        | Moby      |            1226
+ cymbeline         | Moby      |             971
+ hamlet            | Gutenberg |            1275
+ henry4p1          | Moby      |             884
+ henry4p2          | Gutenberg |            1013
+ henry5            | Moby      |             846
+ henry6p1          | Moby      |             772
+ henry6p2          | Moby      |             904
+ henry6p3          | Moby      |             935
+ henry8            | Moby      |             779
+ juliuscaesar      | Moby      |             888
+ kingjohn          | Moby      |             615
+ kinglear          | Gutenberg |            1177
+ loverscomplaint   | Moby      |              47
+ loveslabours      | Moby      |            1120
+ macbeth           | Moby      |             758
+ measure           | Moby      |             980
+ merchantvenice    | Moby      |             718
+ merrywives        | Moby      |            1161
+ midsummer         | Moby      |             603
+ muchado           | Moby      |            1059
+ othello           | Moby      |            1308
+ passionatepilgrim | Moby      |              43
+ pericles          | Moby      |             748
+ phoenixturtle     | Moby      |              19
+ rapelucrece       | Moby      |             269
+ richard2          | Moby      |             628
+ richard3          | Moby      |            1210
+ romeojuliet       | Moby      |             989
+ sonnets           | Moby      |             154
+ tamingshrew       | Gutenberg |             965
+ tempest           | Moby      |             698
+ timonathens       | Moby      |             865
+ titus             | Moby      |             654
+ troilus           | Moby      |            1295
+ twogents          | Moby      |             943
+ venusadonis       | Moby      |             201
+ winterstale       | Moby      |             812
+(43 rows)
+
+Time: 0,937 ms
+shakespeare=# select source, totalparagraphs, title from work where source = 'Moby' and totalparagraphs <= 100;
+ source | totalparagraphs |         title          
+--------+-----------------+------------------------
+ Moby   |              47 | Lover's Complaint
+ Moby   |              43 | Passionate Pilgrim
+ Moby   |              19 | Phoenix and the Turtle
+(3 rows)
+
+Time: 0,528 ms
+shakespeare=# select source, totalparagraphs, title from work where source = 'Moby' and totalparagraphs >= 100;
+ source | totalparagraphs |           title           
+--------+-----------------+---------------------------
+ Moby   |            1031 | Twelfth Night
+ Moby   |            1025 | All's Well That Ends Well
+ Moby   |            1344 | Antony and Cleopatra
+ Moby   |             661 | Comedy of Errors
+ Moby   |            1226 | Coriolanus
+ Moby   |             971 | Cymbeline
+ Moby   |             884 | Henry IV, Part I
+ Moby   |             846 | Henry V
+ Moby   |             772 | Henry VI, Part I
+ Moby   |             904 | Henry VI, Part II
+ Moby   |             935 | Henry VI, Part III
+ Moby   |             779 | Henry VIII
+ Moby   |             888 | Julius Caesar
+ Moby   |             615 | King John
+ Moby   |            1120 | Love's Labour's Lost
+ Moby   |             758 | Macbeth
+ Moby   |             980 | Measure for Measure
+ Moby   |             718 | Merchant of Venice
+ Moby   |            1161 | Merry Wives of Windsor
+ Moby   |             603 | Midsummer Night's Dream
+ Moby   |            1059 | Much Ado about Nothing
+ Moby   |            1308 | Othello
+ Moby   |             748 | Pericles
+ Moby   |             269 | Rape of Lucrece
+ Moby   |             628 | Richard II
+ Moby   |            1210 | Richard III
+ Moby   |             989 | Romeo and Juliet
+ Moby   |             154 | Sonnets
+ Moby   |             698 | Tempest
+ Moby   |             865 | Timon of Athens
+ Moby   |             654 | Titus Andronicus
+ Moby   |            1295 | Troilus and Cressida
+ Moby   |             943 | Two Gentlemen of Verona
+ Moby   |             201 | Venus and Adonis
+ Moby   |             812 | The Winter's Tale
+(35 rows)
+
+Time: 1,137 ms
+shakespeare=# /timing
+shakespeare-# \timing
+Timing is off.
+shakespeare-# 
+shakespeare-# ;
+ERROR:  syntax error at or near "/"
+LINE 1: /timing
+        ^
+shakespeare=# 
+shakespeare=# select paragraphnum, workid, charcount from paragraph where charcount < 1000;
+shakespeare=# select title, totalparagraphs from work;
+           title           | totalparagraphs 
+---------------------------+-----------------
+ Twelfth Night             |            1031
+ All's Well That Ends Well |            1025
+ Antony and Cleopatra      |            1344
+ As You Like It            |             872
+ Comedy of Errors          |             661
+ Coriolanus                |            1226
+ Cymbeline                 |             971
+ Hamlet                    |            1275
+ Henry IV, Part I          |             884
+ Henry IV, Part II         |            1013
+ Henry V                   |             846
+ Henry VI, Part I          |             772
+ Henry VI, Part II         |             904
+ Henry VI, Part III        |             935
+ Henry VIII                |             779
+ Julius Caesar             |             888
+ King John                 |             615
+ King Lear                 |            1177
+ Lover's Complaint         |              47
+ Love's Labour's Lost      |            1120
+ Macbeth                   |             758
+ Measure for Measure       |             980
+ Merchant of Venice        |             718
+ Merry Wives of Windsor    |            1161
+ Midsummer Night's Dream   |             603
+ Much Ado about Nothing    |            1059
+ Othello                   |            1308
+ Passionate Pilgrim        |              43
+ Pericles                  |             748
+ Phoenix and the Turtle    |              19
+ Rape of Lucrece           |             269
+ Richard II                |             628
+ Richard III               |            1210
+ Romeo and Juliet          |             989
+ Sonnets                   |             154
+ Taming of the Shrew       |             965
+ Tempest                   |             698
+ Timon of Athens           |             865
+ Titus Andronicus          |             654
+ Troilus and Cressida      |            1295
+ Two Gentlemen of Verona   |             943
+ Venus and Adonis          |             201
+ The Winter's Tale         |             812
+(43 rows)
+
+shakespeare=# select distinct genretype from work;
+ genretype 
+-----------
+ c
+ p
+ h
+ t
+ s
+(5 rows)
+
+shakespeare=# select count(*), genretype from work group by genretype;
+ count | genretype 
+-------+-----------
+    14 | c
+     5 | p
+    12 | h
+    11 | t
+     1 | s
+(5 rows)
+
+shakespeare=# 
+shakespeare=# 
+shakespeare=# select count(*) as chapters, w.title from chapter inner join work as w on chapter.workid=w.workid group by w.title;
+ chapters |           title           
+----------+---------------------------
+       20 | Two Gentlemen of Verona
+       23 | All's Well That Ends Well
+       25 | Troilus and Cressida
+       28 | Henry VI, Part III
+       17 | Much Ado about Nothing
+        9 | Midsummer Night's Dream
+      154 | Sonnets
+       28 | Henry V
+       20 | Henry IV, Part II
+       21 | Passionate Pilgrim
+       28 | Macbeth
+       18 | Julius Caesar
+        9 | Love's Labour's Lost
+       22 | As You Like It
+       28 | Coriolanus
+       27 | Henry VI, Part I
+       20 | Hamlet
+       17 | Measure for Measure
+       27 | Cymbeline
+       15 | The Winter's Tale
+       18 | Twelfth Night
+       16 | King John
+       15 | Othello
+       17 | Timon of Athens
+       14 | Taming of the Shrew
+       11 | Comedy of Errors
+        1 | Phoenix and the Turtle
+       24 | Henry VI, Part II
+       23 | Merry Wives of Windsor
+        1 | Lover's Complaint
+        2 | Venus and Adonis
+       26 | Pericles
+       20 | Merchant of Venice
+       19 | Henry IV, Part I
+        9 | Tempest
+       42 | Antony and Cleopatra
+       14 | Titus Andronicus
+       26 | King Lear
+       25 | Richard III
+        3 | Rape of Lucrece
+       26 | Romeo and Juliet
+       19 | Richard II
+       18 | Henry VIII
+(43 rows)
+
+shakespeare=# select count(*) as chapters, w.title from chapter inner join work as w on chapter.workid=w.workid group by w.title order by chapters DESC limit 5;
+ chapters |        title         
+----------+----------------------
+      154 | Sonnets
+       42 | Antony and Cleopatra
+       28 | Macbeth
+       28 | Henry VI, Part III
+       28 | Henry V
+(5 rows)
+
+shakespeare=# select count(*) as chapters, w.title from chapter inner join work as w on chapter.workid=w.workid group by w.title order by chapters DESC limit 10;
+ chapters |        title         
+----------+----------------------
+      154 | Sonnets
+       42 | Antony and Cleopatra
+       28 | Macbeth
+       28 | Henry VI, Part III
+       28 | Coriolanus
+       28 | Henry V
+       27 | Cymbeline
+       27 | Henry VI, Part I
+       26 | Pericles
+       26 | King Lear
+(10 rows)
+
+shakespeare=# select count(*) as chapters, w.title from chapter inner join work as w on chapter.workid=w.workid group by w.title, w.genretype order by chapters DESC limit 1;
+ chapters |  title  
+----------+---------
+      154 | Sonnets
+(1 row)
+
+shakespeare=# select count(*) as chapters, w.title, w.genretype from chapter inner join work as w on chapter.workid=w.workid group by w.title, w.genretype order by chapters DESC limit 1;
+ chapters |  title  | genretype 
+----------+---------+-----------
+      154 | Sonnets | s
+(1 row)
+
+shakespeare=# 
+shakespeare=# select c.charname, c.speechcount, w.title, w.year, w.genretype from character as c inner join character_work as cw on c.charid=cw.charid 
+inner join work as w on w.workid=cw.workid where c.speechcount >= 200 order by w.year desc;
+
+      charname      | speechcount |         title          | year | genretype 
+--------------------+-------------+------------------------+------+-----------
+ Poet               |         733 | Lover's Complaint      | 1609 | p
+ Poet               |         733 | Sonnets                | 1609 | s
+ Timon              |         210 | Timon of Athens        | 1607 | t
+ Antony             |         253 | Antony and Cleopatra   | 1606 | t
+ Cleopatra          |         204 | Antony and Cleopatra   | 1606 | t
+ Iago               |         272 | Othello                | 1604 | t
+ Othello            |         274 | Othello                | 1604 | t
+ Poet               |         733 | Phoenix and the Turtle | 1601 | p
+ Hamlet             |         358 | Hamlet                 | 1600 | t
+ Falstaff           |         471 | Merry Wives of Windsor | 1600 | c
+ Antony             |         253 | Julius Caesar          | 1599 | t
+ Rosalind           |         201 | As You Like It         | 1599 | c
+ Falstaff           |         471 | Henry V                | 1598 | h
+ Duke of Gloucester |         285 | Henry V                | 1598 | h
+ Henry V            |         377 | Henry V                | 1598 | h
+ Poet               |         733 | Passionate Pilgrim     | 1598 | p
+ Henry V            |         377 | Henry IV, Part I       | 1597 | h
+ Henry V            |         377 | Henry IV, Part II      | 1597 | h
+ Falstaff           |         471 | Henry IV, Part II      | 1597 | h
+ Falstaff           |         471 | Henry IV, Part I       | 1597 | h
+ Poet               |         733 | Rape of Lucrece        | 1594 | p
+ Poet               |         733 | Venus and Adonis       | 1593 | p
+ Duke of Gloucester |         285 | Richard III            | 1592 | h
+ Richard III        |         246 | Richard III            | 1592 | h
+ Duke of Gloucester |         285 | Henry VI, Part I       | 1591 | h
+ Richard III        |         246 | Henry VI, Part III     | 1590 | h
+ Duke of Gloucester |         285 | Henry VI, Part II      | 1590 | h
+(27 rows)
+
+shakespeare=# 
+                                                                ^
+shakespeare=# select count(*) as works, c.charname from work as w inner join character_work as cw on w.workid=cw.workid 
+inner join character as c on c.charid=cw.charid group by c.charid;
+
+shakespeare=# 
+shakespeare=# 
+shakespeare=# 
+shakespeare=# select ch.charname, count(w.title) from character as ch inner join character_work as cw on ch.charid=cw.charid 
+inner join work as w on w.workid=cw.workid group by ch.charname order by count(w.title) desc limit 2;
+ charname  | count 
+-----------+-------
+ Messenger |    23
+ All       |    23
+(2 rows)
+
+shakespeare=# SELECT ch.charname,count(cw.workid) from character as ch INNER JOIN character_work as cw on ch.charid= cw.charid 
+GROUP BY ch.charname order by count(cw.workid) desc limit 2;
+ charname  | count 
+-----------+-------
+ Messenger |    23
+ All       |    23
+(2 rows)
+

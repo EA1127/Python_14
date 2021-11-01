@@ -1,0 +1,762 @@
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+[sudo] password for hello: 
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# CREATE database my_db_postgres;
+CREATE DATABASE
+postgres=# \c my_db_postgres 
+You are now connected to database "my_db_postgres" as user "postgres".
+my_db_postgres=# CREATE TABLE students(
+my_db_postgres(# id SERIAL PRIMARY KEY,
+my_db_postgres(# name VARCHAR(55),
+my_db_postgres(# last_name VARCHAR (65),
+my_db_postgres(# faculty VARCHAR(50),
+my_db_postgres(# year INT);
+CREATE TABLE
+my_db_postgres=# \d students
+                                     Table "public.students"
+  Column   |         Type          | Collation | Nullable |               Default                
+-----------+-----------------------+-----------+----------+--------------------------------------
+ id        | integer               |           | not null | nextval('students_id_seq'::regclass)
+ name      | character varying(55) |           |          | 
+ last_name | character varying(65) |           |          | 
+ faculty   | character varying(50) |           |          | 
+ year      | integer               |           |          | 
+Indexes:
+    "students_pkey" PRIMARY KEY, btree (id)
+
+my_db_postgres=# INSERT INTO students (name, last_name, faculty, year) VALUES ('John', 'Snow', 'IT', 2), ('Sandra', 'Black', 'Business', 3), 
+('James', 'Collins', 'IT', 1), ('Tailor', 'Baker', 'Medicine', 1), ('Emily', 'Johns', 'Business', 1);
+INSERT 0 5
+my_db_postgres=# SELECT * FROM students;
+ id |  name  | last_name | faculty  | year 
+----+--------+-----------+----------+------
+  1 | John   | Snow      | IT       |    2
+  2 | Sandra | Black     | Business |    3
+  3 | James  | Collins   | IT       |    1
+  4 | Tailor | Baker     | Medicine |    1
+  5 | Emily  | Johns     | Business |    1
+(5 rows)
+
+my_db_postgres=# SELECT * FROM students WHERE id=4;
+ id |  name  | last_name | faculty  | year 
+----+--------+-----------+----------+------
+  4 | Tailor | Baker     | Medicine |    1
+(1 row)
+
+my_db_postgres=# CREATE INDEX student_id_index ON students(id);
+CREATE INDEX
+my_db_postgres=# \d students
+                                     Table "public.students"
+  Column   |         Type          | Collation | Nullable |               Default                
+-----------+-----------------------+-----------+----------+--------------------------------------
+ id        | integer               |           | not null | nextval('students_id_seq'::regclass)
+ name      | character varying(55) |           |          | 
+ last_name | character varying(65) |           |          | 
+ faculty   | character varying(50) |           |          | 
+ year      | integer               |           |          | 
+Indexes:
+    "students_pkey" PRIMARY KEY, btree (id)
+    "student_id_index" btree (id)
+
+my_db_postgres=# SELECT * FROM students WHERE id=3;
+ id | name  | last_name | faculty | year 
+----+-------+-----------+---------+------
+  3 | James | Collins   | IT      |    1
+(1 row)
+
+my_db_postgres=# 
+my_db_postgres=# 
+my_db_postgres=# CREATE INDEX faculty_index ON students(faculty);
+CREATE INDEX
+my_db_postgres=# \d students
+                                     Table "public.students"
+  Column   |         Type          | Collation | Nullable |               Default                
+-----------+-----------------------+-----------+----------+--------------------------------------
+ id        | integer               |           | not null | nextval('students_id_seq'::regclass)
+ name      | character varying(55) |           |          | 
+ last_name | character varying(65) |           |          | 
+ faculty   | character varying(50) |           |          | 
+ year      | integer               |           |          | 
+Indexes:
+    "students_pkey" PRIMARY KEY, btree (id)
+    "faculty_index" btree (faculty)
+    "student_id_index" btree (id)
+
+my_db_postgres=# DROP INDEX student_id_index;
+DROP INDEX
+my_db_postgres=# \d students
+                                     Table "public.students"
+  Column   |         Type          | Collation | Nullable |               Default                
+-----------+-----------------------+-----------+----------+--------------------------------------
+ id        | integer               |           | not null | nextval('students_id_seq'::regclass)
+ name      | character varying(55) |           |          | 
+ last_name | character varying(65) |           |          | 
+ faculty   | character varying(50) |           |          | 
+ year      | integer               |           |          | 
+Indexes:
+    "students_pkey" PRIMARY KEY, btree (id)
+    "faculty_index" btree (faculty)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+[sudo] password for hello: 
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# CREATE database my_db_postgres;
+CREATE DATABASE
+postgres=# \c my_db_postgres 
+You are now connected to database "my_db_postgres" as user "postgres".
+my_db_postgres=# CREATE TABLE students(
+my_db_postgres(# id SERIAL PRIMARY KEY,
+my_db_postgres(# name VARCHAR(55),
+my_db_postgres(# last_name VARCHAR (65),
+my_db_postgres(# faculty VARCHAR(50),
+my_db_postgres(# year INT);
+CREATE TABLE
+my_db_postgres=# \d students
+                                     Table "public.students"
+  Column   |         Type          | Collation | Nullable |               Default                
+-----------+-----------------------+-----------+----------+--------------------------------------
+ id        | integer               |           | not null | nextval('students_id_seq'::regclass)
+ name      | character varying(55) |           |          | 
+ last_name | character varying(65) |           |          | 
+ faculty   | character varying(50) |           |          | 
+ year      | integer               |           |          | 
+Indexes:
+    "students_pkey" PRIMARY KEY, btree (id)
+
+my_db_postgres=# INSERT INTO students (name, last_name, faculty, year) VALUES ('John', 'Snow', 'IT', 2), ('Sandra', 'Black', 'Business', 3), 
+('James', 'Collins', 'IT', 1), ('Tailor', 'Baker', 'Medicine', 1), ('Emily', 'Johns', 'Business', 1);
+INSERT 0 5
+my_db_postgres=# SELECT * FROM students;
+ id |  name  | last_name | faculty  | year 
+----+--------+-----------+----------+------
+  1 | John   | Snow      | IT       |    2
+  2 | Sandra | Black     | Business |    3
+  3 | James  | Collins   | IT       |    1
+  4 | Tailor | Baker     | Medicine |    1
+  5 | Emily  | Johns     | Business |    1
+(5 rows)
+
+my_db_postgres=# SELECT * FROM students WHERE id=4;
+ id |  name  | last_name | faculty  | year 
+----+--------+-----------+----------+------
+  4 | Tailor | Baker     | Medicine |    1
+(1 row)
+
+my_db_postgres=# CREATE INDEX student_id_index ON students(id);
+CREATE INDEX
+my_db_postgres=# \d students
+                                     Table "public.students"
+  Column   |         Type          | Collation | Nullable |               Default                
+-----------+-----------------------+-----------+----------+--------------------------------------
+ id        | integer               |           | not null | nextval('students_id_seq'::regclass)
+ name      | character varying(55) |           |          | 
+ last_name | character varying(65) |           |          | 
+ faculty   | character varying(50) |           |          | 
+ year      | integer               |           |          | 
+Indexes:
+    "students_pkey" PRIMARY KEY, btree (id)
+    "student_id_index" btree (id)
+
+my_db_postgres=# SELECT * FROM students WHERE id=3;
+ id | name  | last_name | faculty | year 
+----+-------+-----------+---------+------
+  3 | James | Collins   | IT      |    1
+(1 row)
+
+my_db_postgres=# 
+my_db_postgres=# 
+my_db_postgres=# CREATE INDEX faculty_index ON students(faculty);
+CREATE INDEX
+my_db_postgres=# \d students
+                                     Table "public.students"
+  Column   |         Type          | Collation | Nullable |               Default                
+-----------+-----------------------+-----------+----------+--------------------------------------
+ id        | integer               |           | not null | nextval('students_id_seq'::regclass)
+ name      | character varying(55) |           |          | 
+ last_name | character varying(65) |           |          | 
+ faculty   | character varying(50) |           |          | 
+ year      | integer               |           |          | 
+Indexes:
+    "students_pkey" PRIMARY KEY, btree (id)
+    "faculty_index" btree (faculty)
+    "student_id_index" btree (id)
+
+my_db_postgres=# DROP INDEX student_id_index;
+DROP INDEX
+my_db_postgres=# \d students
+                                     Table "public.students"
+  Column   |         Type          | Collation | Nullable |               Default                
+-----------+-----------------------+-----------+----------+--------------------------------------
+ id        | integer               |           | not null | nextval('students_id_seq'::regclass)
+ name      | character varying(55) |           |          | 
+ last_name | character varying(65) |           |          | 
+ faculty   | character varying(50) |           |          | 
+ year      | integer               |           |          | 
+Indexes:
+    "students_pkey" PRIMARY KEY, btree (id)
+    "faculty_index" btree (faculty)
+
+my_db_postgres=# DROP TABLE students;
+DROP TABLE
+my_db_postgres=# \dt
+Did not find any relations.
+my_db_postgres=# 
+my_db_postgres=# CREATE TABLE faculty(
+my_db_postgres(# id serial primary key,
+my_db_postgres(# title varchar(50));
+CREATE TABLE
+my_db_postgres=# CREATE TABLE students(
+id serial primary key,
+name varchar(50),);
+ERROR:  syntax error at or near ")"
+LINE 3: name varchar(50),);
+                         ^
+my_db_postgres=# CREATE TABLE students(
+my_db_postgres(# id serial primary key,
+my_db_postgres(# name varchar(50),
+my_db_postgres(# last_name varchar(50),
+my_db_postgres(# faculty_id INT NOT NULL,
+my_db_postgres(# constraint fk_student_faculty foreign key(faculty_id) references faculty(id));
+CREATE TABLE
+my_db_postgres=# \d students
+                                     Table "public.students"
+   Column   |         Type          | Collation | Nullable |               Default                
+------------+-----------------------+-----------+----------+--------------------------------------
+ id         | integer               |           | not null | nextval('students_id_seq'::regclass)
+ name       | character varying(50) |           |          | 
+ last_name  | character varying(50) |           |          | 
+ faculty_id | integer               |           | not null | 
+Indexes:
+    "students_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "fk_student_faculty" FOREIGN KEY (faculty_id) REFERENCES faculty(id)
+
+my_db_postgres=# 
+my_db_postgres=# insert into faculty (title) values('Medicine'), ('IT'), ('Business'), ('Psycology');
+INSERT 0 4
+my_db_postgres=# select * from faculty;
+ id |   title   
+----+-----------
+  1 | Medicine
+  2 | IT
+  3 | Business
+  4 | Psycology
+(4 rows)
+
+my_db_postgres=# 
+my_db_postgres=# insert into students (name, last_name, faculty_id) values ('John', 'Snow', 3), ('Alice', 'Pumpkin', 1), ('Chris', 'White', 4), 
+('Emily', 'Baker', 2), ('Bob', 'Smith', 2), ('Emily', 'Justice', 4);
+INSERT 0 6
+my_db_postgres=# 
+my_db_postgres=# select * from faculty;
+ id |   title   
+----+-----------
+  1 | Medicine
+  2 | IT
+  3 | Business
+  4 | Psycology
+(4 rows)
+
+my_db_postgres=# select s.name, s.last_name, f.title from students as s inner join faculty as f on s.faculty_id=f.id; 
+ name  | last_name |   title   
+-------+-----------+-----------
+ John  | Snow      | Business
+ Alice | Pumpkin   | Medicine
+ Chris | White     | Psycology
+ Emily | Baker     | IT
+ Bob   | Smith     | IT
+ Emily | Justice   | Psycology
+(6 rows)
+
+my_db_postgres=# create index student_faculty_index on students(faculty_id);
+CREATE INDEX
+my_db_postgres=# \d students
+                                     Table "public.students"
+   Column   |         Type          | Collation | Nullable |               Default                
+------------+-----------------------+-----------+----------+--------------------------------------
+ id         | integer               |           | not null | nextval('students_id_seq'::regclass)
+ name       | character varying(50) |           |          | 
+ last_name  | character varying(50) |           |          | 
+ faculty_id | integer               |           | not null | 
+Indexes:
+    "students_pkey" PRIMARY KEY, btree (id)
+    "student_faculty_index" btree (faculty_id)
+Foreign-key constraints:
+    "fk_student_faculty" FOREIGN KEY (faculty_id) REFERENCES faculty(id)
+
+my_db_postgres=# select * from students where faculty_id=3;
+ id | name | last_name | faculty_id 
+----+------+-----------+------------
+  1 | John | Snow      |          3
+(1 row)
+
+my_db_postgres=# insert into faculty (title) values ('Economics');
+INSERT 0 1
+my_db_postgres=# insert into students (name, last_name) values ('Tom', 'Muller');
+ERROR:  null value in column "faculty_id" of relation "students" violates not-null constraint
+DETAIL:  Failing row contains (7, Tom, Muller, null).
+my_db_postgres=# alter table students alter column faculty_id drop not null;
+ALTER TABLE
+my_db_postgres=# 
+my_db_postgres=# 
+my_db_postgres=# \d students
+                                     Table "public.students"
+   Column   |         Type          | Collation | Nullable |               Default                
+------------+-----------------------+-----------+----------+--------------------------------------
+ id         | integer               |           | not null | nextval('students_id_seq'::regclass)
+ name       | character varying(50) |           |          | 
+ last_name  | character varying(50) |           |          | 
+ faculty_id | integer               |           |          | 
+Indexes:
+    "students_pkey" PRIMARY KEY, btree (id)
+    "student_faculty_index" btree (faculty_id)
+Foreign-key constraints:
+    "fk_student_faculty" FOREIGN KEY (faculty_id) REFERENCES faculty(id)
+
+my_db_postgres=# insert into students (name, last_name) values ('Tom', 'Muller');
+INSERT 0 1
+my_db_postgres=# \d students
+                                     Table "public.students"
+   Column   |         Type          | Collation | Nullable |               Default                
+------------+-----------------------+-----------+----------+--------------------------------------
+ id         | integer               |           | not null | nextval('students_id_seq'::regclass)
+ name       | character varying(50) |           |          | 
+ last_name  | character varying(50) |           |          | 
+ faculty_id | integer               |           |          | 
+Indexes:
+    "students_pkey" PRIMARY KEY, btree (id)
+    "student_faculty_index" btree (faculty_id)
+Foreign-key constraints:
+    "fk_student_faculty" FOREIGN KEY (faculty_id) REFERENCES faculty(id)
+
+my_db_postgres=# select s.name, s.last_name, f.title from students as s inner join faculty as f on s.faculty_id=f.id;
+ name  | last_name |   title   
+-------+-----------+-----------
+ Alice | Pumpkin   | Medicine
+ Bob   | Smith     | IT
+ Emily | Baker     | IT
+ John  | Snow      | Business
+ Emily | Justice   | Psycology
+ Chris | White     | Psycology
+(6 rows)
+
+my_db_postgres=# select s.name, s.last_name, f.title from students as s left join faculty as f on s.faculty_id=f.id;
+ name  | last_name |   title   
+-------+-----------+-----------
+ Alice | Pumpkin   | Medicine
+ Bob   | Smith     | IT
+ Emily | Baker     | IT
+ John  | Snow      | Business
+ Emily | Justice   | Psycology
+ Chris | White     | Psycology
+ Tom   | Muller    | 
+(7 rows)
+
+my_db_postgres=# select s.name, s.last_name, f.title from students as s right join faculty as f on s.faculty_id=f.id;
+ name  | last_name |   title   
+-------+-----------+-----------
+ Alice | Pumpkin   | Medicine
+ Bob   | Smith     | IT
+ Emily | Baker     | IT
+ John  | Snow      | Business
+ Emily | Justice   | Psycology
+ Chris | White     | Psycology
+       |           | Economics
+(7 rows)
+
+my_db_postgres=# select s.name, s.last_name, f.title from students as s full join faculty as f on s.faculty_id=f.id;
+ name  | last_name |   title   
+-------+-----------+-----------
+ Alice | Pumpkin   | Medicine
+ Bob   | Smith     | IT
+ Emily | Baker     | IT
+ John  | Snow      | Business
+ Emily | Justice   | Psycology
+ Chris | White     | Psycology
+       |           | Economics
+ Tom   | Muller    | 
+(8 rows)
+
+my_db_postgres=# 
+my_db_postgres=# 
+my_db_postgres=# 
+my_db_postgres=# \dt
+          List of relations
+ Schema |   Name   | Type  |  Owner   
+--------+----------+-------+----------
+ public | faculty  | table | postgres
+ public | students | table | postgres
+(2 rows)
+
+my_db_postgres=# exit
+postgres@hello-Extensa-215-51:~$ cd Desktop
+-bash: cd: Desktop: No such file or directory
+postgres@hello-Extensa-215-51:~$ exit
+logout
+hello@hello-Extensa-215-51:~$ cd Desktop/
+hello@hello-Extensa-215-51:~/Desktop$ cd bootcamp/week8/day36
+hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day36$ pg_dump my_db_postgres > mydb.sql
+hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day36$ cd
+hello@hello-Extensa-215-51:~$ cd Downloads/
+hello@hello-Extensa-215-51:~/Downloads$ ls
+ bootstrap-5.1.3.zip        oh-my-git-linux       opensourceshakespeare-master.zip
+'CSS Классная работа.zip'   oh-my-git-linux.zip  'Telegram Desktop'
+hello@hello-Extensa-215-51:~/Downloads$ cd
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+[sudo] password for hello: 
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# create database shakespeare;
+CREATE DATABASE
+postgres=# exit
+postgres@hello-Extensa-215-51:~$ exit
+logout
+hello@hello-Extensa-215-51:~$ cd bootcamp/week8/day36
+bash: cd: bootcamp/week8/day36: No such file or directory
+hello@hello-Extensa-215-51:~$ cd Desktop/bootcamp/week8/day36
+hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day36$ 
+hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day36$ psql shakespeare < shakespeare.sql
+SET
+SET
+SET
+SET
+SET
+SET
+CREATE EXTENSION
+COMMENT
+SET
+SET
+SET
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+COPY 945
+COPY 1266
+COPY 1346
+COPY 35465
+COPY 28830
+COPY 43
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+REVOKE
+REVOKE
+GRANT
+GRANT
+hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day36$ 
+hello@hello-Extensa-215-51:~/Desktop/bootcamp/week8/day36$ cd
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \l
+                                    List of databases
+      Name      |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+----------------+----------+----------+-------------+-------------+-----------------------
+ hello          | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ kfc_menu       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ my_db_postgres | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ mydb           | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ shakespeare    | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ shop_db        | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ template1      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ test_user      | hello    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(10 rows)
+
+postgres=# \c shakespeare 
+You are now connected to database "shakespeare" as user "postgres".
+shakespeare=# 
+shakespeare=# 
+shakespeare=# \dt
+            List of relations
+ Schema |      Name      | Type  | Owner 
+--------+----------------+-------+-------
+ public | chapter        | table | hello
+ public | character      | table | hello
+ public | character_work | table | hello
+ public | paragraph      | table | hello
+ public | wordform       | table | hello
+ public | work           | table | hello
+(6 rows)
+
+shakespeare=# select * from chapter 
+shakespeare-# ;
+shakespeare=# \dt
+            List of relations
+ Schema |      Name      | Type  | Owner 
+--------+----------------+-------+-------
+ public | chapter        | table | hello
+ public | character      | table | hello
+ public | character_work | table | hello
+ public | paragraph      | table | hello
+ public | wordform       | table | hello
+ public | work           | table | hello
+(6 rows)
+
+shakespeare=# \d character_work
+                  Table "public.character_work"
+ Column |         Type          | Collation | Nullable | Default 
+--------+-----------------------+-----------+----------+---------
+ charid | character varying(32) |           | not null | 
+ workid | character varying(32) |           | not null | 
+Indexes:
+    "character_work_pkey" PRIMARY KEY, btree (charid, workid)
+Foreign-key constraints:
+    "character_work_charid_fkey" FOREIGN KEY (charid) REFERENCES "character"(charid)
+    "character_work_workid_fkey" FOREIGN KEY (workid) REFERENCES work(workid)
+
+shakespeare=# 
+shakespeare=# select * from work;
+shakespeare=# select title, totalwords from work;
+           title           | totalwords 
+---------------------------+------------
+ Twelfth Night             |      19837
+ All's Well That Ends Well |      22997
+ Antony and Cleopatra      |      24905
+ As You Like It            |      21690
+ Comedy of Errors          |      14692
+ Coriolanus                |      27577
+ Cymbeline                 |      27565
+ Hamlet                    |      30558
+ Henry IV, Part I          |      24579
+ Henry IV, Part II         |      25692
+ Henry V                   |      26119
+ Henry VI, Part I          |      21575
+ Henry VI, Part II         |      25411
+ Henry VI, Part III        |      24284
+ Henry VIII                |      24629
+ Julius Caesar             |      19703
+ King John                 |      20760
+ King Lear                 |      26119
+ Lover's Complaint         |       2559
+ Love's Labour's Lost      |      21450
+ Macbeth                   |      17121
+ Measure for Measure       |      21773
+ Merchant of Venice        |      21291
+ Merry Wives of Windsor    |      21845
+ Midsummer Night's Dream   |      16511
+ Much Ado about Nothing    |      21157
+ Othello                   |      26450
+ Passionate Pilgrim        |       3124
+ Pericles                  |      18529
+ Phoenix and the Turtle    |        353
+ Rape of Lucrece           |      15003
+ Richard II                |      22411
+ Richard III               |      29278
+ Romeo and Juliet          |      24553
+ Sonnets                   |      17515
+ Taming of the Shrew       |      21055
+ Tempest                   |      16628
+ Timon of Athens           |      18206
+ Titus Andronicus          |      20710
+ Troilus and Cressida      |      26089
+ Two Gentlemen of Verona   |      17129
+ Venus and Adonis          |       9870
+ The Winter's Tale         |      24914
+(43 rows)
+
+shakespeare=# select title, totalwords from work where totalwords > 20000;
+           title           | totalwords 
+---------------------------+------------
+ All's Well That Ends Well |      22997
+ Antony and Cleopatra      |      24905
+ As You Like It            |      21690
+ Coriolanus                |      27577
+ Cymbeline                 |      27565
+ Hamlet                    |      30558
+ Henry IV, Part I          |      24579
+ Henry IV, Part II         |      25692
+ Henry V                   |      26119
+ Henry VI, Part I          |      21575
+ Henry VI, Part II         |      25411
+ Henry VI, Part III        |      24284
+ Henry VIII                |      24629
+ King John                 |      20760
+ King Lear                 |      26119
+ Love's Labour's Lost      |      21450
+ Measure for Measure       |      21773
+ Merchant of Venice        |      21291
+ Merry Wives of Windsor    |      21845
+ Much Ado about Nothing    |      21157
+ Othello                   |      26450
+ Richard II                |      22411
+ Richard III               |      29278
+ Romeo and Juliet          |      24553
+ Taming of the Shrew       |      21055
+ Titus Andronicus          |      20710
+ Troilus and Cressida      |      26089
+ The Winter's Tale         |      24914
+(28 rows)
+
+shakespeare=# 
+shakespeare=# select avg(totlawords) from work;
+ERROR:  column "totlawords" does not exist
+LINE 1: select avg(totlawords) from work;
+                   ^
+HINT:  Perhaps you meant to reference the column "work.totalwords".
+shakespeare=# select avg(totalwords) from work;
+        avg         
+--------------------
+ 20563.162790697674
+(1 row)
+
+shakespeare=# select title, totalwords from work where totalwords > (select avg(totalwords) from work);
+           title           | totalwords 
+---------------------------+------------
+ All's Well That Ends Well |      22997
+ Antony and Cleopatra      |      24905
+ As You Like It            |      21690
+ Coriolanus                |      27577
+ Cymbeline                 |      27565
+ Hamlet                    |      30558
+ Henry IV, Part I          |      24579
+ Henry IV, Part II         |      25692
+ Henry V                   |      26119
+ Henry VI, Part I          |      21575
+ Henry VI, Part II         |      25411
+ Henry VI, Part III        |      24284
+ Henry VIII                |      24629
+ King John                 |      20760
+ King Lear                 |      26119
+ Love's Labour's Lost      |      21450
+ Measure for Measure       |      21773
+ Merchant of Venice        |      21291
+ Merry Wives of Windsor    |      21845
+ Much Ado about Nothing    |      21157
+ Othello                   |      26450
+ Richard II                |      22411
+ Richard III               |      29278
+ Romeo and Juliet          |      24553
+ Taming of the Shrew       |      21055
+ Titus Andronicus          |      20710
+ Troilus and Cressida      |      26089
+ The Winter's Tale         |      24914
+(28 rows)
+
+shakespeare=# \dt
+            List of relations
+ Schema |      Name      | Type  | Owner 
+--------+----------------+-------+-------
+ public | chapter        | table | hello
+ public | character      | table | hello
+ public | character_work | table | hello
+ public | paragraph      | table | hello
+ public | wordform       | table | hello
+ public | work           | table | hello
+(6 rows)
+
+shakespeare=# select * from character_work;
+shakespeare=# 
+shakespeare=# \d character;
+                        Table "public.character"
+   Column    |          Type           | Collation | Nullable | Default 
+-------------+-------------------------+-----------+----------+---------
+ charid      | character varying(32)   |           | not null | 
+ charname    | character varying(64)   |           | not null | 
+ abbrev      | character varying(32)   |           |          | 
+ description | character varying(2056) |           |          | 
+ speechcount | integer                 |           | not null | 
+Indexes:
+    "character_pkey" PRIMARY KEY, btree (charid)
+Referenced by:
+    TABLE "character_work" CONSTRAINT "character_work_charid_fkey" FOREIGN KEY (charid) REFERENCES "character"(charid)
+    TABLE "paragraph" CONSTRAINT "paragraph_charid_fkey" FOREIGN KEY (charid) REFERENCES "character"(charid)
+
+shakespeare=# select * from character;
+shakespeare=# 
+shakespeare=# 
+shakespeare=# select * from work;
+shakespeare=# \d character_work;
+                  Table "public.character_work"
+ Column |         Type          | Collation | Nullable | Default 
+--------+-----------------------+-----------+----------+---------
+ charid | character varying(32) |           | not null | 
+ workid | character varying(32) |           | not null | 
+Indexes:
+    "character_work_pkey" PRIMARY KEY, btree (charid, workid)
+Foreign-key constraints:
+    "character_work_charid_fkey" FOREIGN KEY (charid) REFERENCES "character"(charid)
+    "character_work_workid_fkey" FOREIGN KEY (workid) REFERENCES work(workid)
+
+shakespeare=# \d character;
+                        Table "public.character"
+   Column    |          Type           | Collation | Nullable | Default 
+-------------+-------------------------+-----------+----------+---------
+ charid      | character varying(32)   |           | not null | 
+ charname    | character varying(64)   |           | not null | 
+ abbrev      | character varying(32)   |           |          | 
+ description | character varying(2056) |           |          | 
+ speechcount | integer                 |           | not null | 
+Indexes:
+    "character_pkey" PRIMARY KEY, btree (charid)
+Referenced by:
+    TABLE "character_work" CONSTRAINT "character_work_charid_fkey" FOREIGN KEY (charid) REFERENCES "character"(charid)
+    TABLE "paragraph" CONSTRAINT "paragraph_charid_fkey" FOREIGN KEY (charid) REFERENCES "character"(charid)
+
+shakespeare=# \d work;
+                           Table "public.work"
+     Column      |         Type          | Collation | Nullable | Default 
+-----------------+-----------------------+-----------+----------+---------
+ workid          | character varying(32) |           | not null | 
+ title           | character varying(32) |           | not null | 
+ longtitle       | character varying(64) |           | not null | 
+ year            | integer               |           | not null | 
+ genretype       | character varying(1)  |           | not null | 
+ notes           | text                  |           |          | 
+ source          | character varying(16) |           | not null | 
+ totalwords      | integer               |           | not null | 
+ totalparagraphs | integer               |           | not null | 
+Indexes:
+    "work_pkey" PRIMARY KEY, btree (workid)
+Referenced by:
+    TABLE "chapter" CONSTRAINT "chapter_workid_fkey" FOREIGN KEY (workid) REFERENCES work(workid)
+    TABLE "character_work" CONSTRAINT "character_work_workid_fkey" FOREIGN KEY (workid) REFERENCES work(workid)
+    TABLE "paragraph" CONSTRAINT "paragraph_workid_fkey" FOREIGN KEY (workid) REFERENCES work(workid)
+
+shakespeare=# select ch.charname, w.title, w.genretype from character_work as ch_w inner join character as ch on ch.charid=ch_w.charid 
+inner join work as w on w.workid=ch_w.workid;
+shakespeare=# 
+shakespeare=# 
+shakespeare=# select distinct genretype from work;
+ genretype 
+-----------
+ c
+ p
+ h
+ t
+ s
+(5 rows)
+
+shakespeare=# 
+shakespeare=# 
+shakespeare=# select ch.charname, w.title, w.genretype from character_work as ch_w inner join character as ch on ch.charid=ch_w.charid 
+inner join work as w on w.workid=ch_w.workid where w.genretype = 'c';
+shakespeare=# 
+shakespeare=# 

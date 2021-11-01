@@ -1,0 +1,45 @@
+/* task-1 */
+* {
+    text-decoration: none;
+}
+
+/* task-2 */
+h1 {
+    color: red;
+}
+
+h2 {
+    color: green;
+}
+
+/* task-3 */
+.season2 {
+    color: violet;
+}
+
+/* task-4 */
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+/* task-5 */
+#jesse {
+    color: darkblue;
+}
+
+#saul {
+    color: darkgreen;
+}
+
+#gus {
+    color: darkred
+}
+
+/* task-6 */
+a[href*="name"] {
+    text-transform: uppercase;
+  }

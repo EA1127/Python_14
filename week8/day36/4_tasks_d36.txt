@@ -1,0 +1,299 @@
+hello@hello-Extensa-215-51:~$ sudo -i -u postgres
+[sudo] password for hello: 
+postgres@hello-Extensa-215-51:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \c sh
+shakespeare  shop_db      
+postgres=# \l
+                                    List of databases
+      Name      |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+----------------+----------+----------+-------------+-------------+-----------------------
+ hello          | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ kfc_menu       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ my_db_postgres | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ mydb           | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ shakespeare    | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ shop_db        | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ template1      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+                |          |          |             |             | postgres=CTc/postgres
+ test_user      | hello    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+(10 rows)
+
+postgres=# \c shakespeare
+You are now connected to database "shakespeare" as user "postgres".
+shakespeare=# \dt
+            List of relations
+ Schema |      Name      | Type  | Owner 
+--------+----------------+-------+-------
+ public | chapter        | table | hello
+ public | character      | table | hello
+ public | character_work | table | hello
+ public | paragraph      | table | hello
+ public | wordform       | table | hello
+ public | work           | table | hello
+(6 rows)
+=================================================================================================================================================================
+
+TASK-1
+
+shakespeare=# SELECT * FROM wordform ORDER BY occurences DESC FETCH FIRST (10) ROW ONLY;
+ wordformid | plaintext | phonetictext | stemtext | occurences 
+------------+-----------+--------------+----------+------------
+     596293 | the       | 0            | the      |      28932
+     596294 | and       | ANT          | and      |      27296
+     596295 | i         | I            | i        |      21120
+     596296 | to        | T            | to       |      20136
+     596297 | of        | OF           | of       |      17169
+     596298 | a         | A            | a        |      14943
+     596299 | you       | Y            | you      |      13989
+     596300 | my        | M            | my       |      12950
+     596301 | in        | IN           | in       |      11512
+     596302 | that      | 0T           | that     |      11487
+(10 rows)
+
+shakespeare=# SELECT plaintext FROM wordform ORDER BY occurences DESC FETCH FIRST (10) ROW ONLY;
+ plaintext 
+-----------
+ the
+ and
+ i
+ to
+ of
+ a
+ you
+ my
+ in
+ that
+(10 rows)
+
+shakespeare=# 
+=================================================================================================================================================================
+
+TASK-2
+
+shakespeare=# SELECT plaintext FROM wordform WHERE plaintext ILIKE 'a%';
+=================================================================================================================================================================
+
+TASK-3
+
+shakespeare=# SELECT * FROM work;
+      workid       |           title           |                 longtitle                 | year | genretype | notes |  source   | totalwords | totalparagraphs 
+-------------------+---------------------------+-------------------------------------------+------+-----------+-------+-----------+------------+-----------------
+ 12night           | Twelfth Night             | Twelfth Night, Or What You Will           | 1599 | c         |       | Moby      |      19837 |            1031
+ allswell          | All's Well That Ends Well | All's Well That Ends Well                 | 1602 | c         |       | Moby      |      22997 |            1025
+ antonycleo        | Antony and Cleopatra      | Antony and Cleopatra                      | 1606 | t         |       | Moby      |      24905 |            1344
+ asyoulikeit       | As You Like It            | As You Like It                            | 1599 | c         |       | Gutenberg |      21690 |             872
+ comedyerrors      | Comedy of Errors          | The Comedy of Errors                      | 1589 | c         |       | Moby      |      14692 |             661
+ coriolanus        | Coriolanus                | Coriolanus                                | 1607 | t         |       | Moby      |      27577 |            1226
+ cymbeline         | Cymbeline                 | Cymbeline, King of Britain                | 1609 | h         |       | Moby      |      27565 |             971
+ hamlet            | Hamlet                    | Tragedy of Hamlet, Prince of Denmark, The | 1600 | t         |       | Gutenberg |      30558 |            1275
+ henry4p1          | Henry IV, Part I          | History of Henry IV, Part I               | 1597 | h         |       | Moby      |      24579 |             884
+ henry4p2          | Henry IV, Part II         | History of Henry IV, Part II              | 1597 | h         |       | Gutenberg |      25692 |            1013
+ henry5            | Henry V                   | History of Henry V                        | 1598 | h         |       | Moby      |      26119 |             846
+ henry6p1          | Henry VI, Part I          | History of Henry VI, Part I               | 1591 | h         |       | Moby      |      21575 |             772
+ henry6p2          | Henry VI, Part II         | History of Henry VI, Part II              | 1590 | h         |       | Moby      |      25411 |             904
+ henry6p3          | Henry VI, Part III        | History of Henry VI, Part III             | 1590 | h         |       | Moby      |      24284 |             935
+ henry8            | Henry VIII                | History of Henry VIII                     | 1612 | h         |       | Moby      |      24629 |             779
+ juliuscaesar      | Julius Caesar             | The Tragedy of Julius Caesar              | 1599 | t         |       | Moby      |      19703 |             888
+ kingjohn          | King John                 | History of King John                      | 1596 | h         |       | Moby      |      20760 |             615
+ kinglear          | King Lear                 | The Tragedy of King Lear                  | 1605 | t         |       | Gutenberg |      26119 |            1177
+ loverscomplaint   | Lover's Complaint         | A Lover's Complaint                       | 1609 | p         |       | Moby      |       2559 |              47
+ loveslabours      | Love's Labour's Lost      | Love's Labour's Lost                      | 1594 | c         |       | Moby      |      21450 |            1120
+ macbeth           | Macbeth                   | The Tragedy of Macbeth                    | 1605 | t         |       | Moby      |      17121 |             758
+ measure           | Measure for Measure       | Measure for Measure                       | 1604 | c         |       | Moby      |      21773 |             980
+ merchantvenice    | Merchant of Venice        | Merchant of Venice, The                   | 1596 | c         |       | Moby      |      21291 |             718
+ merrywives        | Merry Wives of Windsor    | Merry Wives of Windsor, The               | 1600 | c         |       | Moby      |      21845 |            1161
+ midsummer         | Midsummer Night's Dream   | A Midsummer Night's Dream                 | 1595 | c         |       | Moby      |      16511 |             603
+ muchado           | Much Ado about Nothing    | Much Ado about Nothing                    | 1598 | c         |       | Moby      |      21157 |            1059
+ othello           | Othello                   | The Tragedy of Othello, Moor of Venice    | 1604 | t         |       | Moby      |      26450 |            1308
+ passionatepilgrim | Passionate Pilgrim        | The Passionate Pilgrim                    | 1598 | p         |       | Moby      |       3124 |              43
+ pericles          | Pericles                  | Pericles, Prince of Tyre                  | 1608 | h         |       | Moby      |      18529 |             748
+ phoenixturtle     | Phoenix and the Turtle    | The Phoenix and the Turtle                | 1601 | p         |       | Moby      |        353 |              19
+ rapelucrece       | Rape of Lucrece           | The Rape of Lucrece                       | 1594 | p         |       | Moby      |      15003 |             269
+ richard2          | Richard II                | History of Richard II                     | 1595 | h         |       | Moby      |      22411 |             628
+ richard3          | Richard III               | History of Richard III                    | 1592 | h         |       | Moby      |      29278 |            1210
+ romeojuliet       | Romeo and Juliet          | The Tragedy of Romeo and Juliet           | 1594 | t         |       | Moby      |      24553 |             989
+ sonnets           | Sonnets                   | Sonnets                                   | 1609 | s         |       | Moby      |      17515 |             154
+ tamingshrew       | Taming of the Shrew       | The Taming of the Shrew                   | 1593 | c         |       | Gutenberg |      21055 |             965
+ tempest           | Tempest                   | The Tempest                               | 1611 | c         |       | Moby      |      16628 |             698
+ timonathens       | Timon of Athens           | The Tragedy of Timon of Athens            | 1607 | t         |       | Moby      |      18206 |             865
+ titus             | Titus Andronicus          | Titus Andronicus                          | 1593 | t         |       | Moby      |      20710 |             654
+ troilus           | Troilus and Cressida      | Troilus and Cressida                      | 1601 | t         |       | Moby      |      26089 |            1295
+ twogents          | Two Gentlemen of Verona   | Two Gentlemen of Verona                   | 1594 | c         |       | Moby      |      17129 |             943
+ venusadonis       | Venus and Adonis          | Venus and Adonis                          | 1593 | p         |       | Moby      |       9870 |             201
+ winterstale       | The Winter's Tale         | The Winter's Tale                         | 1610 | c         |       | Moby      |      24914 |             812
+(43 rows)
+
+shakespeare=# SELECT title FROM work WHERE genretype = 'p';
+         title          
+------------------------
+ Lover's Complaint
+ Passionate Pilgrim
+ Phoenix and the Turtle
+ Rape of Lucrece
+ Venus and Adonis
+(5 rows)
+=================================================================================================================================================================
+
+TASK-4
+
+shakespeare=# SELECT AVG(totalparagraphs) FROM work WHERE genretype='t';
+          avg          
+-----------------------
+ 1070.8181818181818182
+(1 row)
+
+shakespeare=# 
+=================================================================================================================================================================
+
+TASK-5
+
+shakespeare=# SELECT title FROM work WHERE totalwords > (SELECT AVG(totalwords) FROM work);
+           title           
+---------------------------
+ All's Well That Ends Well
+ Antony and Cleopatra
+ As You Like It
+ Coriolanus
+ Cymbeline
+ Hamlet
+ Henry IV, Part I
+ Henry IV, Part II
+ Henry V
+ Henry VI, Part I
+ Henry VI, Part II
+ Henry VI, Part III
+ Henry VIII
+ King John
+ King Lear
+ Love's Labour's Lost
+ Measure for Measure
+ Merchant of Venice
+ Merry Wives of Windsor
+ Much Ado about Nothing
+ Othello
+ Richard II
+ Richard III
+ Romeo and Juliet
+ Taming of the Shrew
+ Titus Andronicus
+ Troilus and Cressida
+ The Winter's Tale
+(28 rows)
+
+shakespeare=# 
+=================================================================================================================================================================
+
+TASK-6
+
+shakespeare=# SELECT ch.charname, ch.speechcount, w.title FROM character AS ch INNER JOIN character_work AS cw ON ch.charid=cw.charid 
+INNER JOIN work AS w ON w.workid=cw.workid;
+
+----------------------------------------------
+shakespeare=# SELECT ch.charname, ch.speechcount, w.title FROM character AS ch INNER JOIN character_work AS cw ON ch.charid=cw.charid 
+INNER JOIN work AS w ON w.workid=cw.workid WHERE ch.charname = 'Imogen';
+=================================================================================================================================================================
+
+TASK-7
+
+shakespeare=# SELECT ROUND(AVG(ch.speechcount), 0) AS round, w.title FROM character AS ch INNER JOIN character_work AS cw ON ch.charid=cw.charid 
+INNER JOIN work AS w ON w.workid=cw.workid WHERE w.title = 'Romeo and Juliet' GROUP BY w.title;
+=================================================================================================================================================================
+
+TASK-8
+
+shakespeare=# SELECT section, SUM(wordcount) AS sum FROM paragraph GROUP BY section;
+ section |  sum   
+---------+--------
+       0 |   2963
+       1 | 219622
+       3 | 174015
+       5 | 148638
+       4 | 168204
+       2 | 170774
+(6 rows)
+
+shakespeare=# 
+=================================================================================================================================================================
+
+TASK-9
+
+shakespeare=# SELECT charname, speechcount FROM character WHERE speechcount BETWEEN 15 and 30;
+=================================================================================================================================================================
+
+TASK-10
+
+shakespeare=# SELECT title, year FROM work WHERE year BETWEEN 1601 and 1700;
+           title           | year 
+---------------------------+------
+ All's Well That Ends Well | 1602
+ Antony and Cleopatra      | 1606
+ Coriolanus                | 1607
+ Cymbeline                 | 1609
+ Henry VIII                | 1612
+ King Lear                 | 1605
+ Lover's Complaint         | 1609
+ Macbeth                   | 1605
+ Measure for Measure       | 1604
+ Othello                   | 1604
+ Pericles                  | 1608
+ Phoenix and the Turtle    | 1601
+ Sonnets                   | 1609
+ Tempest                   | 1611
+ Timon of Athens           | 1607
+ Troilus and Cressida      | 1601
+ The Winter's Tale         | 1610
+(17 rows)
+
+shakespeare=# 
+=================================================================================================================================================================
+
+TASK-11
+
+shakespeare=# SELECT longtitle FROM work WHERE longtitle LIKE '%the%';
+               longtitle                
+----------------------------------------
+ The Tragedy of Othello, Moor of Venice
+ The Phoenix and the Turtle
+ The Taming of the Shrew
+ The Tragedy of Timon of Athens
+(4 rows)
+
+shakespeare=# 
+=================================================================================================================================================================
+
+TASK-12
+
+shakespeare=# SELECT DISTINCT section FROM paragraph; 
+ section 
+---------
+       0
+       1
+       3
+       5
+       4
+       2
+(6 rows)
+
+shakespeare=# 
+=================================================================================================================================================================
+
+TASK-13
+
+shakespeare=# SELECT chp.chapterid, chp.description, w.title FROM chapter AS chp INNER JOIN work AS w ON chp.workid=w.workid;
+=================================================================================================================================================================
+
+TASK-14
+
+shakespeare=# SELECT p.paragraphnum, ch.charname, ch.speechcount FROM character AS ch INNER JOIN paragraph AS p ON ch.charid=p.charid;
+=================================================================================================================================================================
+
+TASK-15
+shakespeare=# SELECT p.paragraphnum, w.title, w.year FROM work AS w INNER JOIN paragraph AS p ON w.workid=p.workid;
+
+

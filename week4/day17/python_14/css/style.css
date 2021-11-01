@@ -1,0 +1,33 @@
+/* *{
+    background-color: red;
+} */
+
+
+/* input {
+    height: 50px;
+} */
+
+
+.inp_1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: blue;
+    background-color: yellow;
+}
+
+
+.text {
+    background-color: black;
+    color: chartreuse;
+    width: 700px;
+}
+
+
+#input_1 {
+    background-color: orange;
+}
+
+.nav_list {
+    /* list-style-type: none; */
+    color: violet;
+}

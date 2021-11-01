@@ -1,0 +1,618 @@
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying sessions.0001_initial... OK
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ python manage.py makemigrations
+No changes detected
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ python manage.py makemigrations
+Migrations for 'main':
+  main/migrations/0001_initial.py
+    - Create model Author
+    - Create model Genre
+    - Create model Book
+Migrations for 'order':
+  order/migrations/0001_initial.py
+    - Create model Order
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, main, order, sessions
+Running migrations:
+  Applying main.0001_initial... OK
+  Applying order.0001_initial... OK
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ python manage.py createsuperuser
+Username (leave blank to use 'hello'): admin
+Email address: 
+Password: 
+Password (again): 
+This password is too short. It must contain at least 8 characters.
+This password is entirely numeric.
+Bypass password validation and create user anyway? [y/N]: y
+Superuser created successfully.
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 05:53:42
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[01/Nov/2021 05:53:48] "GET / HTTP/1.1" 200 10697
+[01/Nov/2021 05:53:48] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[01/Nov/2021 05:53:48] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 05:53:48] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 05:53:48] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 05:53:55] "GET /admin/ HTTP/1.1" 302 0
+[01/Nov/2021 05:53:55] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 2214
+[01/Nov/2021 05:53:55] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2271
+[01/Nov/2021 05:53:55] "GET /static/admin/css/base.css HTTP/1.1" 200 19513
+[01/Nov/2021 05:53:55] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 1360
+[01/Nov/2021 05:53:55] "GET /static/admin/css/login.css HTTP/1.1" 200 939
+[01/Nov/2021 05:53:55] "GET /static/admin/css/responsive.css HTTP/1.1" 200 18545
+[01/Nov/2021 05:53:58] "GET /admin/ HTTP/1.1" 302 0
+[01/Nov/2021 05:53:58] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 2214
+[01/Nov/2021 05:54:09] "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[01/Nov/2021 05:54:09] "GET /admin/ HTTP/1.1" 200 3326
+[01/Nov/2021 05:54:09] "GET /static/admin/css/dashboard.css HTTP/1.1" 200 380
+[01/Nov/2021 05:54:09] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+[01/Nov/2021 05:54:09] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+[01/Nov/2021 05:54:56] "GET /admin/auth/ HTTP/1.1" 200 3264
+[01/Nov/2021 05:55:03] "GET /admin/auth/ HTTP/1.1" 200 3264
+[01/Nov/2021 05:55:07] "GET /admin/auth/user/ HTTP/1.1" 200 7826
+[01/Nov/2021 05:55:07] "GET /static/admin/css/changelists.css HTTP/1.1" 200 6874
+[01/Nov/2021 05:55:07] "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+[01/Nov/2021 05:55:07] "GET /static/admin/js/core.js HTTP/1.1" 200 5698
+[01/Nov/2021 05:55:07] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 5984
+[01/Nov/2021 05:55:07] "GET /static/admin/js/actions.js HTTP/1.1" 200 7867
+[01/Nov/2021 05:55:07] "GET /static/admin/js/urlify.js HTTP/1.1" 200 7902
+[01/Nov/2021 05:55:07] "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+[01/Nov/2021 05:55:07] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+[01/Nov/2021 05:55:07] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 287630
+[01/Nov/2021 05:55:07] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 05:55:07] "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+[01/Nov/2021 05:55:07] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+[01/Nov/2021 05:55:07] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+[01/Nov/2021 05:55:07] "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+[01/Nov/2021 05:55:11] "GET /admin/auth/group/ HTTP/1.1" 200 4752
+[01/Nov/2021 05:55:11] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 05:55:13] "GET /admin/auth/user/ HTTP/1.1" 200 7826
+[01/Nov/2021 05:55:13] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 05:55:15] "GET /admin/auth/user/1/change/ HTTP/1.1" 200 16038
+[01/Nov/2021 05:55:15] "GET /static/admin/css/forms.css HTTP/1.1" 200 8804
+[01/Nov/2021 05:55:15] "GET /static/admin/js/SelectBox.js HTTP/1.1" 200 4360
+[01/Nov/2021 05:55:15] "GET /static/admin/js/calendar.js HTTP/1.1" 200 8466
+[01/Nov/2021 05:55:15] "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 12350
+[01/Nov/2021 05:55:15] "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19634
+[01/Nov/2021 05:55:15] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 05:55:15] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+[01/Nov/2021 05:55:15] "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+[01/Nov/2021 05:55:15] "GET /static/admin/css/widgets.css HTTP/1.1" 200 11097
+[01/Nov/2021 05:55:15] "GET /static/admin/img/icon-unknown.svg HTTP/1.1" 200 655
+[01/Nov/2021 05:55:15] "GET /static/admin/img/icon-unknown-alt.svg HTTP/1.1" 200 655
+[01/Nov/2021 05:55:15] "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+[01/Nov/2021 05:55:15] "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+[01/Nov/2021 05:55:15] "GET /static/admin/img/selector-icons.svg HTTP/1.1" 200 3291
+[01/Nov/2021 05:55:57] "GET /admin/auth/user/1/password/ HTTP/1.1" 200 4552
+[01/Nov/2021 05:55:59] "GET /admin/auth/user/1/change/ HTTP/1.1" 200 16038
+[01/Nov/2021 05:56:57] "GET /admin/auth/user/ HTTP/1.1" 200 7826
+[01/Nov/2021 05:56:58] "GET /admin/auth/group/ HTTP/1.1" 200 4752
+[01/Nov/2021 05:56:59] "GET /admin/auth/user/ HTTP/1.1" 200 7826
+[01/Nov/2021 05:57:00] "GET /admin/auth/ HTTP/1.1" 200 3264
+[01/Nov/2021 05:57:01] "GET /admin/ HTTP/1.1" 200 3326
+/home/hello/PycharmProjects/BookShop/main/admin.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 05:58:03
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/BookShop/main/admin.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 05:58:16
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/BookShop/main/admin.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 05:58:49
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/BookShop/order/admin.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 05:59:10
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/BookShop/order/admin.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 05:59:32
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/BookShop/order/admin.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 06:00:01
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/BookShop/main/admin.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 06:00:18
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[01/Nov/2021 06:01:53] "GET /admin/ HTTP/1.1" 200 5409
+[01/Nov/2021 06:01:53] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[01/Nov/2021 06:01:53] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[01/Nov/2021 06:01:53] "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+[01/Nov/2021 06:01:53] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[01/Nov/2021 06:01:53] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[01/Nov/2021 06:01:53] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[01/Nov/2021 06:01:53] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:01:53] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 06:01:53] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:01:53] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 06:01:53] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /admin/main/author/add/ HTTP/1.1" 200 8227
+[01/Nov/2021 06:03:51] "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/js/calendar.js HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:03:51] "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+[01/Nov/2021 06:03:51] "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:05:59] "POST /admin/main/author/add/ HTTP/1.1" 302 0
+[01/Nov/2021 06:05:59] "GET /admin/main/author/ HTTP/1.1" 200 7347
+[01/Nov/2021 06:05:59] "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[01/Nov/2021 06:05:59] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:05:59] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:05:59] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+/home/hello/PycharmProjects/BookShop/main/models.py changed, reloading.
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/core/management/commands/runserver.py", line 110, in inner_run
+    autoreload.raise_last_exception()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 87, in raise_last_exception
+    raise _exception[1]
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/core/management/__init__.py", line 375, in execute
+    autoreload.check_errors(django.setup)()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/apps/config.py", line 301, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 844, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 981, in get_code
+  File "<frozen importlib._bootstrap_external>", line 911, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/hello/PycharmProjects/BookShop/main/models.py", line 13
+    class Genre(models.Model):
+    ^
+IndentationError: expected an indented block
+/home/hello/PycharmProjects/BookShop/main/models.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 06:08:10
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/BookShop/main/models.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 06:08:41
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[01/Nov/2021 06:08:53] "GET /admin/main/author/ HTTP/1.1" 200 7139
+[01/Nov/2021 06:08:53] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[01/Nov/2021 06:08:53] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[01/Nov/2021 06:08:53] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[01/Nov/2021 06:08:53] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[01/Nov/2021 06:08:53] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[01/Nov/2021 06:08:53] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:08:53] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:08:53] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 06:08:53] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 06:08:53] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+/home/hello/PycharmProjects/BookShop/main/models.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 06:10:03
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/BookShop/main/models.py changed, reloading.
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/core/management/commands/runserver.py", line 110, in inner_run
+    autoreload.raise_last_exception()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 87, in raise_last_exception
+    raise _exception[1]
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/core/management/__init__.py", line 375, in execute
+    autoreload.check_errors(django.setup)()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/apps/config.py", line 301, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 844, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 981, in get_code
+  File "<frozen importlib._bootstrap_external>", line 911, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/hello/PycharmProjects/BookShop/main/models.py", line 34
+    def 
+       ^
+SyntaxError: invalid syntax
+/home/hello/PycharmProjects/BookShop/main/models.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 06:10:30
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/BookShop/order/models.py changed, reloading.
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/core/management/commands/runserver.py", line 110, in inner_run
+    autoreload.raise_last_exception()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 87, in raise_last_exception
+    raise _exception[1]
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/core/management/__init__.py", line 375, in execute
+    autoreload.check_errors(django.setup)()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/apps/config.py", line 301, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 844, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 981, in get_code
+  File "<frozen importlib._bootstrap_external>", line 911, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/hello/PycharmProjects/BookShop/order/models.py", line 13
+    def
+      ^
+SyntaxError: invalid syntax
+/home/hello/PycharmProjects/BookShop/order/models.py changed, reloading.
+Watching for file changes with StatReloader
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/core/management/commands/runserver.py", line 110, in inner_run
+    autoreload.raise_last_exception()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 87, in raise_last_exception
+    raise _exception[1]
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/core/management/__init__.py", line 375, in execute
+    autoreload.check_errors(django.setup)()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/apps/config.py", line 301, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 844, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 981, in get_code
+  File "<frozen importlib._bootstrap_external>", line 911, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/hello/PycharmProjects/BookShop/order/models.py", line 14
+    return f'{}'
+           ^
+SyntaxError: f-string: empty expression not allowed
+/home/hello/PycharmProjects/BookShop/order/models.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 06:11:38
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/BookShop/order/models.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 01, 2021 - 06:11:52
+Django version 3.2.8, using settings 'bookshop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[01/Nov/2021 06:12:54] "GET /admin/main/author/add/ HTTP/1.1" 200 8227
+[01/Nov/2021 06:12:54] "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/js/calendar.js HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:12:54] "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+[01/Nov/2021 06:12:54] "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:15:40] "POST /admin/main/author/add/ HTTP/1.1" 302 0
+[01/Nov/2021 06:15:40] "GET /admin/main/author/ HTTP/1.1" 200 7556
+[01/Nov/2021 06:15:40] "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[01/Nov/2021 06:15:40] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:15:40] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:15:40] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:15:43] "GET /admin/main/author/add/ HTTP/1.1" 200 8227
+[01/Nov/2021 06:15:43] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:17:09] "POST /admin/main/author/add/ HTTP/1.1" 302 0
+[01/Nov/2021 06:17:09] "GET /admin/main/author/ HTTP/1.1" 200 7762
+[01/Nov/2021 06:17:09] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[01/Nov/2021 06:17:09] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[01/Nov/2021 06:17:09] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[01/Nov/2021 06:17:09] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:17:09] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[01/Nov/2021 06:17:09] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[01/Nov/2021 06:17:09] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:17:09] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 06:17:09] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 06:17:09] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 06:17:55] "GET /admin/main/book/ HTTP/1.1" 200 5971
+[01/Nov/2021 06:17:55] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:18:01] "GET /admin/main/genre/ HTTP/1.1" 200 5978
+[01/Nov/2021 06:18:01] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:18:03] "GET /admin/main/genre/add/ HTTP/1.1" 200 7123
+[01/Nov/2021 06:18:03] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:18:28] "POST /admin/main/genre/add/ HTTP/1.1" 302 0
+[01/Nov/2021 06:18:28] "GET /admin/main/genre/add/ HTTP/1.1" 200 7363
+[01/Nov/2021 06:18:28] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:19:00] "POST /admin/main/genre/add/ HTTP/1.1" 302 0
+[01/Nov/2021 06:19:00] "GET /admin/main/genre/add/ HTTP/1.1" 200 7372
+[01/Nov/2021 06:19:00] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:19:18] "POST /admin/main/genre/add/ HTTP/1.1" 302 0
+[01/Nov/2021 06:19:18] "GET /admin/main/genre/add/ HTTP/1.1" 200 7358
+[01/Nov/2021 06:19:18] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:20:06] "POST /admin/main/genre/add/ HTTP/1.1" 302 0
+[01/Nov/2021 06:20:06] "GET /admin/main/genre/ HTTP/1.1" 200 8039
+[01/Nov/2021 06:20:06] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:20:24] "GET /admin/main/genre/Adventure/change/ HTTP/1.1" 200 7467
+[01/Nov/2021 06:20:24] "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[01/Nov/2021 06:20:24] "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+[01/Nov/2021 06:20:24] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[01/Nov/2021 06:20:24] "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[01/Nov/2021 06:20:24] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[01/Nov/2021 06:20:24] "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[01/Nov/2021 06:20:24] "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[01/Nov/2021 06:20:24] "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[01/Nov/2021 06:20:24] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[01/Nov/2021 06:20:24] "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+[01/Nov/2021 06:20:24] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+[01/Nov/2021 06:20:24] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:20:24] "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+[01/Nov/2021 06:20:27] "POST /admin/main/genre/Adventure/change/ HTTP/1.1" 302 0
+[01/Nov/2021 06:20:27] "GET /admin/main/genre/add/ HTTP/1.1" 200 7376
+[01/Nov/2021 06:20:27] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:21:02] "POST /admin/main/genre/add/ HTTP/1.1" 302 0
+[01/Nov/2021 06:21:02] "GET /admin/main/genre/ HTTP/1.1" 200 8252
+[01/Nov/2021 06:21:02] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:21:16] "GET /admin/main/book/ HTTP/1.1" 200 5971
+[01/Nov/2021 06:21:16] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:21:20] "GET /admin/main/book/add/ HTTP/1.1" 200 10108
+[01/Nov/2021 06:21:20] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:21:20] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:23:50] "GET /admin/main/genre/add/?_to_field=slug&_popup=1 HTTP/1.1" 200 3379
+[01/Nov/2021 06:23:50] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:24:05] "GET /admin/main/genre/add/?_to_field=slug&_popup=1 HTTP/1.1" 200 3379
+[01/Nov/2021 06:24:05] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:24:13] "GET /admin/main/genre/add/?_to_field=slug&_popup=1 HTTP/1.1" 200 3379
+[01/Nov/2021 06:24:13] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:24:39] "POST /admin/main/book/add/ HTTP/1.1" 302 0
+[01/Nov/2021 06:24:39] "GET /admin/main/book/ HTTP/1.1" 200 7379
+[01/Nov/2021 06:24:39] "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[01/Nov/2021 06:24:39] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:24:39] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:24:39] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:24:42] "GET /admin/main/book/1/change/ HTTP/1.1" 200 10793
+[01/Nov/2021 06:24:42] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:24:52] "GET /admin/main/book/ HTTP/1.1" 200 7148
+[01/Nov/2021 06:24:58] "GET /admin/main/book/add/ HTTP/1.1" 200 10108
+[01/Nov/2021 06:24:58] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[01/Nov/2021 06:24:58] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[01/Nov/2021 06:24:58] "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[01/Nov/2021 06:24:58] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[01/Nov/2021 06:24:58] "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[01/Nov/2021 06:24:58] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[01/Nov/2021 06:24:58] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:24:58] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 06:24:58] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 06:24:58] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+[01/Nov/2021 06:26:31] "POST /admin/main/book/add/ HTTP/1.1" 302 0
+[01/Nov/2021 06:26:31] "GET /admin/main/book/ HTTP/1.1" 200 7551
+[01/Nov/2021 06:26:31] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:26:34] "GET /admin/main/book/add/ HTTP/1.1" 200 10108
+[01/Nov/2021 06:26:34] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:28:25] "POST /admin/main/book/add/ HTTP/1.1" 302 0
+[01/Nov/2021 06:28:25] "GET /admin/main/book/ HTTP/1.1" 200 7769
+[01/Nov/2021 06:28:25] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:28:28] "GET /admin/main/book/2/change/ HTTP/1.1" 200 10645
+[01/Nov/2021 06:28:28] "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+[01/Nov/2021 06:28:28] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[01/Nov/2021 06:28:28] "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[01/Nov/2021 06:28:28] "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[01/Nov/2021 06:28:28] "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[01/Nov/2021 06:28:28] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[01/Nov/2021 06:28:28] "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[01/Nov/2021 06:28:28] "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[01/Nov/2021 06:28:28] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[01/Nov/2021 06:28:28] "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+[01/Nov/2021 06:28:28] "GET /admin/jsi18n/ HTTP/1.1" 200 3195
+[01/Nov/2021 06:28:28] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+[01/Nov/2021 06:28:28] "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+[01/Nov/2021 06:28:30] "GET /admin/main/book/ HTTP/1.1" 200 7567
+
+
+
+
+local2
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ python manage.py shell
+Python 3.8.10 (default, Sep 28 2021, 16:10:42) 
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from main.models import Book
+>>> Book.objets.create(title='Jamilya', status='out of stock', author_id=1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Book' has no attribute 'objets'
+>>> from main.models import Book
+>>> Book.objects.create(title='Jamilya', status='out of stock', author_id=1)
+<Book: Jamilya>
+>>> from main.models import Genre
+>>> Genre.objects.all()
+<QuerySet [<Genre: Комедия>, <Genre: Фантастика>, <Genre: Роман>, <Genre: Приключение>, <Genre: Повесть>]>
+>>> genre1 = Genre.objects.get(slug='fiction')
+>>> genre1
+<Genre: Повесть>
+>>> book = Book.objects.get(title='Jamilya')
+>>> book
+<Book: Jamilya>
+>>> book.genre.add(genre1)
+>>> genre2 = Genre.objects.get(slug='comedy')
+>>> genre2
+<Genre: Комедия>
+>>> 
+>>> 
+>>> book
+<Book: Jamilya>
+>>> book.genre.add(genre2)
+>>> 
+>>> 
+>>> book2 = Book(title='Harry Potter and Chamber of Secrets', status='in stock', author_id=2)
+>>> book2
+<Book: Harry Potter and Chamber of Secrets>
+>>> book2.save()
+>>> genre3 = Genre.objects.get(slug='fantastic')
+>>> book2.genre.add(genre3)
+>>> 
+>>> genre2
+<Genre: Комедия>
+>>> book2.genre.add(genre2)
+>>> exit()
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ 
+
+
+
+
+
