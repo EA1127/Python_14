@@ -1,0 +1,232 @@
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ python manage.py shell
+Python 3.8.10 (default, Sep 28 2021, 16:10:42) 
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from main.models import *
+>>> Author.objects.all()
+<QuerySet [<Author: Chingiz Aitmatov>, <Author: Joanne Rowling>, <Author: Jack London>]>
+>>> Book.objects.all()
+<QuerySet [<Book: Harry Potter and the Philosopher's stone>, <Book: White Ship>, <Book: The call of Wild>, <Book: Jamilya>, <Book: Harry Potter and Chamber of Secrets>]>
+>>> Author.objects.filter(name='Chingiz')
+<QuerySet [<Author: Chingiz Aitmatov>]>
+>>> Author.objects.filter(name__startswith='J')
+<QuerySet [<Author: Joanne Rowling>, <Author: Jack London>]>
+>>> Author.objects.filter(name__startswith='C')
+<QuerySet [<Author: Chingiz Aitmatov>]>
+>>> Author.objects.filter(name__endswith='e')
+<QuerySet [<Author: Joanne Rowling>]>
+>>> 
+>>> Book.objects.filter(author__name='Chingiz)
+  File "<console>", line 1
+    Book.objects.filter(author__name='Chingiz)
+                                             ^
+SyntaxError: EOL while scanning string literal
+>>> Book.objects.filter(author__name='Chingiz')
+<QuerySet [<Book: White Ship>, <Book: Jamilya>]>
+>>> 
+>>> Book.objects.filter(author__last_name='Rowling')
+<QuerySet [<Book: Harry Potter and the Philosopher's stone>, <Book: Harry Potter and Chamber of Secrets>]>
+>>> 
+>>> Book.objects.filter(author__last_name='Pushkin')
+<QuerySet []>
+>>> Book.objects.filter(genre='fantastic')
+<QuerySet [<Book: Harry Potter and the Philosopher's stone>, <Book: Harry Potter and Chamber of Secrets>]>
+>>> 
+>>> 
+>>> Book.objects.exclude(genre='fantastic')
+<QuerySet [<Book: White Ship>, <Book: The call of Wild>, <Book: Jamilya>]>
+>>> Book.objects.exclude(author__last_name='Chingiz')
+<QuerySet [<Book: White Ship>, <Book: Jamilya>, <Book: Harry Potter and the Philosopher's stone>, <Book: Harry Potter and Chamber of Secrets>, <Book: The call of Wild>]>
+>>> 
+>>> Book.objects.exclude(title__contains='Harry')
+<QuerySet [<Book: White Ship>, <Book: The call of Wild>, <Book: Jamilya>]>
+>>> Book.objects.filter(title__contains='Harry')
+<QuerySet [<Book: Harry Potter and the Philosopher's stone>, <Book: Harry Potter and Chamber of Secrets>]>
+>>> 
+>>> Book.objects.filter(title__contains='harry')
+<QuerySet []>
+>>> Book.objects.filter(title__icontains='harry')
+<QuerySet [<Book: Harry Potter and the Philosopher's stone>, <Book: Harry Potter and Chamber of Secrets>]>
+>>> Book.objects.exclude(title__icontains='harry')
+<QuerySet [<Book: White Ship>, <Book: The call of Wild>, <Book: Jamilya>]>
+>>> 
+>>> Author.objects.oreder_by('name')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Manager' object has no attribute 'oreder_by'
+>>> Author.objects.order_by('name')
+<QuerySet [<Author: Chingiz Aitmatov>, <Author: Jack London>, <Author: Joanne Rowling>]>
+>>> 
+>>> Author.objects.order_by('date_of_birth')
+<QuerySet [<Author: Jack London>, <Author: Chingiz Aitmatov>, <Author: Joanne Rowling>]>
+>>> Author.objects.order_by('-date_of_birth')
+<QuerySet [<Author: Joanne Rowling>, <Author: Chingiz Aitmatov>, <Author: Jack London>]>
+>>> Author.objects.order_by('-name')
+<QuerySet [<Author: Joanne Rowling>, <Author: Jack London>, <Author: Chingiz Aitmatov>]>
+>>> 
+>>> Book.objects.filter(genre='fantastic').order_by('title')
+<QuerySet [<Book: Harry Potter and Chamber of Secrets>, <Book: Harry Potter and the Philosopher's stone>]>
+>>> Book.objects.filter(genre='fantastic').order_by('-title')
+<QuerySet [<Book: Harry Potter and the Philosopher's stone>, <Book: Harry Potter and Chamber of Secrets>]>
+>>> 
+>>> queryset = Book.objects.annotate()
+>>> from django.db.models import Count
+>>> queryset = Book.objects.annotate(Count('genre'))
+>>> queryset
+<QuerySet [<Book: Harry Potter and the Philosopher's stone>, <Book: White Ship>, <Book: The call of Wild>, <Book: Jamilya>, <Book: Harry Potter and Chamber of Secrets>]>
+>>> queryset[1]
+<Book: White Ship>
+>>> book = queryset[1]
+>>> book
+<Book: White Ship>
+>>> book.genre__count
+2
+>>> book.genre.all()
+<QuerySet [<Genre: Роман>, <Genre: Повесть>]>
+>>> 
+>>> 
+>>> queryset = Book.objects.annotate(quantity=Count('genre'))
+>>> queryset
+<QuerySet [<Book: Harry Potter and the Philosopher's stone>, <Book: White Ship>, <Book: The call of Wild>, <Book: Jamilya>, <Book: Harry Potter and Chamber of Secrets>]>
+>>> queryset[3]
+<Book: Jamilya>
+>>> queryset[4]
+<Book: Harry Potter and Chamber of Secrets>
+>>> queryset[4].quantity
+2
+>>> queryset[4].genre.all()
+<QuerySet [<Genre: Комедия>, <Genre: Фантастика>]>
+>>> 
+>>> Author.objects.count()
+3
+>>> Genre.objects.count()
+5
+>>> Book.objects.count()
+5
+>>> 
+>>> Author.objects.filter(last_name__iendwith='ov').exists()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/models/query.py", line 941, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/models/query.py", line 961, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/models/query.py", line 968, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1393, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1412, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1347, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1187, in build_lookup
+    lhs = self.try_transform(lhs, lookup_name)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1226, in try_transform
+    raise FieldError(
+django.core.exceptions.FieldError: Unsupported lookup 'iendwith' for CharField or join on the field not permitted, perhaps you meant iendswith or endswith?
+>>> Author.objects.filter(last_name__iendswith='ov').exists()
+True
+>>> Author.objects.filter(last_name__iendswith='asder').exists()
+False
+>>> 
+>>> Author.objects.get(last_name='Rowling')
+<Author: Joanne Rowling>
+>>> Author.objects.filter(last_name='Rowling')
+<QuerySet [<Author: Joanne Rowling>]>
+>>> Author.objects.create(name='Emily', last_name='Rowling', date_of_birth=1998-12-07')
+  File "<console>", line 1
+    Author.objects.create(name='Emily', last_name='Rowling', date_of_birth=1998-12-07')
+                                                                                    ^
+SyntaxError: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers
+>>> Author.objects.create(name='Emily', last_name='Rowling', date_of_birth='1998-12-07')
+<Author: Emily Rowling>
+>>> Author.objects.filter(last_name='Rowling')
+<QuerySet [<Author: Joanne Rowling>, <Author: Emily Rowling>]>
+>>> Author.objects.get(last_name='Rowling')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/hello/PycharmProjects/BookShop/venv/lib/python3.8/site-packages/django/db/models/query.py", line 439, in get
+    raise self.model.MultipleObjectsReturned(
+main.models.Author.MultipleObjectsReturned: get() returned more than one Author -- it returned 2!
+>>> 
+>>> 
+>>> Author.objects.get(id=2)
+<Author: Joanne Rowling>
+>>> Book.objects.first()
+<Book: Harry Potter and the Philosopher's stone>
+>>> 
+>>> Book.objects.last()
+<Book: Harry Potter and Chamber of Secrets>
+>>> 
+>>> 
+>>> Author.objects.filter(date_of_birth__gt='1900-01-01')
+<QuerySet [<Author: Chingiz Aitmatov>, <Author: Joanne Rowling>, <Author: Emily Rowling>]>
+>>> Author.objects.exclude(date_of_birth__gt='1900-01-01')
+<QuerySet [<Author: Jack London>]>
+>>> Author.objects.exclude(date_of_birth__gt='1900-01-01').first().date_of_birth
+datetime.date(1876, 1, 12)
+>>> 
+>>> Author.objects.filter(date_of_birth__lt='1900-01-01')
+<QuerySet [<Author: Jack London>]>
+>>> Author.objects.filter(date_of_birth__lte='1876-01-01')
+<QuerySet []>
+>>> Book.objects.filter(id__in=[3, 4])
+<QuerySet [<Book: The call of Wild>, <Book: Jamilya>]>
+>>> Author.objects.filter(date_of_birth__range=('1900-01-01', '2001-01-01'))
+<QuerySet [<Author: Chingiz Aitmatov>, <Author: Joanne Rowling>, <Author: Emily Rowling>]>
+>>> Author.objects.filter(date_of_birth__range=('1900-01-01', '1997-01-01'))
+<QuerySet [<Author: Chingiz Aitmatov>, <Author: Joanne Rowling>]>
+>>> 
+>>> 
+>>> Author.objects.create(name='Alexander', date_of_birth='2020-05-22')
+<Author: Alexander >
+>>> Author.objects.filter(last_name__isnull=True)
+<QuerySet []>
+>>> 
+>>> 
+>>> Author.objects.get(id=2)
+<Author: Joanne Rowling>
+>>> author = Author.objects.get(id=2)
+>>> author
+<Author: Joanne Rowling>
+>>> author.books
+<django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x7fdff3ce7820>
+>>> author.books.all()
+<QuerySet [<Book: Harry Potter and the Philosopher's stone>, <Book: Harry Potter and Chamber of Secrets>]>
+>>> author = Author.objects.get(id=1)
+>>> author
+<Author: Chingiz Aitmatov>
+>>> author.books.all()
+<QuerySet [<Book: White Ship>, <Book: Jamilya>]>
+>>> 
+
+
+==============================================================================================================
+
+
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg20.04+1))
+Type "help" for help.
+
+hello=# \c bookshop_db 
+You are now connected to database "bookshop_db" as user "hello".
+bookshop_db=# \dt
+bookshop_db=# select * from main_author;
+ id |   name    | last_name | date_of_birth |            image             
+----+-----------+-----------+---------------+------------------------------
+  1 | Chingiz   | Aitmatov  | 1928-12-12    | authors/chingiz-aytmatov.jpg
+  2 | Joanne    | Rowling   | 1965-07-31    | authors/J_Rowling.jpeg
+  3 | Jack      | London    | 1876-01-12    | authors/J_London.jpeg
+  4 | Emily     | Rowling   | 1998-12-07    | 
+  5 | Alexander |           | 2020-05-22    | 
+(5 rows)
+
+bookshop_db=# exit
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/BookShop$ 
+
+
