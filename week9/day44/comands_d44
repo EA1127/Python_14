@@ -1,0 +1,685 @@
+👉️pip3 install requirements.txt
+👉️clear
+👉️django-admin startproject cooking_blog .
+👉️python manage.py startapp main
+👉️python manage.py startapp account
+  
+  ======================================
+  
+👉️(venv) hello@hello-Extensa-215-51:~/PycharmProjects/CookingBlog$ python manage.py runserver
+
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified 1 issue (0 silenced).
+/home/hello/PycharmProjects/CookingBlog/cooking_blog/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+November 06, 2021 - 18:45:21
+Django version 3.2.9, using settings 'cooking_blog.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Not Found: /
+[06/Nov/2021 18:46:16] "GET / HTTP/1.1" 404 2299
+Not Found: /favicon.ico/
+[06/Nov/2021 18:46:16] "GET /favicon.ico/ HTTP/1.1" 404 2353
+Not Found: /
+[06/Nov/2021 18:46:21] "GET / HTTP/1.1" 404 2299
+[06/Nov/2021 18:47:45] "GET /cooking HTTP/1.1" 301 0
+[06/Nov/2021 18:47:45] "GET /cooking/ HTTP/1.1" 200 10226
+Not Found: /cooking/images/pic10.jpg
+Not Found: /cooking/assets/css/main.css
+[06/Nov/2021 18:47:45] "GET /cooking/images/pic10.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:47:45] "GET /cooking/assets/css/main.css HTTP/1.1" 404 2458
+Not Found: /cooking/assets/js/util.js
+Not Found: /cooking/images/pic01.jpg
+Not Found: /cooking/assets/js/main.js
+[06/Nov/2021 18:47:45] "GET /cooking/assets/js/util.js HTTP/1.1" 404 2452
+Not Found: /cooking/assets/js/browser.min.js
+[06/Nov/2021 18:47:45] "GET /cooking/images/pic01.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/assets/js/jquery.min.js
+Not Found: /cooking/assets/js/breakpoints.min.js
+[06/Nov/2021 18:47:45] "GET /cooking/assets/js/main.js HTTP/1.1" 404 2452
+Not Found: /cooking/images/pic03.jpg
+[06/Nov/2021 18:47:45] "GET /cooking/assets/js/jquery.min.js HTTP/1.1" 404 2470
+[06/Nov/2021 18:47:45] "GET /cooking/assets/js/browser.min.js HTTP/1.1" 404 2473
+[06/Nov/2021 18:47:45] "GET /cooking/assets/js/breakpoints.min.js HTTP/1.1" 404 2485
+[06/Nov/2021 18:47:45] "GET /cooking/images/pic03.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic02.jpg
+Not Found: /cooking/assets/js/browser.min.js
+Not Found: /cooking/images/pic05.jpg
+[06/Nov/2021 18:47:46] "GET /cooking/assets/js/browser.min.js HTTP/1.1" 404 2473
+Not Found: /cooking/images/pic04.jpg
+[06/Nov/2021 18:47:46] "GET /cooking/images/pic05.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:47:46] "GET /cooking/images/pic02.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic06.jpg
+[06/Nov/2021 18:47:46] "GET /cooking/images/pic04.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:47:46] "GET /cooking/images/pic06.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic08.jpg
+Not Found: /cooking/assets/js/breakpoints.min.js
+[06/Nov/2021 18:47:46] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic07.jpg
+Not Found: /cooking/images/pic09.jpg
+[06/Nov/2021 18:47:46] "GET /cooking/assets/js/breakpoints.min.js HTTP/1.1" 404 2485
+[06/Nov/2021 18:47:46] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/assets/js/util.js
+[06/Nov/2021 18:47:46] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:47:46] "GET /cooking/assets/js/util.js HTTP/1.1" 404 2452
+Not Found: /cooking/assets/js/main.js
+[06/Nov/2021 18:47:46] "GET /cooking/assets/js/main.js HTTP/1.1" 404 2452
+Not Found: /cooking/index.html
+[06/Nov/2021 18:48:09] "GET /cooking/index.html HTTP/1.1" 404 2431
+[06/Nov/2021 18:48:16] "GET /cooking/ HTTP/1.1" 200 10226
+Not Found: /cooking/assets/js/breakpoints.min.js
+Not Found: /cooking/images/pic10.jpg
+Not Found: /cooking/assets/js/util.js
+Not Found: /cooking/assets/css/main.css
+[06/Nov/2021 18:48:16] "GET /cooking/assets/js/breakpoints.min.js HTTP/1.1" 404 2485
+[06/Nov/2021 18:48:16] "GET /cooking/images/pic10.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/assets/js/jquery.min.js
+[06/Nov/2021 18:48:16] "GET /cooking/assets/js/util.js HTTP/1.1" 404 2452
+Not Found: /cooking/assets/js/browser.min.js
+Not Found: /cooking/images/pic01.jpg
+[06/Nov/2021 18:48:16] "GET /cooking/assets/css/main.css HTTP/1.1" 404 2458
+[06/Nov/2021 18:48:16] "GET /cooking/assets/js/jquery.min.js HTTP/1.1" 404 2470
+[06/Nov/2021 18:48:16] "GET /cooking/images/pic01.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:48:16] "GET /cooking/assets/js/browser.min.js HTTP/1.1" 404 2473
+Not Found: /cooking/assets/js/main.js
+Not Found: /cooking/images/pic02.jpg
+Not Found: /cooking/images/pic05.jpg
+[06/Nov/2021 18:48:16] "GET /cooking/assets/js/main.js HTTP/1.1" 404 2452
+Not Found: /cooking/images/pic03.jpg
+[06/Nov/2021 18:48:16] "GET /cooking/images/pic02.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:48:16] "GET /cooking/images/pic05.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:48:16] "GET /cooking/images/pic03.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic06.jpg
+Not Found: /cooking/images/pic04.jpg
+[06/Nov/2021 18:48:16] "GET /cooking/images/pic06.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/assets/js/breakpoints.min.js
+[06/Nov/2021 18:48:16] "GET /cooking/images/pic04.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:48:16] "GET /cooking/assets/js/breakpoints.min.js HTTP/1.1" 404 2485
+Not Found: /cooking/images/pic08.jpg
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 18:48:16] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:48:16] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/assets/js/util.js
+[06/Nov/2021 18:48:16] "GET /cooking/assets/js/util.js HTTP/1.1" 404 2452
+Not Found: /cooking/images/pic09.jpg
+[06/Nov/2021 18:48:16] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/assets/js/main.js
+[06/Nov/2021 18:48:16] "GET /cooking/assets/js/main.js HTTP/1.1" 404 2452
+[06/Nov/2021 18:52:14] "GET /cooking/ HTTP/1.1" 200 10095
+Not Found: /cooking/images/pic10.jpg
+[06/Nov/2021 18:52:15] "GET /cooking/images/pic10.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:52:15] "GET /static/assets/css/main.css HTTP/1.1" 200 61737
+Not Found: /cooking/assets/js/jquery.min.js
+Not Found: /cooking/assets/js/main.js
+[06/Nov/2021 18:52:15] "GET /cooking/assets/js/main.js HTTP/1.1" 404 2452
+Not Found: /cooking/assets/js/util.js
+[06/Nov/2021 18:52:15] "GET /cooking/assets/js/jquery.min.js HTTP/1.1" 404 2470
+Not Found: /cooking/assets/js/browser.min.js
+Not Found: /cooking/assets/js/breakpoints.min.js
+[06/Nov/2021 18:52:15] "GET /cooking/assets/js/util.js HTTP/1.1" 404 2452
+Not Found: /cooking/images/pic01.jpg
+[06/Nov/2021 18:52:15] "GET /cooking/assets/js/browser.min.js HTTP/1.1" 404 2473
+[06/Nov/2021 18:52:15] "GET /cooking/assets/js/breakpoints.min.js HTTP/1.1" 404 2485
+[06/Nov/2021 18:52:15] "GET /cooking/images/pic01.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:52:15] "GET /static/assets/css/fontawesome-all.min.css HTTP/1.1" 200 55969
+Not Found: /cooking/images/pic03.jpg
+Not Found: /cooking/images/pic02.jpg
+Not Found: /cooking/images/pic05.jpg
+[06/Nov/2021 18:52:15] "GET /cooking/images/pic03.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic04.jpg
+[06/Nov/2021 18:52:15] "GET /cooking/images/pic02.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic06.jpg
+[06/Nov/2021 18:52:15] "GET /cooking/images/pic05.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:52:15] "GET /cooking/images/pic04.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:52:15] "GET /cooking/images/pic06.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic08.jpg
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 18:52:15] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:52:15] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic09.jpg
+[06/Nov/2021 18:52:15] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/assets/js/browser.min.js
+[06/Nov/2021 18:52:15] "GET /cooking/assets/js/browser.min.js HTTP/1.1" 404 2473
+Not Found: /cooking/assets/js/breakpoints.min.js
+[06/Nov/2021 18:52:15] "GET /static/assets/webfonts/fa-regular-400.woff2 HTTP/1.1" 200 13580
+[06/Nov/2021 18:52:15] "GET /cooking/assets/js/breakpoints.min.js HTTP/1.1" 404 2485
+[06/Nov/2021 18:52:15] "GET /static/assets/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 75440
+[06/Nov/2021 18:52:15] "GET /static/assets/webfonts/fa-brands-400.woff2 HTTP/1.1" 200 74508
+Not Found: /cooking/assets/js/util.js
+[06/Nov/2021 18:52:15] "GET /cooking/assets/js/util.js HTTP/1.1" 404 2452
+Not Found: /cooking/assets/js/main.js
+[06/Nov/2021 18:52:15] "GET /cooking/assets/js/main.js HTTP/1.1" 404 2452
+[06/Nov/2021 18:56:23] "GET /cooking/ HTTP/1.1" 200 10135
+Not Found: /cooking/images/pic10.jpg
+[06/Nov/2021 18:56:23] "GET /cooking/images/pic10.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic01.jpg
+[06/Nov/2021 18:56:23] "GET /static/assets/js/browser.min.js HTTP/1.1" 200 1851
+[06/Nov/2021 18:56:23] "GET /static/assets/js/main.js HTTP/1.1" 200 5968
+[06/Nov/2021 18:56:23] "GET /static/assets/js/breakpoints.min.js HTTP/1.1" 200 2439
+[06/Nov/2021 18:56:23] "GET /cooking/images/pic01.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:56:23] "GET /static/assets/js/util.js HTTP/1.1" 200 12433
+Not Found: /cooking/images/pic02.jpg
+[06/Nov/2021 18:56:23] "GET /cooking/images/pic02.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic04.jpg
+Not Found: /cooking/images/pic03.jpg
+[06/Nov/2021 18:56:23] "GET /static/assets/js/jquery.min.js HTTP/1.1" 200 88145
+Not Found: /cooking/images/pic05.jpg
+[06/Nov/2021 18:56:23] "GET /cooking/images/pic04.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:56:23] "GET /cooking/images/pic03.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:56:23] "GET /cooking/images/pic05.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic09.jpg
+Not Found: /cooking/images/pic08.jpg
+[06/Nov/2021 18:56:23] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 18:56:23] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 18:56:23] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic06.jpg
+[06/Nov/2021 18:56:23] "GET /cooking/images/pic06.jpg HTTP/1.1" 404 2449
+/home/hello/PycharmProjects/CookingBlog/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+November 06, 2021 - 19:01:49
+Django version 3.2.9, using settings 'cooking_blog.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/CookingBlog/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+November 06, 2021 - 19:03:05
+Django version 3.2.9, using settings 'cooking_blog.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[06/Nov/2021 19:04:03] "GET /cooking/ HTTP/1.1" 200 10692
+Not Found: /cooking/images/pic11.jpg
+[06/Nov/2021 19:04:03] "GET /cooking/images/pic11.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic07.jpg
+Not Found: /cooking/images/pic08.jpg
+Not Found: /cooking/images/pic09.jpg
+[06/Nov/2021 19:04:03] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 19:04:03] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 19:04:03] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 19:10:41] "GET /cooking/ HTTP/1.1" 200 10704
+[06/Nov/2021 19:10:42] "GET /static/images/FoodBlog.jpeg HTTP/1.1" 200 12967
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 19:10:42] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic08.jpg
+Not Found: /cooking/images/pic09.jpg
+[06/Nov/2021 19:10:42] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 19:10:42] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 19:13:38] "GET /cooking/ HTTP/1.1" 200 10703
+[06/Nov/2021 19:13:38] "GET /static/images/FoodBlog.jpg HTTP/1.1" 200 131933
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 19:13:38] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic09.jpg
+Not Found: /cooking/images/pic08.jpg
+[06/Nov/2021 19:13:38] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 19:13:38] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 19:15:12] "GET /cooking/ HTTP/1.1" 200 10738
+[06/Nov/2021 19:15:12] "GET /static/images/FoodBlog.jpg HTTP/1.1" 304 0
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 19:15:12] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic08.jpg
+Not Found: /cooking/images/pic09.jpg
+[06/Nov/2021 19:15:12] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 19:15:12] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/index.html
+[06/Nov/2021 19:15:32] "GET /cooking/index.html HTTP/1.1" 404 2431
+
+
+👉️(venv) hello@hello-Extensa-215-51:~/PycharmProjects/CookingBlog$ python manage.py makemigrations
+Migrations for 'account':
+  account/migrations/0001_initial.py
+    - Create model User
+Migrations for 'main':
+  main/migrations/0001_initial.py
+    - Create model Category
+    - Create model Recipe
+    - Create model Image
+👉️(venv) hello@hello-Extensa-215-51:~/PycharmProjects/CookingBlog$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: account, admin, auth, contenttypes, main, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying account.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying main.0001_initial... OK
+  Applying sessions.0001_initial... OK
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/CookingBlog$ 
+
+
+==========================================================================================================================
+👉️(venv) hello@hello-Extensa-215-51:~/PycharmProjects/CookingBlog$ python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 06, 2021 - 21:01:42
+Django version 3.2.9, using settings 'cooking_blog.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Internal Server Error: /cooking/
+Traceback (most recent call last):
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/hello/PycharmProjects/CookingBlog/main/views.py", line 7, in index
+    return render(request, 'index.html')
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 103, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 29, in get_template
+    return Template(
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 478, in parse
+    raise self.error(token, e)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 216, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 478, in parse
+    raise self.error(token, e)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 216, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 483, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 544, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 5: 'block'. Looking for one of: endblock.
+[06/Nov/2021 21:01:47] "GET /cooking/ HTTP/1.1" 500 185651
+Internal Server Error: /cooking/
+Traceback (most recent call last):
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/hello/PycharmProjects/CookingBlog/main/views.py", line 7, in index
+    return render(request, 'index.html')
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 103, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loaders/base.py", line 29, in get_template
+    return Template(
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 478, in parse
+    raise self.error(token, e)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 216, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 478, in parse
+    raise self.error(token, e)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 216, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 483, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/template/base.py", line 544, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 5: 'block'. Looking for one of: endblock.
+[06/Nov/2021 21:01:59] "GET /cooking/ HTTP/1.1" 500 185430
+[06/Nov/2021 21:02:38] "GET /cooking/ HTTP/1.1" 200 10564
+[06/Nov/2021 21:02:38] "GET /static/images/FoodBlog.jpg HTTP/1.1" 304 0
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 21:02:38] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic09.jpg
+[06/Nov/2021 21:02:38] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic08.jpg
+[06/Nov/2021 21:02:38] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 21:10:07] "GET /cooking/ HTTP/1.1" 200 10564
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 21:10:07] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic09.jpg
+Not Found: /cooking/images/pic08.jpg
+[06/Nov/2021 21:10:07] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 21:10:07] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 21:10:09] "GET /cooking/ HTTP/1.1" 200 10564
+Not Found: /cooking/images/pic08.jpg
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 21:10:09] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 21:10:09] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic09.jpg
+[06/Nov/2021 21:10:09] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 21:10:13] "GET /cooking/ HTTP/1.1" 200 10564
+Not Found: /cooking/images/pic08.jpg
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 21:10:13] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 21:10:13] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic09.jpg
+[06/Nov/2021 21:10:13] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 21:10:38] "GET /cooking/ HTTP/1.1" 200 10564
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 21:10:38] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic09.jpg
+Not Found: /cooking/images/pic08.jpg
+[06/Nov/2021 21:10:38] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 21:10:38] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+/home/hello/PycharmProjects/CookingBlog/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/management/commands/runserver.py", line 118, in inner_run
+    self.check(display_num_errors=True)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/management/base.py", line 419, in check
+    all_issues = checks.run_checks(
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/checks/registry.py", line 76, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/checks/urls.py", line 13, in check_url_config
+    return check_resolver(resolver)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/checks/urls.py", line 23, in check_resolver
+    return check_method()
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/urls/resolvers.py", line 412, in check
+    for pattern in self.url_patterns:
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/urls/resolvers.py", line 598, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/urls/resolvers.py", line 591, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/hello/PycharmProjects/CookingBlog/cooking_blog/urls.py", line 23, in <module>
+    path('cooking/', include('main.urls')),
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/urls/conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/hello/PycharmProjects/CookingBlog/main/urls.py", line 3, in <module>
+    from .views import *
+  File "/home/hello/PycharmProjects/CookingBlog/main/views.py", line 10
+    def ctegory_detail
+                     ^
+SyntaxError: invalid syntax
+/home/hello/PycharmProjects/CookingBlog/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 06, 2021 - 21:13:13
+Django version 3.2.9, using settings 'cooking_blog.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[06/Nov/2021 21:13:15] "GET /cooking/ HTTP/1.1" 200 10564
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 21:13:15] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic08.jpg
+[06/Nov/2021 21:13:15] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic09.jpg
+[06/Nov/2021 21:13:15] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+[06/Nov/2021 21:13:28] "GET /cooking/ HTTP/1.1" 200 10564
+Not Found: /cooking/images/pic07.jpg
+[06/Nov/2021 21:13:28] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic09.jpg
+[06/Nov/2021 21:13:28] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2449
+Not Found: /cooking/images/pic08.jpg
+[06/Nov/2021 21:13:28] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2449
+/home/hello/PycharmProjects/CookingBlog/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 06, 2021 - 21:19:40
+Django version 3.2.9, using settings 'cooking_blog.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/CookingBlog/main/views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 06, 2021 - 21:20:16
+Django version 3.2.9, using settings 'cooking_blog.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/CookingBlog/main/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/management/commands/runserver.py", line 118, in inner_run
+    self.check(display_num_errors=True)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/management/base.py", line 419, in check
+    all_issues = checks.run_checks(
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/checks/registry.py", line 76, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/checks/urls.py", line 13, in check_url_config
+    return check_resolver(resolver)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/checks/urls.py", line 23, in check_resolver
+    return check_method()
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/urls/resolvers.py", line 412, in check
+    for pattern in self.url_patterns:
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/urls/resolvers.py", line 598, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/urls/resolvers.py", line 591, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/hello/PycharmProjects/CookingBlog/cooking_blog/urls.py", line 23, in <module>
+    path('cooking/', include('main.urls')),
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/urls/conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/hello/PycharmProjects/CookingBlog/main/urls.py", line 7, in <module>
+    path('category', )
+TypeError: _path() missing 1 required positional argument: 'view'
+/home/hello/PycharmProjects/CookingBlog/main/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/management/commands/runserver.py", line 118, in inner_run
+    self.check(display_num_errors=True)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/management/base.py", line 419, in check
+    all_issues = checks.run_checks(
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/checks/registry.py", line 76, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/checks/urls.py", line 13, in check_url_config
+    return check_resolver(resolver)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/core/checks/urls.py", line 23, in check_resolver
+    return check_method()
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/urls/resolvers.py", line 412, in check
+    for pattern in self.url_patterns:
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/urls/resolvers.py", line 598, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/urls/resolvers.py", line 591, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/hello/PycharmProjects/CookingBlog/cooking_blog/urls.py", line 23, in <module>
+    path('cooking/', include('main.urls')),
+  File "/home/hello/PycharmProjects/CookingBlog/venv/lib/python3.8/site-packages/django/urls/conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/hello/PycharmProjects/CookingBlog/main/urls.py", line 7, in <module>
+    path('category/<str:slug>/', )
+TypeError: _path() missing 1 required positional argument: 'view'
+/home/hello/PycharmProjects/CookingBlog/main/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 06, 2021 - 21:22:52
+Django version 3.2.9, using settings 'cooking_blog.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+/home/hello/PycharmProjects/CookingBlog/main/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 06, 2021 - 21:23:54
+Django version 3.2.9, using settings 'cooking_blog.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[06/Nov/2021 21:24:07] "GET /cooking/ HTTP/1.1" 200 10564
+[06/Nov/2021 21:24:07] "GET /static/images/FoodBlog.jpg HTTP/1.1" 304 0
+Not Found: /cooking/images/pic07.jpg
+Not Found: /cooking/images/pic09.jpg
+[06/Nov/2021 21:24:07] "GET /cooking/images/pic07.jpg HTTP/1.1" 404 2647
+[06/Nov/2021 21:24:07] "GET /cooking/images/pic09.jpg HTTP/1.1" 404 2647
+Not Found: /cooking/images/pic08.jpg
+[06/Nov/2021 21:24:07] "GET /cooking/images/pic08.jpg HTTP/1.1" 404 2647
+[06/Nov/2021 21:25:11] "GET /cooking/ HTTP/1.1" 200 9626
+^C(venv) hello@hello-Extensa-215-51:~/PycharmProjects/CookingBlog$ 
+
+👉️(venv) hello@hello-Extensa-215-51:~/PycharmProjects/CookingBlog$ python manage.py createsuperuser
+Email: admin@admin.com
+Username: admin
+Password: 
+Password (again): 
+This password is too short. It must contain at least 8 characters.
+This password is entirely numeric.
+Bypass password validation and create user anyway? [y/N]: y
+Superuser created successfully.
+(venv) hello@hello-Extensa-215-51:~/PycharmProjects/CookingBlog$ 
+
